@@ -1,0 +1,9 @@
+.tagdesign {
+  height: 32px;
+  width: 174px;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #f4f5f7;
+  font-family: mulish;
+  padding-top: 5px;
+}

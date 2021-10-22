@@ -1,0 +1,56 @@
+.name-company {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-family: mulish;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 17.5px;
+  cursor: pointer;
+}
+
+.company {
+  font-family: mulish;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17.5px;
+}
+
+.positiondiv {
+  padding-right: 400px;
+}
+
+.position {
+  font-family: mulish;
+  font-size: 16px;
+  line-height: 17.5px;
+  font-weight: 400;
+}
+
+.date {
+  font-family: mulish;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17.5px;
+}
+
+.hiringmanagerdiv {
+  background-color: #fe9800;
+  height: 29.51px;
+  width: 29.26px;
+  border-radius: 20px;
+}
+
+.hiringmanager {
+  font-family: mulish;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 10px;
+  text-align: center;
+  margin-left: 2.5px;
+}
+.pointer {
+  cursor: pointer;
+}

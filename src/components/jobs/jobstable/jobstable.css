@@ -1,0 +1,39 @@
+.name-detail {
+  display: flex;
+  flex-direction: column;
+}
+.job-name {
+  width: 300px;
+  font-family: mulish;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 17.5px;
+  color: #55565a;
+  padding-left: 9%;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3%;
+  margin-left: 4.5%;
+}
+
+.detail-style {
+  width: 70px;
+  font-family: mulish;
+  font-weight: 400;
+  font-size: 12.64px;
+  line-height: 24px;
+  color: #55565a;
+  margin-left: 5%;
+}
+
+.opportunities-styling {
+  font-family: mulish;
+  font-weight: 400;
+  font-size: 14.22px;
+  line-height: 24px;
+  color: #000000;
+  text-align: right;
+}

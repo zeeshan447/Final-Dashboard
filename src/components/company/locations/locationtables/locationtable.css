@@ -1,0 +1,20 @@
+.table-settings {
+  width: 100%;
+  height: 500px;
+  overflow: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.addrowbutton {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-left: 400px;
+}
+
+.edit-delete-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

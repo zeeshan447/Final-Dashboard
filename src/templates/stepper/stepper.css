@@ -1,0 +1,89 @@
+.stepper-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  margin-top: 80px;
+  max-width: 100%;
+  font-family: mulish;
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 33px;
+  cursor: pointer;
+}
+
+.box .steps ul {
+  overflow: hidden;
+  list-style: none;
+  max-width: 100%;
+  padding-left: 25px;
+  margin-top: 16px;
+}
+.box .steps ul li div {
+  color: #999;
+  padding: 10px 0 15px 45px;
+  position: relative;
+  background: #f5f5f5;
+  width: 181px;
+  max-width: 100%;
+  text-align: center;
+  /* border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px; */
+  border-radius: 8px;
+}
+.box .steps ul li div span {
+  font-size: 13px;
+}
+.box .steps ul li:first-child div {
+  width: 165px;
+  padding-left: 15px;
+  max-width: 100%;
+}
+.box .steps ul li div::before {
+  content: " ";
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 30px solid #fff;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  left: 99%;
+  z-index: 1;
+  margin-left: 1px;
+  max-width: 100%;
+}
+.box .steps ul li div::after {
+  content: " ";
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 32px solid #f5f5f5;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  left: 96%;
+  z-index: 2;
+  max-width: 100%;
+}
+.box .steps ul li.done div {
+  border-color: #fff !important;
+  color: #999 !important;
+  background: #f5f5f5 !important;
+}
+.box .steps ul li.done div::after {
+  border-left: 30px solid #f5f5f5;
+}
+.box .steps ul li.active div {
+  border-color: #38a6f5 !important;
+  color: #fff !important;
+  background: #38a6f5 !important;
+}
+.box .steps ul li.active div::after {
+  border-left: 30px solid #38a6f5;
+}
+.table-data {
+  padding-left: 2%;
+}
