@@ -69,12 +69,12 @@ const LoginPage = () => {
     if (code?.length === 0) {
       console.log("Code not found");
     } else {
-      debugger;
       await Axios.get(
         `http://localhost:2500/auth/outlook/redirect/?code=${code}`
       ).then((res) => {
         console.log("authentication response", res);
         setAccessToken(res.data.token);
+        console.log("LOGIN RESPONSE", res);
       });
     }
   };
