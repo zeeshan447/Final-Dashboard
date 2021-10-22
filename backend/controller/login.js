@@ -64,7 +64,7 @@ const outlookLoginCallback = async (req, res) => {
       const chk_email = await pool.query(
         `select * from users where email = '${email}'`
       );
-      console.log(chk_email.rows);
+      console.log("user details", chk_email.rows);
       if (chk_email.rows.length === 0) {
         return res
           .status(403)
@@ -72,7 +72,14 @@ const outlookLoginCallback = async (req, res) => {
       } else {
         return res
           .status(200)
-          .json({ statusCode: 200, token: response.accessToken, body: true });
+          .json({
+            statusCode: 200,
+            token: response.accessToken,
+            body: true,
+            user_name: chk_email.rows.user_name,
+            user_id: chk_email.rows.user_id,
+            role_id: chk_email.rows.role_id,
+          });
         //   res.redirect(`${ DASHBOARD_URL}?accesstoken=${response.accessToken}`);
         // res.redirect(`${DASHBOARD_URL}?accesstoken=${response.accessToken}`);
       }

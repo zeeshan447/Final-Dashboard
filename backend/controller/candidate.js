@@ -37,7 +37,7 @@ const candidateJobStatus = async (req, res) => {
 
 /////
 const candidateInitial = async (req, res) => {
-  console.log("req.query :>> ", req.query);
+  // console.log("req.query :>> ", req.query);
   let stage = req.query.stage;
   let job_id = req.query.job_id;
   let search = req.query.search;
@@ -73,7 +73,7 @@ const candidateInitial = async (req, res) => {
     ${job_id ? ` and j.job_id = '${job_id}'` : ""}`
     );
 
-    console.log("candidate_status : ", candidateDetail.rows);
+    // console.log("candidate_status : ", candidateDetail.rows);
     //pool.end()
     res.send({
       statusCode: 200,
