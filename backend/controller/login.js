@@ -6,7 +6,7 @@ var DASHBOARD_URL = process.env.DASHBOARD_URL;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 var OUTLOOK_CLIENT_ID = process.env.OUTLOOK_CLIENT_ID;
 var OUTLOOK_CLIENT_SECRET = process.env.OUTLOOK_CLIENT_SECRET;
-
+var POST_REDIRECT_URI = process.env.POST_REDIRECT_URI;
 const config = {
   auth: {
     clientId: process.env.OUTLOOK_CLIENT_ID,
@@ -95,8 +95,38 @@ const outlookLoginCallback = async (req, res) => {
     console.log(error);
   }
 };
+const outlookLogout = async (req, res) => {
+  const config = {
+    auth: {
+      clientId: process.env.OUTLOOK_CLIENT_ID,
+      redirectUri: process.env.DASHBOARD_URL, // defaults to application start page
+      postLogoutRedirectUri: process.env.DASHBOARD_URL,
+    },
+  };
+
+  const pca = new msal.PublicClientApplication(config);
+  pca
+    .getTokenCache()
+    .getAllAccounts()
+    .then((response) => {
+      const account = response[0];
+      pca
+        .getTokenCache()
+        .removeAccount(account)
+        .then(() => {
+          res.status(200).json({ msg: "Account logout" });
+        })
+        .catch((error) => {
+          res.status(500).send({ error });
+        });
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+};
 
 module.exports = {
   outlookLogin,
   outlookLoginCallback,
+  outlookLogout,
 };
