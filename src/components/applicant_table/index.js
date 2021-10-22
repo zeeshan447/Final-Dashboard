@@ -84,9 +84,6 @@ const ApplicantTable = () => {
   };
   useEffect(() => {
     getData();
-    const res = Axios.get("http://localhost:2500/candidate");
-
-    console.log("response", res);
   }, [recallApi, jobChangeApiCallback]);
 
   console.log("select", checked);
