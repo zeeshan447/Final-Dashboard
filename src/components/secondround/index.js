@@ -20,6 +20,7 @@ const SecondRound = () => {
   const [getCandidateData, setCandidateData] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [jobChangeApiCallback, setJobChangeApiCallback] = useState(false);
+  const [stageChangeApiCallback, setStageChangeApiCallback] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -56,7 +57,7 @@ const SecondRound = () => {
 
   useEffect(() => {
     getData();
-  }, [recallApi]);
+  }, [recallApi, jobChangeApiCallback, stageChangeApiCallback]);
 
   const getData = async () => {
     await Axios.get(`${SECONDROUND_APPLICANTS}=SECOND ROUND`).then((res) => {
@@ -132,6 +133,7 @@ const SecondRound = () => {
               dataCallBack={setJobChangeApiCallback}
               secondDataCallback={jobChangeApiCallback}
               candidateDetailModal={isModalVisible}
+              stageChange={setStageChangeApiCallback}
             ></CandidateDetails>
           </Modal>
         </React.Fragment>

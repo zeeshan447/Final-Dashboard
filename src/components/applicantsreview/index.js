@@ -19,6 +19,7 @@ const ApplicantReview = () => {
   const [recallApi, setRecallApi] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [jobChangeApiCallback, setJobChangeApiCallback] = useState(false);
+  const [stageChangeApiCallback, setStageChangeApiCallback] = useState(false);
 
   const [getCandidateData, setCandidateData] = useState();
 
@@ -57,7 +58,7 @@ const ApplicantReview = () => {
 
   useEffect(() => {
     getData();
-  }, [recallApi, jobChangeApiCallback]);
+  }, [recallApi, jobChangeApiCallback, stageChangeApiCallback]);
 
   const getData = async () => {
     await Axios.get(`${GET_REVIEWAPPLICANTS}=REVIEWS`).then((res) => {
@@ -134,6 +135,7 @@ const ApplicantReview = () => {
               dataCallBack={setJobChangeApiCallback}
               secondDataCallback={jobChangeApiCallback}
               candidateDetailModal={isModalVisible}
+              stageChange={setStageChangeApiCallback}
             ></CandidateDetails>
           </Modal>
         </React.Fragment>

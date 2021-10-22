@@ -176,7 +176,6 @@ const CandidateSchedule = ({ modalVisibility, scheduledCandidateData }) => {
       getInterviewer.length !== 0
     ) {
       modalVisibility(false);
-      debugger;
       await Axios.post(SCHEDULE_INTERVIEW, [
         {
           scheduled_time: time,

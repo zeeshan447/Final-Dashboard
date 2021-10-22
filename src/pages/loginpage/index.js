@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import LoginImage from "../../images/LoginImage.png";
 import { Route, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import Axios from "axios";
 import {
   LoginMainPageDiv,
@@ -24,6 +26,18 @@ const LoginPage = () => {
   const [url, setUrl] = useState("");
   const [code, setCode] = useState("");
   const [accessToken, setAccessToken] = useState("");
+  const [userRoleId, setUserRoleId] = useState();
+  const [userId, setUserId] = useState();
+  const [userName, setUserName] = useState();
+  const [userRoleName, setUserRoleName] = useState();
+  const [userRoleValue, setUserRoleValue] = useState();
+  //let userDetailing = useSelector((state) => state.userDetails.userDetails);
+
+  // const renderList = userDetails.map((data)=>{
+  //   return userRoleId: data.userRoleId
+
+  // })
+
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -55,6 +69,14 @@ const LoginPage = () => {
     }
   };
 
+  useEffect(() => {
+    // console.log(userRoleId);
+    // console.log(userId);
+    // console.log(userName);
+    // console.log(userRoleName);
+    // console.log(userRoleValue);
+  });
+
   const getURL = () => {
     if (window.location.href?.split("?")[1]?.split("=")[1]?.length === 0) {
       console.log("Empty String");
@@ -75,11 +97,14 @@ const LoginPage = () => {
         console.log("authentication response", res);
         setAccessToken(res.data.token);
         console.log("LOGIN RESPONSE", res);
+        //userDetails = res.data;
+        let details = res.data;
+        dispatch({ type: "USER_DETAILS", payload: details });
+        //console.log("USER DETAILS", userDetails);
       });
     }
   };
   console.log("Access Token", accessToken);
-
   useEffect(() => {
     setTokenInLocalStorage();
   }, [accessToken]);

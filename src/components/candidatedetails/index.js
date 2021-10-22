@@ -40,6 +40,7 @@ const CandidateDetails = ({
   dataCallBack,
   secondDataCallback,
   candidateDetailModal,
+  stageChange,
 }) => {
   const [getInputSize, setInputSize] = useState("");
   const [getOnFocus, setOnFocus] = useState(false);
@@ -108,7 +109,6 @@ const CandidateDetails = ({
   };
 
   const deleteScheduleInterview = async (id) => {
-    debugger;
     await Axios.delete(`http://localhost:2500/interview/schedule/${id}`);
     const newInterviewList = InterviewStatus.filter((InterviewStatus) => {
       return InterviewStatus.interviewer_status_id !== id;
@@ -149,6 +149,7 @@ const CandidateDetails = ({
             candidateStage={candidateData}
             stageChangeCallback={dataCallBack}
             secondStageCallback={secondDataCallback}
+            changeStage={stageChange}
           />
         </AddCandidateStageSelect>
         <AddCandidateScheduleButtonsDiv>

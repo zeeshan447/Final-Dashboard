@@ -15,37 +15,45 @@ import {
   ExclamationCircleOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
+import Axios from "axios";
 
 function handleMenuClick(e) {
   //   message.info("Click on menu item.");
   //   console.log("click", e);
 }
 
-const menu = (
-  <Menu onClick={handleMenuClick}>
-    <Menu.Item key="1" style={{ width: "191px" }} disabled>
-      <UserNameDropdownDiv>
-        <UserNameDropdown>Ali Haider</UserNameDropdown>
-        <UserRoleDropdown>Limited Team Member</UserRoleDropdown>
-      </UserNameDropdownDiv>
-    </Menu.Item>
-
-    <Menu.Item key="2" style={{ width: "300px" }} icon={<SettingOutlined />}>
-      <Link to="/edituser">Settings </Link>
-    </Menu.Item>
-    <Menu.Item key="3" icon={<ExclamationCircleOutlined />}>
-      Help Center{" "}
-    </Menu.Item>
-    <Menu.Item key="4" icon={<MessageOutlined />}>
-      Support{" "}
-    </Menu.Item>
-    <Menu.Item key="5" icon={<PoweroffOutlined />}>
-      Log Out{" "}
-    </Menu.Item>
-  </Menu>
-);
-
 const ProfilePicture = () => {
+  const logoutHandler = async () => {
+    await Axios.get("http://localhost:2500/auth/outlook/logout").then((res) => {
+      console.log("LOGOUT RESPONSE", res);
+      //localStorage.removeItem("access_token")
+    });
+  };
+
+  const menu = (
+    <Menu onClick={handleMenuClick}>
+      <Menu.Item key="1" style={{ width: "191px" }} disabled>
+        <UserNameDropdownDiv>
+          <UserNameDropdown>Ali Haider</UserNameDropdown>
+          <UserRoleDropdown>Limited Team Member</UserRoleDropdown>
+        </UserNameDropdownDiv>
+      </Menu.Item>
+
+      <Menu.Item key="2" style={{ width: "300px" }} icon={<SettingOutlined />}>
+        <Link to="/edituser">Settings </Link>
+      </Menu.Item>
+      <Menu.Item key="3" icon={<ExclamationCircleOutlined />}>
+        Help Center{" "}
+      </Menu.Item>
+      <Menu.Item key="4" icon={<MessageOutlined />}>
+        Support{" "}
+      </Menu.Item>
+      <Menu.Item onClick={logoutHandler} key="5" icon={<PoweroffOutlined />}>
+        Log Out
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <React.Fragment>
       <Dropdown overlay={menu} arrow>

@@ -112,7 +112,6 @@ function DepartmentTeamTable({ recallDepartment }) {
     console.log("row ", row);
 
     const getTeamById = async () => {
-      debugger;
       await Axios.get(`http://localhost:2500/company-loc/${row}`).then(
         (res) => {
           setRowId(

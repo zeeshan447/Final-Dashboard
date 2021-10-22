@@ -19,6 +19,7 @@ const PhoneScreening = () => {
   const [recallApi, setRecallApi] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [jobChangeApiCallback, setJobChangeApiCallback] = useState(false);
+  const [stageChangeApiCallback, setStageChangeApiCallback] = useState(false);
 
   const [getCandidateData, setCandidateData] = useState();
   const showModal = () => {
@@ -56,7 +57,7 @@ const PhoneScreening = () => {
 
   useEffect(() => {
     getData();
-  }, [recallApi]);
+  }, [recallApi, jobChangeApiCallback, stageChangeApiCallback]);
 
   const getData = async () => {
     await Axios.get(`${PHONESCREENED_APPLICANTS}=PHONE SCREEN`).then((res) => {
@@ -132,6 +133,7 @@ const PhoneScreening = () => {
               dataCallBack={setJobChangeApiCallback}
               secondDataCallback={jobChangeApiCallback}
               candidateDetailModal={isModalVisible}
+              stageChange={setStageChangeApiCallback}
             ></CandidateDetails>
           </Modal>
         </React.Fragment>

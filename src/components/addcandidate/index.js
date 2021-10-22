@@ -50,7 +50,6 @@ const AddCandidate = () => {
   };
 
   const candidateAddHandler = async () => {
-    debugger;
     await Axios.post(ADD_CANDIDATE, {
       candidate_name: getName,
       prev_company: getCompanyName,

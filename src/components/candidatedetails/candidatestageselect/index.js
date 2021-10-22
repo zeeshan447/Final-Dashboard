@@ -3,15 +3,22 @@ import "antd/dist/antd.css";
 import { AddCandidateStageSelect } from "./candidatestageselect.style";
 import { GET_HIRINGSTAGES } from "../apis";
 import Axios from "axios";
+import { Alert } from "antd";
+import { Button, notification } from "antd";
+
 const { Option } = AddCandidateStageSelect;
+
+const openNotification = () => {};
 
 const CandidateStageChange = ({
   candidateStage,
   stageChangeCallback,
   secondStageCallback,
+  changeStage,
 }) => {
   const [getStages, setStages] = useState();
   const [currentCandidate, setCurrentCandidate] = useState([]);
+  const [alertState, setAlertState] = useState(false);
   let responseData = [];
   let candidatesArray = Object.values(candidateStage);
 
@@ -21,6 +28,15 @@ const CandidateStageChange = ({
     }
     if (value.length > 0) {
       changeStageHandler(value);
+      changeStage(true);
+      // alert("Stage Changed Successfully");
+      notification.open({
+        message: "Stage Change",
+        description: "Stage Changed Successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     }
   }
 
@@ -40,7 +56,6 @@ const CandidateStageChange = ({
   // };
 
   const changeStageHandler = async (value) => {
-    debugger;
     await Axios.put(
       "http://localhost:2500/can/status",
       candidatesArray.map((row, key) => ({

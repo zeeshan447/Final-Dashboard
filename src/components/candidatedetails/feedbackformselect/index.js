@@ -5,7 +5,6 @@ const { Option } = FeedbackFormDropdown;
 
 const FeedbackFormSelect = ({ typeInterview }) => {
   function handleChange(value) {
-    debugger;
     console.log(`selected ${value}`);
     typeInterview(value);
   }

@@ -101,7 +101,6 @@ const CandidateDetailsBody = ({
   };
 
   const updateJob = async (id, jobid) => {
-    debugger;
     await Axios.put(
       JOB_UPDATE,
 

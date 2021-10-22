@@ -10,6 +10,7 @@ import { Modal } from "antd";
 import CandidateDetails from "../candidatedetails";
 import { GET_NEWAPPLICANTS } from "./apis";
 import { CandidateDetailModal } from "./applicanttable.style";
+import { useSelector } from "react-redux";
 
 const ApplicantTable = () => {
   const [select, setSelectedRow] = useState([]);
@@ -22,11 +23,15 @@ const ApplicantTable = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [getCandidateData, setCandidateData] = useState();
   const [jobChangeApiCallback, setJobChangeApiCallback] = useState(false);
+  const userDetailing = useSelector((state) => state.userDetails.userDetails);
+  const [stageChangeApiCallback, setStageChangeApiCallback] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
   };
-
+  useEffect(() => {
+    console.log("USERID FROM REDUCER", userDetailing?.user_name);
+  });
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -84,7 +89,7 @@ const ApplicantTable = () => {
   };
   useEffect(() => {
     getData();
-  }, [recallApi, jobChangeApiCallback]);
+  }, [recallApi, jobChangeApiCallback, stageChangeApiCallback]);
 
   console.log("select", checked);
   console.log("helloooasdijas", recallApi);
@@ -139,6 +144,7 @@ const ApplicantTable = () => {
               dataCallBack={setJobChangeApiCallback}
               secondDataCallback={jobChangeApiCallback}
               candidateDetailModal={isModalVisible}
+              stageChange={setStageChangeApiCallback}
             ></CandidateDetails>
           </CandidateDetailModal>
         </React.Fragment>

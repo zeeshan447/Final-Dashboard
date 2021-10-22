@@ -54,7 +54,6 @@ const UserDetails = ({ modalVisibility, userDetails }) => {
   };
 
   const updateUserHandler = async () => {
-    debugger;
     await Axios.put(`${UPDATE_USER}/${userDetails.key}`, {
       user_name: userName,
       email: userEmail,
