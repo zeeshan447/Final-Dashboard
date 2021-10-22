@@ -65,21 +65,20 @@ const outlookLoginCallback = async (req, res) => {
         `select * from users where email = '${email}'`
       );
       console.log("user details", chk_email.rows);
+      //  console.log("usernmae", chk_email.rows[0].user_id);
       if (chk_email.rows.length === 0) {
         return res
           .status(403)
           .send({ statusCode: 403, message: "User not exist", body: false });
       } else {
-        return res
-          .status(200)
-          .json({
-            statusCode: 200,
-            token: response.accessToken,
-            body: true,
-            user_name: chk_email.rows.user_name,
-            user_id: chk_email.rows.user_id,
-            role_id: chk_email.rows.role_id,
-          });
+        return res.status(200).json({
+          statusCode: 200,
+          token: response.accessToken,
+          body: true,
+          user_name: chk_email.rows[0].user_name,
+          user_id: chk_email.rows[0].user_id,
+          role_id: chk_email.rows[0].role_id,
+        });
         //   res.redirect(`${ DASHBOARD_URL}?accesstoken=${response.accessToken}`);
         // res.redirect(`${DASHBOARD_URL}?accesstoken=${response.accessToken}`);
       }
