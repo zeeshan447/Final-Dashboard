@@ -65,7 +65,11 @@ const outlookLoginCallback = async (req, res) => {
         `select * from users where email = '${email}'`
       );
       console.log("user details", chk_email.rows);
-      //  console.log("usernmae", chk_email.rows[0].user_id);
+      const role_name = await pool.query(
+        `Select * from roles where role_id = ${chk_email.rows[0].role_id}`
+      );
+
+      // console.log("role value", role_name.rows[0].role_value);
       if (chk_email.rows.length === 0) {
         return res
           .status(403)
@@ -77,7 +81,9 @@ const outlookLoginCallback = async (req, res) => {
           body: true,
           user_name: chk_email.rows[0].user_name,
           user_id: chk_email.rows[0].user_id,
-          role_id: chk_email.rows[0].role_id,
+          role_id: role_name.rows[0].role_id,
+          role_name: role_name.rows[0].role_name,
+          role_value: role_name.rows[0].role_value,
         });
         //   res.redirect(`${ DASHBOARD_URL}?accesstoken=${response.accessToken}`);
         // res.redirect(`${DASHBOARD_URL}?accesstoken=${response.accessToken}`);
