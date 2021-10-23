@@ -56,9 +56,9 @@ const candidateInitial = async (req, res) => {
     c.notes,
     c.address,
     c.cv,
+    j.user_id,
     c.created_at,
     c.updated_at,
-    c.HiringManager,
     c.phone,
     c.email
       FROM

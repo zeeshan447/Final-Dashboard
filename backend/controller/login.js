@@ -1,4 +1,5 @@
 const msal = require("@azure/msal-node");
+const { ProcessCredentials } = require("aws-sdk");
 const { response } = require("express");
 const { Pool } = require("pg");
 const pool = require("../client");
@@ -95,38 +96,8 @@ const outlookLoginCallback = async (req, res) => {
     console.log(error);
   }
 };
-const outlookLogout = async (req, res) => {
-  const config = {
-    auth: {
-      clientId: process.env.OUTLOOK_CLIENT_ID,
-      redirectUri: process.env.DASHBOARD_URL, // defaults to application start page
-      postLogoutRedirectUri: process.env.DASHBOARD_URL,
-    },
-  };
-
-  const pca = new msal.PublicClientApplication(config);
-  pca
-    .getTokenCache()
-    .getAllAccounts()
-    .then((response) => {
-      const account = response[0];
-      pca
-        .getTokenCache()
-        .removeAccount(account)
-        .then(() => {
-          res.status(200).json({ msg: "Account logout" });
-        })
-        .catch((error) => {
-          res.status(500).send({ error });
-        });
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    });
-};
 
 module.exports = {
   outlookLogin,
   outlookLoginCallback,
-  outlookLogout,
 };

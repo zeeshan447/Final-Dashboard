@@ -24,7 +24,7 @@ const upload = require("./router/upload");
 const country = require("./router/country");
 
 const jobPosted = require("./router/jobPosted");
-
+const can = require("./router/candidate");
 app.use(express.json());
 app.use(cors());
 // app.use(function (req, res, next) {
@@ -76,7 +76,6 @@ app.use("/candidatebyjob", candidate_job_maping);
 app.use("/team", teamsrouter);
 app.use("/auth", login);
 app.use("/interview", interview);
-const can = require("./router/candidate");
 app.use("/work-type", worktype);
 app.use("/company-loc", location);
 app.use("/job-owner", owner);
