@@ -98,19 +98,86 @@ const updateFeedback = async (req, res) => {
 
 const userInterviewList = async (req, res) => {
   try {
-    let myinterviewerList =
-      await pool.query(`select interviewer_status_id, scheduled_time,schedule_date,
-        c.candidate_name, j.job_title, is2.status, is2.stage, feedback
-        from interviewer_status is2 join candidate_job_maping cjm on cjm.candidate_job_maping_id  = is2.candidate_job_maping_id 
-        join candidate c on c.candidate_id = cjm.candidate_id 
-        join job j on j.job_id = cjm.job_id
-        where is2.user_id =${req.params.user_id} `);
-    console.log("users", myinterviewerList.rows);
+    //
+    var dt = new Date();
+    let today = new Date().toISOString().slice(0, 10);
+    var hours = new Date().getHours();
+    var minutes = new Date().getMinutes();
+    var seconds = new Date().getSeconds();
+    var getStatus;
+    ////
+
+    let { rows } = await pool.query(
+      `select  is2.schedule_date ,is2.interviewer_status_id
+    from
+      interviewer_status is2
+    join userinterview_maping um on
+    um.interviewer_status_id = is2.interviewer_status_id
+    join users u on u.user_id =um.user_id
+    join candidate_job_maping cjm on cjm.candidate_job_maping_id = is2.candidate_job_maping_id
+    join candidate c on c.candidate_id =cjm.candidate_id
+    where
+      um.user_id =${req.params.user_id}`
+    );
+    var str = rows[0].schedule_date;
+    console.log("rows are", str);
+    for (var i = 0; rows.length; i++) {
+      if (today > rows[i].schedule_date) {
+        getStatus = "UPCOMING INTERVIEW";
+      } else if (today < rows[i].schedule_date) {
+        getStatus = "OVERDUE INTERVIEW";
+      } else if ((today = rows[i].schedule_date)) {
+        getStatus = "OVERDUE INTERVIEW";
+      }
+      await pool.query(
+        `Update interviewer_status set status=${getStatus} where interviewer_status_id = ${req.params.interviewer_status_id}`
+      );
+    }
+    // ///
+    // let myinterviewerList = await pool.query(`select is2.schedule_date
+    //   from
+    //     interviewer_status is2
+    //   join userinterview_maping um on
+    //   um.interviewer_status_id = is2.interviewer_status_id
+    //   join users u on u.user_id =um.user_id
+    //   join candidate_job_maping cjm on cjm.candidate_job_maping_id = is2.candidate_job_maping_id
+    //   join candidate c on c.candidate_id =cjm.candidate_id
+    //   where
+    //     um.user_id =${req.params.user_id} `);
+    console.log("data change", rows[0].schedule_date.split("T"));
+
+    var getResult = new Date(rows.rows[0].scheduled_date.slice(0, 10));
+    console.log("today date", today);
+    console.log("result is", getResult);
+    if (today > getResult) {
+      getStatus = "OverDue Interview";
+    } else if (today < getResult) {
+      getStatus = "Upcoming Interview";
+    } else if (parseFloat(getResult) === 0) {
+      getStatus = "Today Schedule";
+    }
+
+    console.log("Schedule date", getStatus);
     //pool.end()
-    res.json({ statusCode: 200, users: myinterviewerList.rows });
+    res.json({ statusCode: 200, users: getStatus });
+
+    //
+    // let myinterviewerList = await pool.query(`select c.candidate_name, is2.*
+    //   from
+    //     interviewer_status is2
+    //   join userinterview_maping um on
+    //   um.interviewer_status_id = is2.interviewer_status_id
+    //   join users u on u.user_id =um.user_id
+    //   join candidate_job_maping cjm on cjm.candidate_job_maping_id = is2.candidate_job_maping_id
+    //   join candidate c on c.candidate_id =cjm.candidate_id
+    //   where
+    //     um.user_id =${req.params.user_id} `);
+    // console.log("users", myinterviewerList.rows);
+    // //pool.end()
+    // res.json({ statusCode: 200, users: myinterviewerList.rows });
   } catch (err) {
     console.error(err.message);
-    throw err;
+    res.json({ statusCode: 300, message: err.message });
   }
 };
 ///
