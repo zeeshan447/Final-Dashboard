@@ -23,9 +23,9 @@ export const PrivateRoute = ({ children, component: Component, ...rest }) => {
   console.log("Authenticated", isAuthenticated);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: "dashboard" });
-  }, []);
+  // useEffect(() => {
+  //   dispatch({ type: "dashboard" });
+  // }, []);
 
   return (
     <Route

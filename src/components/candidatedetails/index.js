@@ -187,7 +187,7 @@ const CandidateDetails = ({
                     </CandidateHiringManager>
                     <DeleteInterviewStatusButton>
                       <Popconfirm
-                        title="Are you sure to delete this task?"
+                        title="Are you sure to delete this schedule?"
                         onConfirm={() =>
                           deleteScheduleInterview(data.interviewer_status_id)
                         }
@@ -222,6 +222,7 @@ const CandidateDetails = ({
         onCancel={handleCancel}
         footer={false}
         closable={false}
+        destroyOnClose
       >
         <CandidateSchedule
           modalVisibility={setIsModalVisible}

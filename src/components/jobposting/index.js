@@ -3,6 +3,8 @@ import Axios from "axios";
 import JobDepartmentSelect from "./jobdepartmentselect";
 import JobLocationSelect from "./joblocationselect";
 import JobWorkTypeSelect from "./jobworktypeselect";
+import { Button, notification } from "antd";
+import { useSelector } from "react-redux";
 
 import {
   JobPostingDiv,
@@ -28,6 +30,7 @@ import {
   PostingOwnerAvatar,
   PostingOwnerSelect,
   LineSpace,
+  PostingOwnerName,
 } from "./jobposting.style";
 import HiringManagerSelect from "./hiringmanagerselect";
 import PostingOwner from "./postingownerselect";
@@ -43,6 +46,7 @@ const JobPosting = () => {
   const [getJobOwner, setJobOwner] = useState();
   const [getIsActive, setIsActive] = useState();
   const [getHiringManager, setHiringManager] = useState();
+  const userDetailing = useSelector((state) => state.userDetails.userDetails);
 
   const { TextArea } = JobPostingDescription;
 
@@ -78,6 +82,13 @@ const JobPosting = () => {
       is_active: "true",
     }).then((response) => {
       console.log("asdsadsadsadsadsad ", response.data);
+      notification.open({
+        message: "Job Posted",
+        description: "Job Posted Successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
   };
   return (
@@ -129,11 +140,10 @@ const JobPosting = () => {
               Posting Owner
             </JobSidebarPostingOwnerTitle>
             <PostingOwnerDiv>
-              <PostingOwnerAvatar bgcolor="#F178B6">TS</PostingOwnerAvatar>
-              <PostingOwner
-                jobPostingOwner={setJobOwner}
-                userId={setUserId}
-              ></PostingOwner>
+              <PostingOwnerAvatar bgcolor="#F178B6">
+                {userDetailing.user_name}
+              </PostingOwnerAvatar>
+              <PostingOwnerName>{userDetailing.user_name}</PostingOwnerName>
             </PostingOwnerDiv>
           </JobPostingDetailsDiv>
           <LineSpace />

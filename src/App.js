@@ -23,6 +23,7 @@ import {
 import { PublicRoute } from "./routes/publicroutes/publicroute";
 import ApplicantReview from "./components/applicantsreview";
 import TestingLocations from "./components/company/testlocations";
+import MyInterviews from "./components/myinterviews";
 
 function App(props) {
   const isLoggedIn = useSelector((state) => state.isAuthenticated);
@@ -56,6 +57,8 @@ function App(props) {
         <PublicRoute exact={true} path="/" component={LoginPage} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/review" component={ApplicantReview} />
+        <PrivateRoute path="/myinterviews" component={MyInterviews} />
+        {/* <Redirect from="*" to="/applicant" /> */}
       </Switch>
     </React.Fragment>
   );

@@ -80,6 +80,7 @@ const ApplicantTable = () => {
           address: row.address,
           email: row.email,
           phone: row.phone,
+          job_createdby: row.job_createdby,
         }))
       );
       console.log("INITIAL RESPONSE", res);

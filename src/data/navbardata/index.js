@@ -62,3 +62,12 @@ export const NavButtonCompany = [
     to: "/locations",
   },
 ];
+
+export const MyInterviewData = [
+  {
+    key: 11,
+    name: "My Interviews",
+    width: "180px;",
+    to: "/myinterviews",
+  },
+];

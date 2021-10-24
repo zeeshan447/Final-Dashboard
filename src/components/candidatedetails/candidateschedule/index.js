@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import { Button, notification } from "antd";
+
 import {
   ScheduleDatePicker,
   ScheduleTimePicker,
@@ -192,6 +194,13 @@ const CandidateSchedule = ({ modalVisibility, scheduledCandidateData }) => {
         },
       ]).then((response) => {
         console.log("Interview has been scheduled", response);
+        notification.open({
+          message: "Interview Schedule",
+          description: "Interview Scheduled Successfully",
+          onClick: () => {
+            console.log("Notification Clicked!");
+          },
+        });
       });
     } else {
       alert("Please Fill in all the values");

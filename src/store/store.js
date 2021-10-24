@@ -1,5 +1,6 @@
 import { createStore } from "redux";
-import { reducers } from "./index";
+import reducers from "./index";
+import { persistStore } from "redux-persist";
 
 const store = createStore(
   reducers,
@@ -7,4 +8,6 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-export default store;
+const persistor = persistStore(store);
+
+export { store, persistor };

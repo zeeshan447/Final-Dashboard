@@ -30,7 +30,7 @@ import {
   SecondaryHeaderTabs,
   TabsDiv,
 } from "./navbar.style";
-import { NavButtons } from "../../data/navbardata/index";
+import { MyInterviewData, NavButtons } from "../../data/navbardata/index";
 import { NavButtonArRe } from "../../data/navbardata/index";
 import { NavButtonUserEdit } from "../../data/navbardata/index";
 import { NavButtonCompany } from "../../data/navbardata/index";
@@ -79,7 +79,7 @@ const NavBar = () => {
                 <NavLinks to="/jobs">Jobs</NavLinks>
               </NavItem>
               <NavItem>
-                <NavLinks to="/">Interviews</NavLinks>
+                <NavLinks to="/myinterviews">Interviews</NavLinks>
               </NavItem>
               <NavItem>
                 <NavLinks to="/">More</NavLinks>
@@ -211,6 +211,30 @@ const NavBar = () => {
                   </NavbarPostingsButton>
                 </NavbarPostingsDiv>
               </ArchiveTabs>
+            ) : null}
+            {counter === 4 ? (
+              <ApplicantTab>
+                {MyInterviewData.map((data, i) => {
+                  return (
+                    <Link to={data.to}>
+                      <Tabs
+                        i={data.key}
+                        width={data.width}
+                        key={data.key}
+                        onClick={() => handleClick(data.key)}
+                        active={
+                          path === data.to || path === data.to
+                            ? activeButton
+                            : null
+                        }
+                      >
+                        {data.name}
+                        <CustomBadges />
+                      </Tabs>
+                    </Link>
+                  );
+                })}
+              </ApplicantTab>
             ) : null}
           </TabsDiv>
         </SecondaryHeaderTabs>

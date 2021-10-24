@@ -1,5 +1,6 @@
 import React from "react";
 import Profilepic from "../../images/Profilepic.jpg";
+import { useHistory } from "react-router-dom";
 import {
   Image,
   UserNameDropdown,
@@ -23,11 +24,11 @@ function handleMenuClick(e) {
 }
 
 const ProfilePicture = () => {
+  let history = useHistory();
+
   const logoutHandler = async () => {
-    await Axios.get("http://localhost:2500/auth/outlook/logout").then((res) => {
-      console.log("LOGOUT RESPONSE", res);
-      //localStorage.removeItem("access_token")
-    });
+    localStorage.removeItem("access_token");
+    history.push("/");
   };
 
   const menu = (

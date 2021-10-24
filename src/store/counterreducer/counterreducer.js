@@ -13,6 +13,9 @@ export const counterReducer = (state = { counter: 0 }, action) => {
   if (action.type === "jobs") {
     return { counter: 3 };
   }
+  if (action.type === "myinterviews") {
+    return { counter: 4 };
+  }
 
   return state;
 };

@@ -1,5 +1,5 @@
 const pool = require("../client");
-
+const moment = require("moment");
 const InterviewList = async (req, res) => {
   try {
     let users = await pool.query(`select * from interviewer_status`);
@@ -98,19 +98,47 @@ const updateFeedback = async (req, res) => {
 
 const userInterviewList = async (req, res) => {
   try {
-    let myinterviewerList =
-      await pool.query(`select interviewer_status_id, scheduled_time,schedule_date,
-        c.candidate_name, j.job_title, is2.status, is2.stage, feedback
-        from interviewer_status is2 join candidate_job_maping cjm on cjm.candidate_job_maping_id  = is2.candidate_job_maping_id 
-        join candidate c on c.candidate_id = cjm.candidate_id 
-        join job j on j.job_id = cjm.job_id
-        where is2.user_id =${req.params.user_id} `);
+    let myinterviewerList = await pool.query(`select c.candidate_name, is2.*
+      from
+        interviewer_status is2
+      join userinterview_maping um on 
+      um.interviewer_status_id = is2.interviewer_status_id 
+      join users u on u.user_id =um.user_id 
+      join candidate_job_maping cjm on cjm.candidate_job_maping_id = is2.candidate_job_maping_id 
+      join candidate c on c.candidate_id =cjm.candidate_id 
+      where
+        um.user_id =${req.params.user_id} `);
     console.log("users", myinterviewerList.rows);
+    const interviewStatus = {
+      feedbackToComplete: [],
+      upcomingInterview: [],
+      overDueInterview: [],
+      completedInterview: [],
+    };
+    myinterviewerList.rows.map((data) => {
+      let sched_date = moment(data.schedule_date.split(" ")[0]);
+      console.log(moment().diff(sched_date, "days"));
+      if (data.status == "COMPLETE" && !data.feedback) {
+        interviewStatus.feedbackToComplete.push(data);
+      } else if (data.status == "COMPLETE") {
+        interviewStatus.completedInterview.push(data);
+      } else if (
+        data.status == "PENDING" &&
+        moment().diff(sched_date, "days") > 0
+      ) {
+        interviewStatus.overDueInterview.push(data);
+      } else if (
+        data.status == "PENDING" &&
+        moment().diff(sched_date, "days") <= 0
+      ) {
+        interviewStatus.upcomingInterview.push(data);
+      }
+    });
     //pool.end()
-    res.json({ statusCode: 200, users: myinterviewerList.rows });
+    res.json({ statusCode: 200, data: interviewStatus });
   } catch (err) {
     console.error(err.message);
-    throw err;
+    res.json({ statusCode: 300, message: err.message });
   }
 };
 ///

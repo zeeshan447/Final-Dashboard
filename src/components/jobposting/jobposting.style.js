@@ -242,3 +242,13 @@ export const PostingOwnerSelect = styled(Select)`
     font-size: 12px;
   }
 `;
+
+export const PostingOwnerName = styled.h2`
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 10px;
+  color: #000000;
+  margin-left: 4%;
+  margin-top: 6%;
+`;
