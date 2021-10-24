@@ -74,7 +74,7 @@ const JobPosting = () => {
     await Axios.post(POSTJOB, {
       job_title: getJobName,
       job_loc: getLocation,
-      job_createdby: getJobOwner,
+      job_createdby: userDetailing.user_name,
       department_id: getDepartment,
       user_id: getUserId,
       description: getDescription,
