@@ -71,7 +71,6 @@ const JobPosting = () => {
     setDescription(e.target.value);
   };
   const jobPostHandler = async () => {
-    debugger;
     await Axios.post(POSTJOB, {
       job_title: getJobName,
       job_loc: getLocation,
