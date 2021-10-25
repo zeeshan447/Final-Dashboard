@@ -10,12 +10,15 @@ import {
 import { useDispatch } from "react-redux";
 import { Data } from "./dummydata";
 import { MY_INTERVIEWS } from "./apis";
+import { useSelector } from "react-redux";
 
 const MyInterviews = () => {
   const [myInterviews, setMyInterviews] = useState();
   const [upcomingInterview, setUpcomingInterview] = useState();
   const [completedInterview, setCompletedInterview] = useState();
   const [interviews, setInterviews] = useState([]);
+  const userDetailing = useSelector((state) => state.userDetails.userDetails);
+
   const dispatch = useDispatch();
   let random = [];
 
@@ -33,7 +36,7 @@ const MyInterviews = () => {
     console.log("UPCOMING", upcomingInterview);
   });
   const getMyInterviews = async () => {
-    await Axios.get(`${MY_INTERVIEWS}/6`).then((res) => {
+    await Axios.get(`${MY_INTERVIEWS}/${userDetailing.user_id}`).then((res) => {
       setMyInterviews(
         res.data.data.overDueInterview?.map((row, key) => ({
           candidate_name: row.candidate_name,
@@ -52,7 +55,7 @@ const MyInterviews = () => {
   };
 
   const getUpcomingInterview = async () => {
-    await Axios.get(`${MY_INTERVIEWS}/6`).then((res) => {
+    await Axios.get(`${MY_INTERVIEWS}/${userDetailing.user_id}`).then((res) => {
       setUpcomingInterview(
         res.data.data.upcomingInterview?.map((row, key) => ({
           candidate_name: row.candidate_name,
@@ -71,7 +74,7 @@ const MyInterviews = () => {
   };
 
   const completedInterviews = async () => {
-    await Axios.get(`${MY_INTERVIEWS}/6`).then((res) => {
+    await Axios.get(`${MY_INTERVIEWS}/${userDetailing.user_id}`).then((res) => {
       setCompletedInterview(
         res.data.data.completedInterview?.map((row, key) => ({
           candidate_name: row.candidate_name,

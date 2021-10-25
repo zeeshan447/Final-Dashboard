@@ -24,6 +24,7 @@ import { PublicRoute } from "./routes/publicroutes/publicroute";
 import ApplicantReview from "./components/applicantsreview";
 import TestingLocations from "./components/company/testlocations";
 import MyInterviews from "./components/myinterviews";
+import AllRoutes from "./routes";
 
 function App(props) {
   const isLoggedIn = useSelector((state) => state.isAuthenticated);
@@ -31,36 +32,9 @@ function App(props) {
 
   console.log("Logged In State", isLoggedIn);
 
-  setTimeout(() => {
-    //props.history.push("");
-  });
   return (
     <React.Fragment>
-      {/* <Dashboard /> */}
-      {/* {isLoggedIn ? (
-        <PrivateRoute path="/dashboard" component={Dashboard} />
-      ) : (
-        <Redirect to="/login" />
-      )}
-      <LoginPage /> */}
-      <Switch>
-        <PrivateRoute path="/applicant" component={Applicant} />
-        <PrivateRoute path="/edituser" component={EditUser} />
-        <PrivateRoute path="/interview" component={Interview} />
-        <PrivateRoute path="/adduser" component={AddNewUser} />
-        <PrivateRoute path="/company" component={CompanySettings} />
-        <PrivateRoute path="/locations" component={TestingLocations} />
-        <PrivateRoute
-          path="/departmentsandteams"
-          component={DepartmentAndTeam}
-        />
-        <PrivateRoute path="/jobs" component={Jobs} />
-        <PublicRoute exact={true} path="/" component={LoginPage} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
-        <PrivateRoute path="/review" component={ApplicantReview} />
-        {/* <Redirect from="*" to="/applicant" /> */}
-        <PrivateRoute path="/myinterviews" component={MyInterviews} />
-      </Switch>
+      <AllRoutes />
     </React.Fragment>
   );
 }

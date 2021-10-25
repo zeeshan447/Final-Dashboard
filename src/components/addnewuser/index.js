@@ -105,7 +105,12 @@ const AddNewUser = ({ modalVisibility }) => {
                       {userRoles.map((data, key) => {
                         key = { key };
                         return (
-                          <Option value={data.role_id}>{data.role_name}</Option>
+                          <Option
+                            value={data.role_id}
+                            disabled={data.role_id === 4}
+                          >
+                            {data.role_name}
+                          </Option>
                         );
                       })}
                     </Select>
