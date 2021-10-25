@@ -71,12 +71,13 @@ const JobPosting = () => {
     setDescription(e.target.value);
   };
   const jobPostHandler = async () => {
+    debugger;
     await Axios.post(POSTJOB, {
       job_title: getJobName,
       job_loc: getLocation,
       job_createdby: userDetailing.user_name,
       department_id: getDepartment,
-      user_id: getUserId,
+      user_id: getUserId.key,
       description: getDescription,
       worktype_id: getWorkType,
       is_active: "true",
@@ -158,6 +159,7 @@ const JobPosting = () => {
               </PostingOwnerAvatar>
               <HiringManagerSelect
                 hiringManagerName={setHiringManager}
+                hiringManagerId={setUserId}
               ></HiringManagerSelect>
             </PostingOwnerDiv>
           </JobPostingDetailsDiv>

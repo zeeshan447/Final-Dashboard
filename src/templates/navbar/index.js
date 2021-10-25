@@ -247,6 +247,7 @@ const NavBar = () => {
         width="991px"
         height="888px"
         footer={false}
+        destroyOnClose
       >
         <AddCandidate />
       </Modal>
@@ -258,6 +259,7 @@ const NavBar = () => {
         height="740px"
         footer={false}
         closable={false}
+        destroyOnClose
       >
         <JobPosting />
       </JobModal>

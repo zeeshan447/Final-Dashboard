@@ -24,9 +24,9 @@ const interviewSchedule = async (req, res) => {
 
                 (candidate_job_maping_id, scheduled_time,
 
-                schedule_date , duration, location,interview_type, stage)
+                schedule_date , duration, location,interview_type, stage, status)
 
-                values ($1, $2, $3, $4,$5,$6,$7)
+                values ($1, $2, $3, $4,$5,$6,$7,$8)
 
                 RETURNING interviewer_status_id`,
 
@@ -43,6 +43,7 @@ const interviewSchedule = async (req, res) => {
           data.interview_type,
 
           data.stage,
+          data.status,
         ]
       );
 
@@ -98,7 +99,8 @@ const updateFeedback = async (req, res) => {
 
 const userInterviewList = async (req, res) => {
   try {
-    let myinterviewerList = await pool.query(`select c.candidate_name, is2.*
+    let myinterviewerList =
+      await pool.query(`select c.candidate_name, is2.*, cjm.stage
       from
         interviewer_status is2
       join userinterview_maping um on 

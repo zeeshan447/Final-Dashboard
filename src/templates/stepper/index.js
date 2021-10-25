@@ -8,6 +8,7 @@ import Interview from "../../components/interview";
 import PhoneScreening from "../../components/phonescreening";
 import Axios from "axios";
 import { NEW_APPLICANTS } from "../../apis";
+import { useHistory } from "react-router-dom";
 
 const firstComponent = () => {
   return <ApplicantTable />;
@@ -20,6 +21,8 @@ const thirdComponent = () => {
 };
 
 const Stepper = ({ applicantCount, reviewCount, phoneCount }) => {
+  let history = useHistory();
+
   const [steps, setSteps] = useState([
     {
       key: "1",
@@ -51,7 +54,12 @@ const Stepper = ({ applicantCount, reviewCount, phoneCount }) => {
     // setApplicantCount(localStorage.getItem("applicant_count"));
   });
   const handleNext = (i) => {
-    setActiveStep(steps[i]);
+    debugger;
+    if (i === 2) {
+      history.push("/interview");
+    } else {
+      setActiveStep(steps[i]);
+    }
   };
 
   return (

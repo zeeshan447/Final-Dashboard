@@ -72,6 +72,7 @@ const Jobs = () => {
   // };
 
   const getDepartments = async () => {
+    debugger;
     const response = await Axios.get(GET_ALLJOBS);
     setDepartmentName(
       response.data.job.map((row, key) => ({

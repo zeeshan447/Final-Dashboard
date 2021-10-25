@@ -177,7 +177,7 @@ const CandidateSchedule = ({ modalVisibility, scheduledCandidateData }) => {
       getInterval.length &&
       getInterviewer.length !== 0
     ) {
-      modalVisibility(false);
+      //modalVisibility(false);
       await Axios.post(SCHEDULE_INTERVIEW, [
         {
           scheduled_time: time,
@@ -186,7 +186,7 @@ const CandidateSchedule = ({ modalVisibility, scheduledCandidateData }) => {
           user_id: getInterviewer,
           candidate_job_maping_id:
             scheduledCandidateData.candidate_job_maping_id,
-          status: null,
+          status: "PENDING",
           schedule_date: date,
           duration: getInterval,
           location: null,

@@ -56,23 +56,26 @@ const candidateInitial = async (req, res) => {
     c.notes,
     c.address,
     c.cv,
+    j.user_id,
+    u.user_name,
     c.created_at,
     c.updated_at,
-    c.HiringManager,
     c.phone,
     c.email
       FROM
     candidate c
   JOIN candidate_job_maping cjm ON
     c.candidate_id = cjm.candidate_id
+    
   JOIN job j ON
     j.job_id = cjm.job_id 
+    JOIN users u on
+    j.user_id= u.user_id
     where 1=1
     ${stage ? ` and cjm.stage = '${stage}'` : ""}
     ${search ? ` and c.candidate_name ilike '%${search}%'` : ""}
     ${job_id ? ` and j.job_id = '${job_id}'` : ""}`
     );
-
     // console.log("candidate_status : ", candidateDetail.rows);
     //pool.end()
     res.send({

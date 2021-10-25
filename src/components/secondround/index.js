@@ -69,7 +69,7 @@ const SecondRound = () => {
           prev_company: row.prev_company,
           job_title: row.job_title,
           created_at: row.created_at,
-          hiringmanager: row.hiringmanager,
+          hiringmanager: row.user_name,
           job_id: row.job_id,
           urls: row.urls,
           cv: row.cv,

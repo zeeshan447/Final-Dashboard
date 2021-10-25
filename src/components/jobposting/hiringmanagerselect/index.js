@@ -3,7 +3,7 @@ import { PostingOwnerSelect } from "./hiringmanager.style";
 import Axios from "axios";
 import { GETALLUSERS } from "../apis";
 
-const HiringManagerSelect = ({ hiringManagerName }) => {
+const HiringManagerSelect = ({ hiringManagerName, hiringManagerId }) => {
   const { Option } = PostingOwnerSelect;
   let responseData = [];
   const [getHiringManager, setHiringManager] = useState();
@@ -25,9 +25,10 @@ const HiringManagerSelect = ({ hiringManagerName }) => {
     setHiringManager(responseData);
   };
 
-  function handleChange(value) {
+  function handleChange(value, key) {
     console.log(`selected ${value}`);
     hiringManagerName(value);
+    hiringManagerId(key);
   }
   function onSearch(val) {
     console.log("search:", val);
@@ -45,7 +46,11 @@ const HiringManagerSelect = ({ hiringManagerName }) => {
         }
       >
         {getHiringManager?.map((data, key) => {
-          return <Option value={data.user_name}>{data.user_name}</Option>;
+          return (
+            <Option key={data.key} value={data.user_name}>
+              {data.user_name}
+            </Option>
+          );
         })}
       </PostingOwnerSelect>
     </React.Fragment>

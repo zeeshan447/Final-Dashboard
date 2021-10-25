@@ -25,7 +25,6 @@ export const InterviewDetailsDiv = styled.div`
 export const InterviewDateTimeDiv = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 3%;
 `;
 
 export const DateTimeDetails = styled.h2`
@@ -34,4 +33,6 @@ export const DateTimeDetails = styled.h2`
   font-size: 16px;
   line-height: 24px;
   color: #55565a;
+  margin-left: 1%;
+  width: 150px;
 `;
