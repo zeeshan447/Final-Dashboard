@@ -6,6 +6,8 @@ import {
   AddResumeLabelDiv,
   ResumeFileDiv,
 } from "./resumepreview.style";
+import { Document, Page, pdfjs } from "react-pdf";
+
 const ResumePreview = ({ cv }) => {
   const [pdfFile, setPdfFile] = useState(null);
   const [pdfFileError, setPdfFileError] = useState("");

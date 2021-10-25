@@ -11,6 +11,7 @@ import { FilterButtonDiv, FilterButtons } from "./filterbuttons.style";
 import { Tooltip } from "antd";
 import { Menu, Dropdown } from "antd";
 import Axios from "axios";
+import { notification } from "antd";
 
 const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
   const [rowItems, setRowItems] = useState([]);
@@ -31,6 +32,13 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
       }))
     ).then((res) => {
       console.log("response", res);
+      notification.open({
+        message: "Stage Changed Successful",
+        description: "Stage has been changed successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
     apiCall(!secondApiCall);
   };
@@ -50,6 +58,13 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
       }))
     ).then((res) => {
       console.log("response", res);
+      notification.open({
+        message: "Stage Changed Successful",
+        description: "Stage has been changed successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
     apiCall(!secondApiCall);
   };
@@ -69,6 +84,13 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
       }))
     ).then((res) => {
       console.log("response", res);
+      notification.open({
+        message: "Stage Changed Successful",
+        description: "Stage has been changed successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
     apiCall(!secondApiCall);
   };
@@ -88,6 +110,13 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
       }))
     ).then((res) => {
       console.log("response", res);
+      notification.open({
+        message: "Stage Changed Successful",
+        description: "Stage has been changed successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
     apiCall(!secondApiCall);
   };
@@ -107,6 +136,13 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
       }))
     ).then((res) => {
       console.log("response", res);
+      notification.open({
+        message: "Stage Changed Successful",
+        description: "Stage has been changed successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
     apiCall(!secondApiCall);
   };
@@ -126,6 +162,13 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
       }))
     ).then((res) => {
       console.log("response", res);
+      notification.open({
+        message: "Stage Changed Successful",
+        description: "Stage has been changed successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
     apiCall(!secondApiCall);
   };

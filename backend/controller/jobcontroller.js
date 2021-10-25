@@ -111,6 +111,7 @@ const jobupdated = async function (req, res) {
       job_loc,
       job_createdby,
       department_id,
+      description,
       is_active,
       user_id,
       company_id,
@@ -119,12 +120,13 @@ const jobupdated = async function (req, res) {
     //var updateData=req.body;
     //var sql = `UPDATE users SET ? WHERE id= ?`
     await client.query(
-      `Update "job" SET job_title = $1 , job_loc = $2 , job_createdby = $3, department_id = $4,is_active=$5,user_id = $6,company_id=$7,worktype_id=$8 WHERE job_id =$9`,
+      `Update "job" SET job_title = $1 , job_loc = $2 , job_createdby = $3, department_id = $4, description =$5,is_active=$6,user_id = $7,company_id=$8,worktype_id=$9 WHERE job_id =$10`,
       [
         job_title,
         job_loc,
         job_createdby,
         department_id,
+        description,
         is_active,
         user_id,
         company_id,
@@ -229,7 +231,32 @@ const allJob = async function (req, res) {
 
     res.json({ statusCode: 300, jobs: error.message });
   }
+}; ////
+
+const jobCreated = async function (req, res) {
+  try {
+    // let query = "SELECT * FROM company";
+    // let department_id = req.query.search;
+    client.query(
+      `select user_id ,user_name from users `,
+      function (err, result) {
+        if (err) {
+          console.log(err.message);
+        } else {
+          res.json({
+            status: 200,
+            count: result.rows.length,
+            data: result.rows,
+          });
+          console.log(result.rows.length);
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
 };
+//////
 
 ///////////////
 const allPosted = async function (req, res) {
@@ -246,7 +273,7 @@ const allPosted = async function (req, res) {
         j.job_title,'job_loc', j.job_loc,'job_created', 
         j.job_createdby ,'work_id',j.worktype_id,'work_type',
          wt.worktype,'jobDescription',j.description,
-         'jobStatus',j.is_active,'hiring_manager',u.user_name, 'departmentName', d.department_name, 'department_id', d.department_id
+         'jobStatus',j.is_active,'user_name',u.user_name,'user_id',u.user_id, 'departmentName', d.department_name, 'department_id', d.department_id
 
          )) as jobs
         
@@ -284,4 +311,5 @@ module.exports = {
   allPosted,
   allJob,
   archivedjob,
+  jobCreated,
 };

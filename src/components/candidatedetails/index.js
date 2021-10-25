@@ -100,7 +100,7 @@ const CandidateDetails = ({
         status: row.status,
         stage: row.stage,
         feedback: row.feedback,
-        note: row.note,
+        notes: row.note,
         interview_type: row.interview_type,
       }));
     });
@@ -132,7 +132,7 @@ const CandidateDetails = ({
         <AddCandidateNoteDiv>
           <AddCandidateNoteInputDiv active={getOnFocus}>
             <AddCandidateNoteInput
-              placeholder="Add Note"
+              placeholder="Add note"
               onFocus={onFocusHandler}
               onBlur={onBlurHandler}
               active={getOnFocus}

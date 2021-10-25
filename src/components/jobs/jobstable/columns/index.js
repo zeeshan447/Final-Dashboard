@@ -13,7 +13,7 @@ export const Columns = [
         <div className="detail">
           <span className="detail-style">{record.job_loc}</span>
           <span className="detail-style">{record.work_type}</span>
-          <span className="detail-style">{record.department_name}</span>
+          <span className="detail-style">{record.departmentName}</span>
         </div>
       </div>
     ),

@@ -8,20 +8,50 @@ import {
   JobsHeader,
   OpenJobDepartmentName,
   JobTableDiv,
+  Header,
+  HeaderTitle,
+  JobPostingDiv,
+  PostingInput,
+  AddJobPostingButton,
+  JobModal,
+  DepartmentSelectDiv,
+  JobDepartmentDropdown,
+  JobLocationDropdown,
+  JobOwnerDropdown,
+  FiltersText,
 } from "./jobs.style";
 import { Select } from "antd";
 import JobsTable from "./jobstable";
 import { DEPARTMENT_GET, GET_ALLJOBS } from "./apis";
+import JobPosting from "../jobposting";
+import JobDepartmentSelect from "./jobdepartmentselect";
+import JobLocationSelect from "./joblocationselect";
+import JobPostingOwnerSelect from "./jobpostingownerselect";
+import { useSelector } from "react-redux";
 
 const Jobs = () => {
   const [clearFilter, setClearFilter] = useState(false);
   const [departmentName, setDepartmentName] = useState();
+  const [filterDepartmentName, setFilterDepartmentName] = useState("");
+  const [filterLocationName, setFilterLocationName] = useState("");
   const [jobs, setJobs] = useState([]);
   const [jobArrays, setJobArrays] = useState();
   const [modalState, setModalState] = useState(false);
+  const [jobModalVisible, setJobModalVisible] = useState(false);
+  const [filterOwner, setFilterOwner] = useState("");
+  const pageReload = useSelector((state) => state.addCandidates.reloadPage);
+
   let jobArray = [];
 
   const { Option } = Select;
+
+  const handleOk = () => {
+    setJobModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setJobModalVisible(false);
+  };
 
   function handleChange(value) {
     console.log(`selected ${value}`);
@@ -30,49 +60,33 @@ const Jobs = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: "jobs" });
-    //getDepartmentName();
-    // getJobs();
+
     getDepartments();
-    // getAllJobs();
     console.log("FINAL JOBS", jobs);
-  }, []);
+  }, [
+    jobModalVisible,
+    filterDepartmentName,
+    filterLocationName,
+    filterOwner,
+    modalState,
+  ]);
 
   useEffect(() => {
-    //const response = await Axios.get(GET_ALLJOBS);
-    getAllJobs();
-  }, []);
-
-  // useEffect(() => {
-  //   const response = Axios.get(GET_ALLJOBS);
-  //   const info = response.data.job;
-  //   const parsedInfo = {
-  //     ...info,
-  //     jobs: Object.entries(info.favorite).reduce((obj, [k, v]) => {
-  //       obj[k] = "" + v;
-  //       return obj;
-  //     }, {}),
-  //   };
-  //   setJobs(parsedInfo);
-  // }, []);
-  // console.log('HELDSOIAODOIAJSD')
+    getDepartments();
+    console.log("PAGE RELOAD", pageReload);
+  }, [pageReload]);
 
   const handleFilter = () => {
     setClearFilter(false);
+    setFilterDepartmentName("");
+    setFilterLocationName("");
+    setFilterOwner("");
   };
-  // const getDepartmentName = async () => {
-  //   await Axios.get(DEPARTMENT_GET).then((res) => {
-  //     setDepartmentName(
-  //       res.data.data.map((row, key) => ({
-  //         department_id: row.department_id,
-  //         department_name: row.department_name,
-  //         company_id: row.company_id,
-  //       }))
-  //     );
-  //   });
-  // };
 
   const getDepartments = async () => {
-    const response = await Axios.get(GET_ALLJOBS);
+    const response = await Axios.get(
+      `${GET_ALLJOBS}?department_id=${filterDepartmentName}&job_loc=${filterLocationName}&job_createdby=${filterOwner}`
+    );
     setDepartmentName(
       response.data.job.map((row, key) => ({
         department_name: row.department_name,
@@ -85,120 +99,43 @@ const Jobs = () => {
 
     console.log("adkansdasjdasbdsabddhds", response.data);
     console.log("res", response.data.job);
-    jobArray = response.data.job;
-    setJobArrays(response.data.job);
-    //jobArray = Object.values(response.data.job.jobs);
-    getEveryJob();
   };
 
-  const getEveryJob = async () => {
-    const response = await Axios.get(GET_ALLJOBS);
-    console.log(
-      "KJDSKJSADKJSADJKSAD",
-      response.data.job[0].jobs[0].job_created
-    );
+  const openJobModal = () => {
+    setJobModalVisible(true);
   };
-
-  useEffect(() => {
-    console.log("JOB ARRAY", jobArrays);
-  });
-
-  const getAllJobs = () => {
-    // debugger;
-    // jobArray?.jobs.map((row, key) => ({
-    //   setJobs(
-    //     job_id: r
-
-    //   );
-    // }));
-    const newarrayy = jobArrays?.map((item) => {
-      return item.jobs;
-    });
-    console.log("new array", newarrayy);
-
-    const secondArray = newarrayy?.map((item) => {
-      for (var i = 0; i < newarrayy.length; i++) {
-        return item[i].job_id;
-      }
-    });
-
-    console.log("SECOND ARRAY", secondArray);
-
-    setJobs(
-      newarrayy?.map(
-        (row, key) => row
-        // job_id: row.job_id,
-        // job_title: row[0][3],
-        // job_loc: row[0][5],
-        // job_created: row[0][7],
-        // work_id: row[0][9],
-        // work_type: row[0][11],
-      )
-    );
-  };
-  useEffect(() => {
-    console.log("JOB FINAL ARRAY", jobs);
-  });
-  const getJobs = async () => {
-    await Axios.get(GET_ALLJOBS).then((res) => {
-      setJobs(
-        res.data.job.map((row, key) => ({
-          department_name: row.department_name,
-          department_id: row.department_id,
-          job_id: row.job_id,
-          job_title: row.job_title,
-          worktype_id: row.worktype_id,
-          worktype: row.worktype,
-          job_loc: row.job_loc,
-          job_createdby: row.job_createdby,
-        }))
-      );
-      console.log("JOB RESPONSE", res);
-    });
-  };
-
-  console.log("Jobs in departments", jobs);
-  console.log("departmentname", departmentName);
   return (
     <React.Fragment>
+      <Header>
+        <HeaderTitle>VisionX</HeaderTitle>
+        <JobPostingDiv>
+          <PostingInput placeholder="Search Postings"></PostingInput>
+          <AddJobPostingButton onClick={openJobModal}>
+            Add Job Posting
+          </AddJobPostingButton>
+        </JobPostingDiv>
+      </Header>
+
       <JobsHeader>
         <FilterText>
-          Filters:
-          <Select
-            placeholder="Department"
-            style={{ width: 230, margin: 30 }}
-            onChange={handleChange}
-          >
-            <Option value="lucy">Front-End</Option>
-            <Option value="disabled">Mobile</Option>
-            <Option value="Yiminghe">HR</Option>
-          </Select>
-          <Select
-            placeholder="Location"
-            style={{ width: 230, margin: 30 }}
-            onChange={handleChange}
-          >
-            <Option value="jack">Pakistan</Option>
-            <Option value="lucy">NewYork</Option>
-            <Option value="disabled">Canada</Option>
-            <Option value="Yiminghe">Dubai</Option>
-          </Select>
-          <Select
-            placeholder="Owner"
-            style={{ width: 230, margin: 30 }}
-            onChange={handleChange}
-          >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="disabled">Disabled</Option>
-            <Option value="Yiminghe">yiminghe</Option>
-          </Select>
+          <FiltersText>Filters:</FiltersText>
+          <JobDepartmentDropdown>
+            <JobDepartmentSelect
+              jobDepartment={setFilterDepartmentName}
+              jobDepartmentCallback={filterDepartmentName}
+            />
+          </JobDepartmentDropdown>
+          <JobLocationDropdown>
+            <JobLocationSelect locationSelect={setFilterLocationName} />
+          </JobLocationDropdown>
+          <JobOwnerDropdown>
+            <JobPostingOwnerSelect ownerSelect={setFilterOwner} />
+          </JobOwnerDropdown>
         </FilterText>
-        {clearFilter && (
-          <ClearFilterButton onClick={handleFilter}>
-            Clear Filters
-          </ClearFilterButton>
-        )}
+
+        <ClearFilterButton onClick={handleFilter}>
+          Clear Filters
+        </ClearFilterButton>
       </JobsHeader>
       <JobTableDiv>
         {departmentName?.map((data, key) => {
@@ -218,6 +155,19 @@ const Jobs = () => {
           );
         })}
       </JobTableDiv>
+
+      <JobModal
+        visible={jobModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width="1000px"
+        height="740px"
+        footer={false}
+        closable={false}
+        destroyOnClose
+      >
+        <JobPosting jobModalVisibility={setJobModalVisible} />
+      </JobModal>
     </React.Fragment>
   );
 };

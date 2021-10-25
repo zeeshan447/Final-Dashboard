@@ -25,7 +25,7 @@ const ApplicantTable = () => {
   const [jobChangeApiCallback, setJobChangeApiCallback] = useState(false);
   const userDetailing = useSelector((state) => state.userDetails.userDetails);
   const [stageChangeApiCallback, setStageChangeApiCallback] = useState(false);
-
+  const pageReload = useSelector((state) => state.addCandidates.reloadPage);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -81,6 +81,7 @@ const ApplicantTable = () => {
           email: row.email,
           phone: row.phone,
           job_createdby: row.job_createdby,
+          notes: row.notes,
         }))
       );
       console.log("INITIAL RESPONSE", res);
@@ -90,7 +91,8 @@ const ApplicantTable = () => {
   };
   useEffect(() => {
     getData();
-  }, [recallApi, jobChangeApiCallback, stageChangeApiCallback]);
+    console.log("REDUX RESPONSE", pageReload);
+  }, [recallApi, jobChangeApiCallback, stageChangeApiCallback, pageReload]);
 
   console.log("select", checked);
   console.log("helloooasdijas", recallApi);

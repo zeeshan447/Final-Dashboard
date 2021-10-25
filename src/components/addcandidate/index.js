@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { notification } from "antd";
+
 import {
   AddCandidateAddNoteButton,
   AddCandidateDiv,
@@ -14,6 +16,8 @@ import CandidateStageSelect from "./candidatestageselect";
 import AddCandidateBody from "./addcandidatebody";
 import Axios from "axios";
 import { ADD_CANDIDATE } from "./apis";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const AddCandidate = () => {
   const [getInputSize, setInputSize] = useState("");
@@ -27,6 +31,8 @@ const AddCandidate = () => {
   const [jobId, setJobId] = useState();
   const [jobTitle, setJobTitle] = useState();
   const [address, setAddress] = useState();
+  const dispatch = useDispatch();
+  const pageReload = useSelector((state) => state.addCandidates.reloadPage);
 
   const onFocusHandler = () => {
     setOnFocus(true);
@@ -44,6 +50,8 @@ const AddCandidate = () => {
     console.log("Name", getName);
     console.log("Company Name", getCompanyName);
     console.log("Resume", getResume);
+    dispatch({ type: "DEFAULT" });
+    console.log("response from redux", pageReload);
   }, []);
   const config = {
     headers: { "content-type": "multipart/form-data" },
@@ -61,6 +69,15 @@ const AddCandidate = () => {
       address: address,
     }).then((response) => {
       console.log("asdsadsadsadsadsad ", response);
+      dispatch({ type: "RELOAD" });
+
+      notification.open({
+        message: "Added Successfully",
+        description: "Candidate has been added successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
   };
   const noteChangeHandler = (e) => {

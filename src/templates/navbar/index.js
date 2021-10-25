@@ -68,7 +68,7 @@ const NavBar = () => {
 
   return (
     <React.Fragment>
-      <Header>
+      <Header height="150px">
         <Nav>
           <NavbarContainer>
             <NavMenu>
@@ -196,7 +196,7 @@ const NavBar = () => {
                 })}
               </ApplicantTab>
             ) : null}
-            {counter === 3 ? (
+            {/* {counter === 3 ? (
               <ApplicantTab>
                 <NavbarCompanyTitle>VisionX</NavbarCompanyTitle>
               </ApplicantTab>
@@ -211,7 +211,7 @@ const NavBar = () => {
                   </NavbarPostingsButton>
                 </NavbarPostingsDiv>
               </ArchiveTabs>
-            ) : null}
+            ) : null} */}
             {counter === 4 ? (
               <ApplicantTab>
                 {MyInterviewData.map((data, i) => {

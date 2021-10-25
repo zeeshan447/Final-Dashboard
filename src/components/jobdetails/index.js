@@ -30,13 +30,17 @@ import {
   JobDeleteButton,
   LineSpace,
   JobButtonDiv,
+  PostingOwner,
 } from "./jobdetails.style";
+import { notification } from "antd";
+import { useDispatch } from "react-redux";
+
 import HiringManagerSelect from "./jobposting/hiringmanagerselect";
-import PostingOwner from "./jobposting/postingownerselect";
+// import PostingOwner from "./jobposting/postingownerselect";
 import { UPDATEJOB } from "./apis";
 //import { POSTJOB } from "./apis";
 
-const JobDetails = ({ jobDetails }) => {
+const JobDetails = ({ jobDetails, updateJob }) => {
   const [getJobName, setJobName] = useState(jobDetails.job_title);
   const [getDepartment, setDepartment] = useState(jobDetails.department_id);
   const [getWorkType, setWorkType] = useState(jobDetails.work_type);
@@ -45,9 +49,12 @@ const JobDetails = ({ jobDetails }) => {
   const [getUserId, setUserId] = useState(jobDetails.job_id);
   const [getJobOwner, setJobOwner] = useState(jobDetails.job_created);
   const [getIsActive, setIsActive] = useState();
+  const [hiringManagerId, setHiringManagerId] = useState();
   const [getHiringManager, setHiringManager] = useState(
     jobDetails.hiring_manager
   );
+
+  const dispatch = useDispatch();
 
   const { TextArea } = JobPostingDescription;
 
@@ -61,8 +68,10 @@ const JobDetails = ({ jobDetails }) => {
       getDescription,
       getUserId,
       getJobOwner,
-      getHiringManager
+      getHiringManager,
+      hiringManagerId
     );
+    dispatch({ type: "DEFAULT" });
   });
 
   const titleHandler = (e) => {
@@ -88,17 +97,29 @@ const JobDetails = ({ jobDetails }) => {
   // };
 
   const updateJobHandler = async () => {
+    debugger;
     await Axios.put(`${UPDATEJOB}/${jobDetails.job_id}`, {
       job_title: getJobName,
       job_loc: getLocation,
       job_createdby: getJobOwner,
       department_id: getDepartment,
-      user_id: getUserId,
+      user_id: jobDetails.user_id,
       description: getDescription,
       worktype_id: getWorkType,
       is_active: "true",
+      company_id: 2,
     }).then((response) => {
       console.log("asdsadsadsadsadsad ", response.data);
+      dispatch({ type: "RELOAD" });
+
+      updateJob(false);
+      notification.open({
+        message: "Job Update Successfully",
+        description: "Job has successfully updated",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
   };
 
@@ -182,11 +203,7 @@ const JobDetails = ({ jobDetails }) => {
               <PostingOwnerAvatar bgcolor="#F178B6">
                 {getJobOwner ? getJobOwner?.match(/\b(\w)/g) : null}
               </PostingOwnerAvatar>
-              <PostingOwner
-                jobPostingOwner={setJobOwner}
-                userId={setUserId}
-                ownerDetails={jobDetails}
-              ></PostingOwner>
+              <PostingOwner>{getJobOwner}</PostingOwner>
             </PostingOwnerDiv>
           </JobPostingDetailsDiv>
           <LineSpace />
@@ -201,6 +218,7 @@ const JobDetails = ({ jobDetails }) => {
               </PostingOwnerAvatar>
               <HiringManagerSelect
                 hiringManagerName={setHiringManager}
+                hiringId={setHiringManagerId}
                 hiringDetails={jobDetails}
               ></HiringManagerSelect>
             </PostingOwnerDiv>

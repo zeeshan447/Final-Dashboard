@@ -15,6 +15,16 @@ export const JobPostingDiv = styled.div`
   margin-left: 2%;
 `;
 
+export const PostingOwner = styled.div`
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 10px;
+  color: #000000;
+  margin-left: 3%;
+  margin-top: 6%;
+`;
+
 export const JobPostingSidebar = styled.div`
   display: flex;
   flex-direction: column;

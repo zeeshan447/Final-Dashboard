@@ -95,7 +95,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 150px;
+  height: ${(props) => (props.height ? props.height : "100px")};
   font-size: 1.2rem;
   position: sticky;
   top: 0;

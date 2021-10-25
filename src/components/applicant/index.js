@@ -10,19 +10,27 @@ import {
 } from "../../apis";
 import Axios from "axios";
 import { Spin } from "antd";
+import { useSelector } from "react-redux";
 
 const Applicant = () => {
   const [getApplicationCount, setApplicantCount] = useState();
   const [getReviewCount, setReviewCount] = useState();
   const [getPhonescreenCount, setPhonescreenCount] = useState();
   const [loading, setLoading] = useState(true);
+  const pageReload = useSelector((state) => state.addCandidates.reloadPage);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: "dashboard" });
     getCount();
-  }, [getApplicationCount, getReviewCount, getPhonescreenCount, dispatch]);
+  }, [
+    getApplicationCount,
+    getReviewCount,
+    getPhonescreenCount,
+    dispatch,
+    pageReload,
+  ]);
 
   const getCount = async () => {
     setLoading(false);

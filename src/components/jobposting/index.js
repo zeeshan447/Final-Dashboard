@@ -36,7 +36,7 @@ import HiringManagerSelect from "./hiringmanagerselect";
 import PostingOwner from "./postingownerselect";
 import { POSTJOB } from "./apis";
 
-const JobPosting = () => {
+const JobPosting = ({ jobModalVisibility }) => {
   const [getJobName, setJobName] = useState();
   const [getDepartment, setDepartment] = useState();
   const [getWorkType, setWorkType] = useState();
@@ -82,6 +82,7 @@ const JobPosting = () => {
       is_active: "true",
     }).then((response) => {
       console.log("asdsadsadsadsadsad ", response.data);
+      jobModalVisibility(false);
       notification.open({
         message: "Job Posted",
         description: "Job Posted Successfully",

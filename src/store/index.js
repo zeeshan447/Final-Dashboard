@@ -5,6 +5,7 @@ import { userDetailReducer } from "./userDetailReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
+import { addCandidateReducer } from "./addcandidatereducer";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   users: userReducer,
   counter: counterReducer,
   userDetails: userDetailReducer,
+  addCandidates: addCandidateReducer,
 });
 
 export default persistReducer(persistConfig, reducers);
