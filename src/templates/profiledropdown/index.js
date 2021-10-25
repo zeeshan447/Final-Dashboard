@@ -42,9 +42,24 @@ const ProfilePicture = () => {
         </UserNameDropdownDiv>
       </Menu.Item>
 
-      <Menu.Item key="2" style={{ width: "300px" }} icon={<SettingOutlined />}>
-        <Link to="/edituser">Settings </Link>
-      </Menu.Item>
+      {userDetailing.role_value > 30 ? (
+        <Menu.Item
+          key="2"
+          style={{ width: "300px" }}
+          icon={<SettingOutlined />}
+        >
+          <Link to="/edituser">Settings </Link>
+        </Menu.Item>
+      ) : (
+        <Menu.Item
+          disabled
+          key="2"
+          style={{ width: "300px" }}
+          icon={<SettingOutlined />}
+        >
+          <Link to="/edituser">Settings </Link>
+        </Menu.Item>
+      )}
       <Menu.Item key="3" icon={<ExclamationCircleOutlined />}>
         Help Center
       </Menu.Item>
