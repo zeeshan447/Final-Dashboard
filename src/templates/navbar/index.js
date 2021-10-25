@@ -45,6 +45,7 @@ const NavBar = () => {
   console.log("Counter", counter);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [jobModalVisible, setJobModalVisible] = useState(false);
+  const userDetailing = useSelector((state) => state.userDetails.userDetails);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -88,9 +89,11 @@ const NavBar = () => {
           </NavbarContainer>
           <NavInput>
             <CustomInput></CustomInput>
-            <ButtonDiv>
-              <CustomButton onClick={showModal}>+ ADD CANDIDATE</CustomButton>
-            </ButtonDiv>
+            {userDetailing.role_value > 30 && (
+              <ButtonDiv>
+                <CustomButton onClick={showModal}>+ ADD CANDIDATE</CustomButton>
+              </ButtonDiv>
+            )}
             <NotificationIcon>
               <MaterialIcons
                 icon="notificationsnoneoutlined"
@@ -229,7 +232,6 @@ const NavBar = () => {
                         }
                       >
                         {data.name}
-                        <CustomBadges />
                       </Tabs>
                     </Link>
                   );
