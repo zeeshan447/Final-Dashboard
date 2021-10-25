@@ -88,7 +88,7 @@ const NavBar = () => {
             </NavMenu>
           </NavbarContainer>
           <NavInput>
-            <CustomInput></CustomInput>
+            {userDetailing.role_value > 30 && <CustomInput></CustomInput>}{" "}
             {userDetailing.role_value > 30 && (
               <ButtonDiv>
                 <CustomButton onClick={showModal}>+ ADD CANDIDATE</CustomButton>

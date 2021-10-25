@@ -17,6 +17,7 @@ import {
   MessageOutlined,
 } from "@ant-design/icons";
 import Axios from "axios";
+import { useSelector } from "react-redux";
 
 function handleMenuClick(e) {
   //   message.info("Click on menu item.");
@@ -25,6 +26,7 @@ function handleMenuClick(e) {
 
 const ProfilePicture = () => {
   let history = useHistory();
+  const userDetailing = useSelector((state) => state.userDetails.userDetails);
 
   const logoutHandler = async () => {
     localStorage.removeItem("access_token");
@@ -35,8 +37,8 @@ const ProfilePicture = () => {
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="1" style={{ width: "191px" }} disabled>
         <UserNameDropdownDiv>
-          <UserNameDropdown>Ali Haider</UserNameDropdown>
-          <UserRoleDropdown>Limited Team Member</UserRoleDropdown>
+          <UserNameDropdown>{userDetailing.user_name}</UserNameDropdown>
+          <UserRoleDropdown>{userDetailing.role_name}</UserRoleDropdown>
         </UserNameDropdownDiv>
       </Menu.Item>
 
@@ -44,10 +46,10 @@ const ProfilePicture = () => {
         <Link to="/edituser">Settings </Link>
       </Menu.Item>
       <Menu.Item key="3" icon={<ExclamationCircleOutlined />}>
-        Help Center{" "}
+        Help Center
       </Menu.Item>
       <Menu.Item key="4" icon={<MessageOutlined />}>
-        Support{" "}
+        Support
       </Menu.Item>
       <Menu.Item onClick={logoutHandler} key="5" icon={<PoweroffOutlined />}>
         Log Out
