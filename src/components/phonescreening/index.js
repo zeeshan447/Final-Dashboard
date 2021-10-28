@@ -10,7 +10,7 @@ import CandidateDetails from "../candidatedetails";
 import { Spin } from "antd";
 import { PHONESCREENED_APPLICANTS } from "./apis";
 
-const PhoneScreening = () => {
+const PhoneScreening = ({ getCount }) => {
   const [select, setSelectedRow] = useState(null);
   const [checked, setChecked] = useState(false);
   const [candidates, setCandidates] = useState([]);
@@ -80,6 +80,7 @@ const PhoneScreening = () => {
           phone: row.phone,
         }))
       );
+      getCount();
     });
   };
 

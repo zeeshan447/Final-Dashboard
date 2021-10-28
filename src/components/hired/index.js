@@ -10,7 +10,7 @@ import CandidateDetails from "../candidatedetails";
 import { Spin } from "antd";
 import { HIRED_APPLICANTS } from "./apis";
 
-const Hired = () => {
+const Hired = ({ getCount }) => {
   const [select, setSelectedRow] = useState(null);
   const [checked, setChecked] = useState(false);
   const [candidates, setCandidates] = useState([]);
@@ -81,6 +81,7 @@ const Hired = () => {
           phone: row.phone,
         }))
       );
+      getCount();
     });
   };
 

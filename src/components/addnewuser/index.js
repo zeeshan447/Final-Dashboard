@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Select } from "antd";
+import { notification } from "antd";
 
 import "antd/dist/antd.css";
 import { Button, Form } from "antd";
@@ -61,6 +62,13 @@ const AddNewUser = ({ modalVisibility }) => {
       role_id: roleId,
     }).then((response) => {
       console.log("USER DATA RESPONSE", response);
+    });
+    notification.open({
+      message: "Added Successfully",
+      description: "User has been added successfully",
+      onClick: () => {
+        console.log("Notification Clicked!");
+      },
     });
     modalVisibility(false);
   };

@@ -67,6 +67,9 @@ const NavBar = () => {
     setActiveButton(id);
   };
 
+  const archiveHandler = () => {
+    alert("Archive is disabled");
+  };
   return (
     <React.Fragment>
       <Header height="150px">
@@ -82,9 +85,9 @@ const NavBar = () => {
               <NavItem>
                 <NavLinks to="/myinterviews">Interviews</NavLinks>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <NavLinks to="/">More</NavLinks>
-              </NavItem>
+              </NavItem> */}
             </NavMenu>
           </NavbarContainer>
           <NavInput>
@@ -125,7 +128,7 @@ const NavBar = () => {
                         }
                       >
                         {data.name}
-                        <CustomBadges />
+                        {/* <CustomBadges /> */}
                       </Tabs>
                     </Link>
                   );
@@ -168,9 +171,9 @@ const NavBar = () => {
                           ? activeButton
                           : null
                       }
+                      onClick={archiveHandler}
                     >
                       {data.name}
-                      <CustomBadges />
                     </Tabs>
                   );
                 })}

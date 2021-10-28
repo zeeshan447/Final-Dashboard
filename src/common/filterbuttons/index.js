@@ -28,7 +28,7 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
       rowData.map((row, key) => ({
         candidate_id: row.key,
         job_id: row.job_id,
-        stage: "REVIEW",
+        stage: "REVIEWS",
       }))
     ).then((res) => {
       console.log("response", res);

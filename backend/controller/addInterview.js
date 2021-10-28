@@ -79,28 +79,78 @@ const interviewSchedule = async (req, res) => {
 const updateFeedback = async (req, res) => {
   try {
     const interviewer_status_id = req.params.interviewer_status_id;
-    const feedback = req.body.feedback;
+    const feedback = req.body.feedback_data;
     const status = req.body.status;
-    const db = req.body;
-    console.log(db);
-    let interviewerFeedback = await pool.query(
-      `UPDATE "interviewer_status" set feedback = $1, status= $2 
-        where interviewer_status_id = $3`,
-      [feedback, status, interviewer_status_id]
-    );
-    console.log(interviewerFeedback);
-    //pool.end()
-    res.json({ statusCode: 201, message: "updated Successfuly" });
-  } catch (err) {
-    console.error(err.message);
-    return err;
+    const user_id = req.body.user_id;
+    console.log("dasd", interviewer_status_id);
+    console.log("feed", feedback);
+    console.log("status", status);
+    let fb = JSON.stringify(feedback);
+    let sfb = JSON.stringify(feedback[0]);
+    // const db = req.body;
+    //console.log(db);
+    try {
+      await pool.query("BEGIN");
+      try {
+        await pool.query(
+          `
+         Update interviewer_status 
+         set status = '${status}'
+         where interviewer_status_id = ${interviewer_status_id};`,
+          function (err, result) {
+            if (err) {
+              console.log("\nclient.query():", err);
+              // Rollback before executing another transaction
+              pool.query("ROLLBACK");
+            }
+          }
+        );
+        await pool.query(
+          ` Update userinterview_maping 
+         set feedback_data ='${sfb}'
+         where user_id =${user_id}
+          and interviewer_status_id =${interviewer_status_id} ;`,
+          function (err, result) {
+            if (err) {
+              console.log("\nclient.query():", err.message);
+              // Rollback before executing another transaction
+              pool.query("ROLLBACK");
+            } else {
+              console.log("INSERTED DATA ....");
+              res.send({
+                status: 200,
+                msg: "Data updated",
+              });
+              pool.query("COMMIT");
+            }
+          }
+        );
+      } catch (er) {
+        // Rollback before executing another transaction
+        pool.query("ROLLBACK");
+        console.log("client.query():", er.message);
+        console.log("Transaction ROLLBACK called");
+      }
+    } catch (er) {
+      // Rollback before executing another transaction
+      pool.query("ROLLBACK");
+      console.log("client.query():", er);
+      console.log("Transaction ROLLBACK called");
+    }
+  } catch (er) {
+    // Rollback before executing another transaction
+    pool.query("ROLLBACK");
+    console.log("client.query():", er);
+    console.log("Transaction ROLLBACK called");
   }
+  //  console.log(interviewerFeedback);
+  //pool.end()
 };
 
 const userInterviewList = async (req, res) => {
   try {
     let myinterviewerList =
-      await pool.query(`select c.candidate_name, is2.*, cjm.stage
+      await pool.query(`select c.candidate_name,um.feedback_data, is2.*, cjm.stage
       from
         interviewer_status is2
       join userinterview_maping um on 
@@ -120,7 +170,7 @@ const userInterviewList = async (req, res) => {
     myinterviewerList.rows.map((data) => {
       let sched_date = moment(data.schedule_date.split(" ")[0]);
       console.log(moment().diff(sched_date, "days"));
-      if (data.status == "COMPLETE" && !data.feedback) {
+      if (data.status == "COMPLETE" && !data.feedback_data) {
         interviewStatus.feedbackToComplete.push(data);
       } else if (data.status == "COMPLETE") {
         interviewStatus.completedInterview.push(data);

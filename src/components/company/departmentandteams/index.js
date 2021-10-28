@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { notification } from "antd";
+
 import AntSelect from "../../../common/antselect";
 import Axios from "axios";
 import { FlexColumn } from "../../../common/flexcolumn/flexcolumn.style";
@@ -75,6 +77,13 @@ const DepartmentAndTeam = () => {
       department_name: departmentName,
     }).then((response) => {
       console.log(response.userData);
+      notification.open({
+        message: "Department added",
+        description: "Department has been added successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
   };
 

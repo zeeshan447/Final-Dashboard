@@ -15,6 +15,15 @@ export const NavOuter = styled.div`
   height: 100vh;
   max-width: 100%;
 `;
+export const NavbarOuterMyInterviews = styled.div`
+  display: "flex";
+  flex-direction: "column";
+  width: 100%;
+  border-right: 8px solid #e5e5e5;
+  border-left: 8px solid #e5e5e5;
+  height: 100vh;
+  max-width: 100%;
+`;
 
 export const SidebarDivContainer = styled.div`
   width: 20%;

@@ -22,7 +22,7 @@ const owner = require("./router/jobownerRouter");
 const fileUpload = require("express-fileupload");
 const upload = require("./router/upload");
 const country = require("./router/country");
-
+const sendemail = require("./router/emailRout");
 const jobPosted = require("./router/jobPosted");
 
 app.use(express.json());
@@ -83,3 +83,4 @@ app.use("/job-owner", owner);
 app.use("/can", can);
 app.use("/posted", jobPosted);
 app.use("/country", country);
+app.use("/send-email", sendemail);

@@ -11,8 +11,9 @@ import CandidateDetails from "../candidatedetails";
 import { GET_NEWAPPLICANTS } from "./apis";
 import { CandidateDetailModal } from "./applicanttable.style";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const ApplicantTable = () => {
+const ApplicantTable = ({ getCount }) => {
   const [select, setSelectedRow] = useState([]);
   const [checked, setChecked] = useState(false);
   const [candidates, setCandidates] = useState([]);
@@ -26,6 +27,8 @@ const ApplicantTable = () => {
   const userDetailing = useSelector((state) => state.userDetails.userDetails);
   const [stageChangeApiCallback, setStageChangeApiCallback] = useState(false);
   const pageReload = useSelector((state) => state.addCandidates.reloadPage);
+  const dispatch = useDispatch();
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -38,6 +41,7 @@ const ApplicantTable = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    dispatch({ type: "DEFAULT" });
   };
   let checkedArray = [];
 
@@ -87,11 +91,14 @@ const ApplicantTable = () => {
       console.log("INITIAL RESPONSE", res);
       console.log("zeeshan ", res.data.count);
       setApplicantCount(res.data.count);
+      console.log("CALLING CALL COUNT API");
+      getCount();
     });
   };
   useEffect(() => {
     getData();
     console.log("REDUX RESPONSE", pageReload);
+    dispatch({ type: "DEFAULT" });
   }, [recallApi, jobChangeApiCallback, stageChangeApiCallback, pageReload]);
 
   console.log("select", checked);

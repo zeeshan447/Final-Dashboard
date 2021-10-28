@@ -1,35 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./stepper.css";
-import EditUser from "../../components/editusers/index";
-import Applicant from "../../components/applicant";
 import ApplicantReview from "../../components/applicantsreview";
 import ApplicantTable from "../../components/applicant_table";
-import Interview from "../../components/interview";
 import PhoneScreening from "../../components/phonescreening";
-import Axios from "axios";
-import { NEW_APPLICANTS } from "../../apis";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const firstComponent = () => {
-  return <ApplicantTable />;
-};
-const secondComponent = () => {
-  return <ApplicantReview />;
-};
-const thirdComponent = () => {
-  return <PhoneScreening />;
-};
-
-const Stepper = ({ applicantCount, reviewCount, phoneCount }) => {
+const Stepper = ({ applicantCount, reviewCount, phoneCount, getCount }) => {
   let history = useHistory();
 
-  const [steps, setSteps] = useState([
+  const pageReload = useSelector((state) => state.addCandidates.reloadPage);
+
+  useEffect(() => {
+    console.log("STEPPER COUNT", applicantCount, reviewCount, phoneCount);
+  }, [applicantCount, pageReload, phoneCount, reviewCount]);
+
+  const steps = [
     {
       key: "1",
       count: `${applicantCount}`,
       label: "NEW APPLICANTS",
       isDone: true,
-      component: firstComponent,
+      Component: ApplicantTable,
     },
     {
       key: "2",
@@ -37,7 +29,7 @@ const Stepper = ({ applicantCount, reviewCount, phoneCount }) => {
       count: `${reviewCount}`,
       label: "REVIEWS",
       isDone: false,
-      component: secondComponent,
+      Component: ApplicantReview,
     },
     {
       key: "3",
@@ -45,9 +37,9 @@ const Stepper = ({ applicantCount, reviewCount, phoneCount }) => {
       count: `${phoneCount}`,
       label: "PHONE SCREEN",
       isDone: false,
-      component: thirdComponent,
+      Component: PhoneScreening,
     },
-  ]);
+  ];
   const [activeStep, setActiveStep] = useState(steps[0]);
 
   useEffect(() => {
@@ -89,7 +81,9 @@ const Stepper = ({ applicantCount, reviewCount, phoneCount }) => {
           </div>
         </div>
       </div>
-      <div className="table-data">{activeStep.component()}</div>
+      <div className="table-data">
+        <activeStep.Component getCount={getCount} />
+      </div>
     </React.Fragment>
   );
 };

@@ -137,7 +137,7 @@ const LoginPage = () => {
                   src={microsoftlogo}
                   alt="microsoftlogo"
                 ></MicrosoftLogo>
-                SIGN IN WITH MICROSFT
+                SIGN IN WITH MICROSOFT
               </SignInButtonURL>
             </LoginPageButton>
           </LoginPageDiv>

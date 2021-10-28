@@ -19,6 +19,7 @@ import {
   CandidateHistory,
   CandidateHiringManagerDiv,
   DeleteInterviewStatusButton,
+  MailingCandidateModal,
 } from "./candidatedetails.style";
 import CandidateStageSelect from "../addcandidate/candidatestageselect";
 import AddCandidateBody from "../addcandidate/addcandidatebody";
@@ -34,6 +35,7 @@ import {
 import CandidateStageChange from "./candidatestageselect";
 import { GET_INTEVIEWSTATUS } from "./apis";
 import { Popconfirm, message } from "antd";
+import CandidateMail from "./candidatemail";
 
 const CandidateDetails = ({
   candidateData,
@@ -50,19 +52,25 @@ const CandidateDetails = ({
   const [getResume, setResume] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [InterviewStatus, setInterviewStatus] = useState();
+  const [showMailModal, setShowMailModal] = useState(false);
 
   let responseData = [];
 
   const showModal = () => {
     setIsModalVisible(true);
   };
+  const mailModalVisibile = () => {
+    setShowMailModal(true);
+  };
 
   const handleOk = () => {
     setIsModalVisible(false);
+    setShowMailModal(false);
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setShowMailModal(false);
   };
 
   const onFocusHandler = () => {
@@ -91,7 +99,7 @@ const CandidateDetails = ({
     await Axios.get(
       `http://localhost:2500/interview/candidate/${candidateData.key}`
     ).then((response) => {
-      responseData = response.data.scheduleInterview.map((row, key) => ({
+      responseData = response.data.scheduleInterview?.map((row, key) => ({
         interviewer_status_id: row.interviewer_status_id,
         scheduled_time: row.scheduled_time,
         schedule_date: row.schedule_date,
@@ -156,7 +164,7 @@ const CandidateDetails = ({
           <AddCandidateScheduleButtons onClick={showModal}>
             <CalendarOutlined style={{ fontSize: "15px" }} />
           </AddCandidateScheduleButtons>
-          <AddCandidateScheduleButtons>
+          <AddCandidateScheduleButtons onClick={mailModalVisibile}>
             <MailFilled style={{ fontSize: "15px" }} />
           </AddCandidateScheduleButtons>
           <AddCandidateScheduleButtons>
@@ -229,6 +237,19 @@ const CandidateDetails = ({
           scheduledCandidateData={candidateData}
         />
       </AddScheduleModal>
+
+      <MailingCandidateModal
+        width={"1073px"}
+        // height={"260px"}
+        visible={showMailModal}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={false}
+        closable={false}
+        destroyOnClose
+      >
+        <CandidateMail mailData={candidateData} mailModal={setShowMailModal} />
+      </MailingCandidateModal>
     </React.Fragment>
   );
 };

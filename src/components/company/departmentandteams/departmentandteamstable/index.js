@@ -5,6 +5,7 @@ import "./departmenttable.css";
 import { Table, Badge, Menu, Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { Modal, Button } from "antd";
+import { notification } from "antd";
 
 import {
   EditOutlined,
@@ -67,6 +68,13 @@ function DepartmentTeamTable({ recallDepartment }) {
       department_id: departmentId,
     }).then((res) => {
       console.log("TEAM RESPONSE", res);
+      notification.open({
+        message: "Team Added",
+        description: "Team has been added successfully",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
     });
   };
   const getDepartmentNames = async () => {

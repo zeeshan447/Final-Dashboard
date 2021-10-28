@@ -4,7 +4,7 @@ export const ApplicantJobSidebarDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 4%;
-  height: 200px;
+  height: 380px;
   overflow: auto;
 `;
 export const ApplicantJobSidebarList = styled.ul`

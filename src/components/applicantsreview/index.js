@@ -10,7 +10,7 @@ import { Modal } from "antd";
 import CandidateDetails from "../candidatedetails";
 import { GET_REVIEWAPPLICANTS } from "./apis";
 
-const ApplicantReview = () => {
+const ApplicantReview = ({ getCount }) => {
   const [select, setSelectedRow] = useState(null);
   const [checked, setChecked] = useState(false);
   const [candidates, setCandidates] = useState([]);
@@ -81,6 +81,7 @@ const ApplicantReview = () => {
           phone: row.phone,
         }))
       );
+      getCount();
       console.log("review response", res);
     });
   };

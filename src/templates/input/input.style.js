@@ -14,6 +14,7 @@ export const Input = styled.input`
   margin-top: 12px;
   color: #5e6c84;
   padding-left: 40px;
+  padding-bottom: 2%;
   background: ${(props) => (props.primary ? "#FAFBFC" : "#EDEEF2")};
   width: ${(props) => (props.width ? props.width : "auto")};
 
@@ -30,4 +31,5 @@ export const InputIcon = styled.div`
   margin-top: 20px;
   position: absolute;
   padding-left: 8px;
+  padding-bottom: 2%;
 `;

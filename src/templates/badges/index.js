@@ -8,10 +8,10 @@ import {
 } from "./apis";
 
 const CustomBadges = () => {
-  const [getApplicationCount, setApplicantCount] = useState();
-  const [getReviewCount, setReviewCount] = useState();
-  const [getPhonescreenCount, setPhonescreenCount] = useState();
-  const [totalCount, setTotalCount] = useState();
+  const [getApplicationCount, setApplicantCount] = useState(0);
+  const [getReviewCount, setReviewCount] = useState(0);
+  const [getPhonescreenCount, setPhonescreenCount] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     getCount();
@@ -31,9 +31,11 @@ const CustomBadges = () => {
     setTotalCount(getApplicationCount + getReviewCount + getPhonescreenCount);
   };
   return (
-    <Badge>
-      <BadgeNumber>{totalCount}</BadgeNumber>
-    </Badge>
+    <React.Fragment>
+      {totalCount > 0 && (
+        <Badge>{totalCount && <BadgeNumber>{totalCount}</BadgeNumber>}</Badge>
+      )}
+    </React.Fragment>
   );
 };
 

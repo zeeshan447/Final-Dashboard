@@ -10,7 +10,7 @@ import CandidateDetails from "../candidatedetails";
 import { Spin } from "antd";
 import { SECONDROUND_APPLICANTS } from "./apis";
 
-const SecondRound = () => {
+const SecondRound = ({ getCount }) => {
   const [select, setSelectedRow] = useState(null);
   const [checked, setChecked] = useState(false);
   const [candidates, setCandidates] = useState([]);
@@ -80,6 +80,7 @@ const SecondRound = () => {
           phone: row.phone,
         }))
       );
+      getCount();
     });
   };
 

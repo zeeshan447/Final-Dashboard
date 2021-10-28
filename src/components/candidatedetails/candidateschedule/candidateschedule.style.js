@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { DatePicker, TimePicker, Table, Input } from "antd";
+import { Checkbox } from "antd";
+import { Modal } from "antd";
 
 export const ScheduleDatePicker = styled(DatePicker)`
   width: 150px;
@@ -51,6 +53,10 @@ export const AddInterviewCallDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 5%;
+`;
+export const AddInterviewCheckbox = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const AddInterviewButton = styled.button`
@@ -125,4 +131,24 @@ export const ScheduleButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+`;
+
+export const MailCandidateCheckbox = styled(Checkbox)`
+  color: white;
+  font-family: Mulish;
+  margin-top: 7%;
+`;
+export const MailingCandidateModal = styled(Modal)`
+  /* height: 260px; */
+  /* background-color: #55565a; */
+  border-radius: 8px;
+  .ant-modal-body {
+    /* padding: 0px !important; */
+    background-color: #55565a !important;
+    min-height: 260px !important;
+    height: auto !important;
+  }
+  .ant-modal {
+    border-radius: 8px !important;
+  }
 `;

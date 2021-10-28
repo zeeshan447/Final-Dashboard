@@ -5,65 +5,52 @@ import Offered from "../../../components/offered";
 import PhoneScreening from "../../../components/phonescreening";
 import SecondRound from "../../../components/secondround";
 import "../stepper.css";
-const firstComponent = () => {
-  return <PhoneScreening />;
-};
-const secondComponent = () => {
-  return <FirstRound />;
-};
-const thirdComponent = () => {
-  return <SecondRound />;
-};
-const fourthComponent = () => {
-  return <Offered />;
-};
-const fifthComponent = () => {
-  return <Hired />;
-};
+
 const InterviewStepper = ({
   phoneScreen,
   firstRound,
   secondRound,
   offered,
   hired,
+  getCount,
 }) => {
-  const [steps, setSteps] = useState([
+  const steps = [
     {
       key: "1",
       count: `${phoneScreen}`,
       label: "PHONE SCREEN",
       isDone: true,
-      component: firstComponent,
+      Component: PhoneScreening,
     },
     {
       key: "2",
       count: `${firstRound}`,
       label: "FIRST ROUND",
       isDone: false,
-      component: secondComponent,
+      Component: FirstRound,
     },
     {
       key: "3",
       count: `${secondRound}`,
       label: "SECOND ROUND",
       isDone: false,
-      component: thirdComponent,
+      Component: SecondRound,
     },
     {
       key: "4",
       count: `${offered}`,
       label: "OFFERED",
       isDone: false,
-      component: fourthComponent,
+      Component: Offered,
     },
     {
       key: "5",
       count: `${hired}`,
       label: "HIRED",
       isDone: false,
-      component: fifthComponent,
+      Component: Hired,
     },
-  ]);
+  ];
   const [activeStep, setActiveStep] = useState(steps[0]);
 
   const handleNext = (i) => {
@@ -123,7 +110,9 @@ const InterviewStepper = ({
           </div>
         </div>
       </div>
-      <div className="table-data">{activeStep.component()}</div>
+      <div className="table-data">
+        <activeStep.Component getCount={getCount} />
+      </div>
     </React.Fragment>
   );
 };

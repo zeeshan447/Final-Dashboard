@@ -10,7 +10,7 @@ import CandidateDetails from "../candidatedetails";
 import { Spin } from "antd";
 import { FIRSTROUND_APPLICANTS } from "./apis";
 
-const FirstRound = () => {
+const FirstRound = ({ getCount }) => {
   const [select, setSelectedRow] = useState(null);
   const [checked, setChecked] = useState(false);
   const [candidates, setCandidates] = useState([]);
@@ -81,6 +81,7 @@ const FirstRound = () => {
           phone: row.phone,
         }))
       );
+      getCount();
     });
   };
 

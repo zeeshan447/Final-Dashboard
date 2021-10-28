@@ -14,6 +14,7 @@ import LoginPage from "../pages/loginpage";
 import PrivateRoute from "./privateroutes/privateroute";
 import PublicRoute from "./publicroutes/publicroute";
 import { useSelector } from "react-redux";
+import ProtectedRoute from "./protectedroute";
 
 const AllRoutes = () => {
   const userDetailing = useSelector((state) => state.userDetails.userDetails);
@@ -39,7 +40,7 @@ const AllRoutes = () => {
       ) : null}
       {userDetailing.role_value >= 30 && (
         <Switch>
-          <PrivateRoute path="/myinterviews" component={MyInterviews} />
+          <ProtectedRoute path="/myinterviews" component={MyInterviews} />
           <PublicRoute exact={true} path="/" component={LoginPage} />
 
           {/* <Redirect from="*" to="/myinterviews" /> */}

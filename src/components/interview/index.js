@@ -48,6 +48,7 @@ const Interview = () => {
             secondRound={getSecondroundCount}
             offered={getOfferedCount}
             hired={getHiredCount}
+            getCount={getCount}
           />
         )}
     </React.Fragment>

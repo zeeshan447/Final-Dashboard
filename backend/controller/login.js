@@ -65,16 +65,17 @@ const outlookLoginCallback = async (req, res) => {
         `select * from users where email = '${email}'`
       );
       console.log("user details", chk_email.rows);
-      const role_name = await pool.query(
-        `Select * from roles where role_id = ${chk_email.rows[0].role_id}`
-      );
 
       // console.log("role value", role_name.rows[0].role_value);
       if (chk_email.rows.length === 0) {
+        console.log("user not exists");
         return res
           .status(403)
           .send({ statusCode: 403, message: "User not exist", body: false });
       } else {
+        const role_name = await pool.query(
+          `Select * from roles where role_id = ${chk_email.rows[0].role_id}`
+        );
         return res.status(200).json({
           statusCode: 200,
           token: response.accessToken,

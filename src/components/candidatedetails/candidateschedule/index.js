@@ -16,6 +16,9 @@ import {
   DiscardButton,
   ScheduleButton,
   ScheduleCallButton,
+  MailCandidateCheckbox,
+  AddInterviewCheckbox,
+  MailingCandidateModal,
 } from "./candidateschedule.style";
 import moment from "moment";
 import { Popconfirm } from "antd";
@@ -24,6 +27,7 @@ import FeedbackFormSelect from "../feedbackformselect";
 import MeetingLocation from "../meetinglocationselect";
 import { DeleteOutlined, PhoneOutlined } from "@ant-design/icons";
 import { SCHEDULE_INTERVIEW } from "../apis";
+import CandidateMail from "../candidatemail";
 const data = [
   {
     key: "1",
@@ -44,6 +48,11 @@ const CandidateSchedule = ({ modalVisibility, scheduledCandidateData }) => {
   const [getInterval, setInterval] = useState("");
   const [getInterviewer, setInterviewer] = useState([]);
   const [interviewType, setInterviewType] = useState();
+  const [showMailModal, setShowMailModal] = useState(false);
+
+  const mailModalVisibile = () => {
+    setShowMailModal(true);
+  };
 
   const onDateChange = (date, dateString) => {
     setDate(dateString);
@@ -207,7 +216,18 @@ const CandidateSchedule = ({ modalVisibility, scheduledCandidateData }) => {
     }
   };
 
+  const mailModalHandler = () => {
+    mailModalVisibile();
+  };
+
   console.log("getData >", getData);
+  const handleOk = () => {
+    setShowMailModal(false);
+  };
+
+  const handleCancel = () => {
+    setShowMailModal(false);
+  };
   return (
     <React.Fragment>
       <ScheduleTable
@@ -216,9 +236,14 @@ const CandidateSchedule = ({ modalVisibility, scheduledCandidateData }) => {
         pagination={false}
       ></ScheduleTable>
       <AddInterviewCallDiv>
-        <AddInterviewButton onClick={addRowHandler}>
-          + Add Interview
-        </AddInterviewButton>
+        <AddInterviewCheckbox>
+          <AddInterviewButton onClick={addRowHandler}>
+            + Add Interview
+          </AddInterviewButton>
+          <MailCandidateCheckbox onChange={mailModalHandler}>
+            Mail Candidate
+          </MailCandidateCheckbox>
+        </AddInterviewCheckbox>
         <ScheduleCallButton>
           <PhoneOutlined style={{ color: "white", fontSize: 16, margin: 5 }} />{" "}
           Schedule a call
@@ -231,6 +256,21 @@ const CandidateSchedule = ({ modalVisibility, scheduledCandidateData }) => {
         </DiscardButton>
         <ScheduleButton onClick={scheduleHandler}>Schedule</ScheduleButton>
       </ScheduleButtonDiv>
+      <MailingCandidateModal
+        width={"1073px"}
+        // height={"260px"}
+        visible={showMailModal}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={false}
+        closable={false}
+        destroyOnClose
+      >
+        <CandidateMail
+          mailData={scheduledCandidateData}
+          mailModal={setShowMailModal}
+        />
+      </MailingCandidateModal>
     </React.Fragment>
   );
 };

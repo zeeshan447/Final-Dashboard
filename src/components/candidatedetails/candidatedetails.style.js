@@ -168,3 +168,18 @@ export const DateTimeInterviewer = styled.div`
   color: #000000;
   margin-left: 4%;
 `;
+
+export const MailingCandidateModal = styled(Modal)`
+  /* height: 260px; */
+  /* background-color: #55565a; */
+  border-radius: 8px;
+  .ant-modal-body {
+    /* padding: 0px !important; */
+    background-color: #55565a !important;
+    min-height: 260px !important;
+    height: auto !important;
+  }
+  .ant-modal {
+    border-radius: 8px !important;
+  }
+`;
