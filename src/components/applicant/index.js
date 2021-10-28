@@ -24,13 +24,7 @@ const Applicant = () => {
   useEffect(() => {
     dispatch({ type: "dashboard" });
     getCount();
-  }, [
-    getApplicationCount,
-    getReviewCount,
-    getPhonescreenCount,
-    dispatch,
-    pageReload,
-  ]);
+  }, [dispatch, pageReload]);
 
   const getCount = async () => {
     setLoading(false);
@@ -59,6 +53,7 @@ const Applicant = () => {
             applicantCount={getApplicationCount}
             reviewCount={getReviewCount}
             phoneCount={getPhonescreenCount}
+            getCount={getCount}
           />
         )
       )}
