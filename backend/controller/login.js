@@ -2,11 +2,11 @@ const msal = require("@azure/msal-node");
 const { response } = require("express");
 const { Pool } = require("pg");
 const pool = require("../client");
-var DASHBOARD_URL = process.env.DASHBOARD_URL;
+let DASHBOARD_URL = process.env.DASHBOARD_URL;
 const REDIRECT_URI = process.env.REDIRECT_URI;
-var OUTLOOK_CLIENT_ID = process.env.OUTLOOK_CLIENT_ID;
-var OUTLOOK_CLIENT_SECRET = process.env.OUTLOOK_CLIENT_SECRET;
-var POST_REDIRECT_URI = process.env.POST_REDIRECT_URI;
+let OUTLOOK_CLIENT_ID = process.env.OUTLOOK_CLIENT_ID;
+let OUTLOOK_CLIENT_SECRET = process.env.OUTLOOK_CLIENT_SECRET;
+let POST_REDIRECT_URI = process.env.POST_REDIRECT_URI;
 const config = {
   auth: {
     clientId: process.env.OUTLOOK_CLIENT_ID,
@@ -95,6 +95,7 @@ const outlookLoginCallback = async (req, res) => {
     // res.send("looged in ");
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ message: "Something went wrong" });
   }
 };
 const outlookLogout = async (req, res) => {
@@ -116,14 +117,14 @@ const outlookLogout = async (req, res) => {
         .getTokenCache()
         .removeAccount(account)
         .then(() => {
-          res.status(200).json({ msg: "Account logout" });
+          return res.status(200).json({ msg: "Account logout" });
         })
         .catch((error) => {
-          res.status(500).send({ error });
+          return res.status(500).send({ error });
         });
     })
     .catch((error) => {
-      res.status(500).send(error);
+      return res.status(500).send(error);
     });
 };
 
