@@ -92,17 +92,17 @@ const LoginPage = () => {
     if (code?.length === 0) {
       console.log("Code not found");
     } else {
-      await Axios.get(
-        `http://localhost:2500/auth/outlook/redirect/?code=${code}`
-      ).then((res) => {
-        console.log("authentication response", res);
-        setAccessToken(res.data.token);
-        console.log("LOGIN RESPONSE", res);
-        //userDetails = res.data;
-        let details = res.data;
-        dispatch({ type: "USER_DETAILS", payload: details });
-        //console.log("USER DETAILS", userDetails);
-      });
+      await Axios.get(`https://peoplexdev.packagex.xyz/?code=${code}`).then(
+        (res) => {
+          console.log("authentication response", res);
+          setAccessToken(res.data.token);
+          console.log("LOGIN RESPONSE", res);
+          //userDetails = res.data;
+          let details = res.data;
+          dispatch({ type: "USER_DETAILS", payload: details });
+          //console.log("USER DETAILS", userDetails);
+        }
+      );
     }
   };
   console.log("Access Token", accessToken);
