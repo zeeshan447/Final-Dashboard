@@ -93,7 +93,7 @@ const LoginPage = () => {
       console.log("Code not found");
     } else {
       await Axios.get(
-        `https://peoplexdev.packagex.xyz/auth/?code=${code}`
+        `https://peoplexdev.packagex.xyz/auth/callback?code=${code}`
       ).then((res) => {
         console.log("authentication response", res);
         setAccessToken(res.data.token);
