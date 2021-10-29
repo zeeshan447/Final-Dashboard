@@ -1,1 +1,1 @@
-export const ADD_CANDIDATE = "https://peoplexdev.packagex.xyz/candidate";
+export const ADD_CANDIDATE = "https://peoplexdevapi.packagex.xyz/candidate";
