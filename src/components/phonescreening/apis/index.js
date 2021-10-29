@@ -1,2 +1,2 @@
 export const PHONESCREENED_APPLICANTS =
-  "https://peoplexdev.packagex.xyz/can/initial?stage";
+  "https://peoplexdevapi.packagex.xyz/can/initial?stage";

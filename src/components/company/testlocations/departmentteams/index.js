@@ -44,7 +44,7 @@ const DepartmentTeam = ({ record }) => {
 
   const getTeamById = async () => {
     await Axios.get(
-      `https://peoplexdev.packagex.xyz/company-loc/${record.key}`
+      `https://peoplexdevapi.packagex.xyz/company-loc/${record.key}`
     ).then((res) => {
       setRowId(
         res.data.locations.map((row, key) => ({

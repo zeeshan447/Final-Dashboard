@@ -62,7 +62,7 @@ function DepartmentTeamTable({ recallDepartment }) {
   };
 
   const insertTeam = () => {
-    Axios.post("https://peoplexdev.packagex.xyz/team", {
+    Axios.post("https://peoplexdevapi.packagex.xyz/team", {
       team_name: inputTeamName,
       department_id: departmentId,
     }).then((res) => {
@@ -70,20 +70,22 @@ function DepartmentTeamTable({ recallDepartment }) {
     });
   };
   const getDepartmentNames = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/country").then((res) => {
-      setDepartmentNames(
-        res.data.locations.map((row, key) => ({
-          key: row.country_id,
-          country_name: row.country_name,
-        }))
-      );
-    });
+    await Axios.get("https://peoplexdevapi.packagex.xyz/country").then(
+      (res) => {
+        setDepartmentNames(
+          res.data.locations.map((row, key) => ({
+            key: row.country_id,
+            country_name: row.country_name,
+          }))
+        );
+      }
+    );
   };
 
   console.log(departmentNames.length);
 
   const getTeamNames = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/company-loc").then(
+    await Axios.get("https://peoplexdevapi.packagex.xyz/company-loc").then(
       (res) => {
         setTeamName(
           res.data.locations.map((row, key) => ({
@@ -115,7 +117,7 @@ function DepartmentTeamTable({ recallDepartment }) {
 
     const getTeamById = async () => {
       await Axios.get(
-        `https://peoplexdev.packagex.xyz/company-loc/${row}`
+        `https://peoplexdevapi.packagex.xyz/company-loc/${row}`
       ).then((res) => {
         setRowId(
           res.data.data.map((row, key) => ({

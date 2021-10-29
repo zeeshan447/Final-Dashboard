@@ -43,7 +43,7 @@ const CandidateStageChange = ({
   // const changeStageHandler = async (value) => {
   //   debugger;
   //   await Axios.put(
-  //     "https://peoplexdev.packagex.xyz/can/status",
+  //     "https://peoplexdevapi.packagex.xyz/can/status",
   //     Object.keys(currentCandidate).map((row, key) => ({
   //       candidate_id: currentCandidate[row.candidate_id],
   //       job_id: currentCandidate[row.job_id],
@@ -57,7 +57,7 @@ const CandidateStageChange = ({
 
   const changeStageHandler = async (value) => {
     await Axios.put(
-      "https://peoplexdev.packagex.xyz/can/status",
+      "https://peoplexdevapi.packagex.xyz/can/status",
       candidatesArray.map((row, key) => ({
         candidate_id: candidatesArray[0],
         job_id: candidatesArray[6],

@@ -29,7 +29,7 @@ const JobPostingOwnerSelect = ({ ownerSelect }) => {
   }
 
   const getData = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/posted/job_owner").then(
+    await Axios.get("https://peoplexdevapi.packagex.xyz/posted/job_owner").then(
       (response) => {
         responseData = response.data.data.map((row, key) => ({
           key: row.user_id,
@@ -41,7 +41,7 @@ const JobPostingOwnerSelect = ({ ownerSelect }) => {
     setLocation(responseData);
 
     // console.log("response", state);
-    // const response = await axios.get("https://peoplexdev.packagex.xyz/department");
+    // const response = await axios.get("https://peoplexdevapi.packagex.xyz/department");
     // setState(response?.data?.data);
   };
   return (

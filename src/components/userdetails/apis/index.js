@@ -1,1 +1,1 @@
-export const UPDATE_USER = "https://peoplexdev.packagex.xyz/user";
+export const UPDATE_USER = "https://peoplexdevapi.packagex.xyz/user";

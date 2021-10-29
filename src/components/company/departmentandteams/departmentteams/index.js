@@ -43,17 +43,17 @@ const DepartmentTeam = ({ record }) => {
   //console.log("row ", row);
 
   const getTeamById = async () => {
-    await Axios.get(`https://peoplexdev.packagex.xyz/team/${record.key}`).then(
-      (res) => {
-        setRowId(
-          res.data.data.map((row, key) => ({
-            key: row.team_id,
-            team_name: row.team_name,
-            department_id: row.department_id,
-          }))
-        );
-      }
-    );
+    await Axios.get(
+      `https://peoplexdevapi.packagex.xyz/team/${record.key}`
+    ).then((res) => {
+      setRowId(
+        res.data.data.map((row, key) => ({
+          key: row.team_id,
+          team_name: row.team_name,
+          department_id: row.department_id,
+        }))
+      );
+    });
   };
   console.log("row ", rowId);
   //let inTable = row.key === rowId.key;

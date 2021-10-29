@@ -56,7 +56,7 @@ function FileUpload({ uploadPdf, url }) {
       uploadPdf(formData);
 
       axios
-        .post("https://peoplexdev.packagex.xyz/uploadcv", formData)
+        .post("https://peoplexdevapi.packagex.xyz/uploadcv", formData)
         .then((res) => {
           console.log("ajsdkjanskjdsa", res);
           setCvUrl(res.data.url);
@@ -126,7 +126,7 @@ export default FileUpload;
 //     uploadPdf(formData);
 
 //     axios
-//       .post("https://peoplexdev.packagex.xyz/uploadcv", formData, {
+//       .post("https://peoplexdevapi.packagex.xyz/uploadcv", formData, {
 //         onUploadProgress: (ProgressEvent) => {
 //           let progress =
 //             Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) +

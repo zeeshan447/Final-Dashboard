@@ -1,1 +1,1 @@
-export const GET_ALLJOBS = "https://peoplexdev.packagex.xyz/job";
+export const GET_ALLJOBS = "https://peoplexdevapi.packagex.xyz/job";

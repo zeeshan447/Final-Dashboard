@@ -32,7 +32,7 @@ const AntSelect = (props) => {
 
   const getData = async () => {
     await axios
-      .get("https://peoplexdev.packagex.xyz/department")
+      .get("https://peoplexdevapi.packagex.xyz/department")
       .then((response) => {
         responseData = response.data.data.map((row, key) => ({
           key: row.department_id,
@@ -43,7 +43,7 @@ const AntSelect = (props) => {
     setState(responseData);
 
     // console.log("response", state);
-    // const response = await axios.get("https://peoplexdev.packagex.xyz/department");
+    // const response = await axios.get("https://peoplexdevapi.packagex.xyz/department");
     // setState(response?.data?.data);
   };
 

@@ -1,1 +1,1 @@
-export const MY_INTERVIEWS = "https://peoplexdev.packagex.xyz/interview";
+export const MY_INTERVIEWS = "https://peoplexdevapi.packagex.xyz/interview";

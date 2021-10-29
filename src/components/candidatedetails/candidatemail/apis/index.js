@@ -1,1 +1,1 @@
-export const SEND_MAIL = "https://peoplexdev.packagex.xyz/send-email";
+export const SEND_MAIL = "https://peoplexdevapi.packagex.xyz/send-email";

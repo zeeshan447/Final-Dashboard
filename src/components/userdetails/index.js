@@ -31,21 +31,23 @@ const UserDetails = ({ modalVisibility, userDetails }) => {
   const [userName, setUserName] = useState(userDetails.user_name);
   let responseData = "";
   useEffect(() => {
-    // const response = Axios.get("https://peoplexdev.packagex.xyz/roles");
+    // const response = Axios.get("https://peoplexdevapi.packagex.xyz/roles");
     // console.log("options", response);
     getData();
     console.log("USERDETAILS", userDetails);
   }, []);
 
   const getData = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/role").then((response) => {
-      responseData = response.data.data.map((row, key) => ({
-        role_id: row.role_id,
-        role_name: row.role_name,
-        role_value: row.row_value,
-      }));
-      setUserRoles(responseData);
-    });
+    await Axios.get("https://peoplexdevapi.packagex.xyz/role").then(
+      (response) => {
+        responseData = response.data.data.map((row, key) => ({
+          role_id: row.role_id,
+          role_name: row.role_name,
+          role_value: row.row_value,
+        }));
+        setUserRoles(responseData);
+      }
+    );
   };
 
   const handleOptionChange = (value) => {

@@ -82,12 +82,14 @@ const CandidateDetailsBody = ({
   }, [getJobTitle]);
 
   const getData = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/job").then((response) => {
-      responseData = response.data.candidateJob.map((row, key) => ({
-        job_id: row.job_id,
-        job_title: row.job_title,
-      }));
-    });
+    await Axios.get("https://peoplexdevapi.packagex.xyz/job").then(
+      (response) => {
+        responseData = response.data.candidateJob.map((row, key) => ({
+          job_id: row.job_id,
+          job_title: row.job_title,
+        }));
+      }
+    );
     setJobName(responseData);
 
     console.log("akjdjkasnhdkjasds", responseData);

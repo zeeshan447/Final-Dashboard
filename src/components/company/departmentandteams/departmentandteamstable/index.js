@@ -63,7 +63,7 @@ function DepartmentTeamTable({ recallDepartment }) {
   };
 
   const insertTeam = () => {
-    Axios.post("https://peoplexdev.packagex.xyz/team", {
+    Axios.post("https://peoplexdevapi.packagex.xyz/team", {
       team_name: inputTeamName,
       department_id: departmentId,
     }).then((res) => {
@@ -78,7 +78,7 @@ function DepartmentTeamTable({ recallDepartment }) {
     });
   };
   const getDepartmentNames = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/department").then(
+    await Axios.get("https://peoplexdevapi.packagex.xyz/department").then(
       (res) => {
         setDepartmentNames(
           res.data.data.map((row, key) => ({
@@ -93,7 +93,7 @@ function DepartmentTeamTable({ recallDepartment }) {
   console.log(departmentNames.length);
 
   const getTeamNames = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/team").then((res) => {
+    await Axios.get("https://peoplexdevapi.packagex.xyz/team").then((res) => {
       setTeamName(
         res.data.data.map((row, key) => ({
           key: row.team_id,
@@ -122,7 +122,7 @@ function DepartmentTeamTable({ recallDepartment }) {
     console.log("row ", row);
 
     const getTeamById = async () => {
-      await Axios.get(`https://peoplexdev.packagex.xyz/team/${row}`).then(
+      await Axios.get(`https://peoplexdevapi.packagex.xyz/team/${row}`).then(
         (res) => {
           setRowId(
             res.data.data.map((row, key) => ({

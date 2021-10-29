@@ -23,21 +23,21 @@ const JobsTable = ({ departmentId, allJobs, modalVisibility }) => {
     setIsModalVisible(false);
   };
   const getData = async () => {
-    await Axios.get(`https://peoplexdev.packagex.xyz/job/${departmentId}`).then(
-      (res) => {
-        setJobs(
-          res.data.data.map((row, key) => ({
-            job_id: row.job_id,
-            job_title: row.job_title,
-            job_loc: row.job_loc,
-            worktype_id: row.worktype_id,
-            worktype: row.worktype,
-            job_createdby: row.job_createdby,
-            department_name: row.department_name,
-          }))
-        );
-      }
-    );
+    await Axios.get(
+      `https://peoplexdevapi.packagex.xyz/job/${departmentId}`
+    ).then((res) => {
+      setJobs(
+        res.data.data.map((row, key) => ({
+          job_id: row.job_id,
+          job_title: row.job_title,
+          job_loc: row.job_loc,
+          worktype_id: row.worktype_id,
+          worktype: row.worktype,
+          job_createdby: row.job_createdby,
+          department_name: row.department_name,
+        }))
+      );
+    });
   };
 
   return (

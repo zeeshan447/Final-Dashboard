@@ -26,12 +26,12 @@ const EditUserTable = () => {
   };
   useEffect(() => {
     getData();
-    const response = Axios.get("https://peoplexdev.packagex.xyz/user");
+    const response = Axios.get("https://peoplexdevapi.packagex.xyz/user");
     console.log("response", response);
   }, []);
 
   const getData = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/user").then((res) => {
+    await Axios.get("https://peoplexdevapi.packagex.xyz/user").then((res) => {
       setLoading(false);
       setGetUsers(
         res.data.data.map((row, key) => ({

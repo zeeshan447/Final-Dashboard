@@ -21,7 +21,7 @@ const JobWorkTypeSelect = ({ workTypeSelect, workTypeDetails }) => {
 
   useEffect(() => {
     getData();
-    const response = Axios.get("https://peoplexdev.packagex.xyz/work-type");
+    const response = Axios.get("https://peoplexdevapi.packagex.xyz/work-type");
     console.log("ajlksdjsad", response);
   }, []);
 
@@ -31,7 +31,7 @@ const JobWorkTypeSelect = ({ workTypeSelect, workTypeDetails }) => {
   }
 
   const getData = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/work-type").then(
+    await Axios.get("https://peoplexdevapi.packagex.xyz/work-type").then(
       (response) => {
         responseData = response.data.stages.map((row, key) => ({
           key: row.worktype_id,
@@ -43,7 +43,7 @@ const JobWorkTypeSelect = ({ workTypeSelect, workTypeDetails }) => {
     setWorkType(responseData);
 
     // console.log("response", state);
-    // const response = await axios.get("https://peoplexdev.packagex.xyz/department");
+    // const response = await axios.get("https://peoplexdevapi.packagex.xyz/department");
     // setState(response?.data?.data);
   };
   return (

@@ -1,2 +1,2 @@
 export const GET_REVIEWAPPLICANTS =
-  "https://peoplexdev.packagex.xyz/can/initial?stage";
+  "https://peoplexdevapi.packagex.xyz/can/initial?stage";

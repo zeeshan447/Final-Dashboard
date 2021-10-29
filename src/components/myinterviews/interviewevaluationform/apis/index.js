@@ -1,2 +1,2 @@
 export const POSTFEEDBACK =
-  "https://peoplexdev.packagex.xyz/interview/feedback";
+  "https://peoplexdevapi.packagex.xyz/interview/feedback";

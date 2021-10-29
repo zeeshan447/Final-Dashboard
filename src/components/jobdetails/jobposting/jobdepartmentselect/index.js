@@ -29,7 +29,7 @@ const JobDepartmentSelect = ({ departmentSelect, departmentDetail }) => {
   }
 
   const getData = async () => {
-    await Axios.get("https://peoplexdev.packagex.xyz/department").then(
+    await Axios.get("https://peoplexdevapi.packagex.xyz/department").then(
       (response) => {
         responseData = response.data.data.map((row, key) => ({
           key: row.department_id,
@@ -41,7 +41,7 @@ const JobDepartmentSelect = ({ departmentSelect, departmentDetail }) => {
     setDepartment(responseData);
 
     // console.log("response", state);
-    // const response = await axios.get("https://peoplexdev.packagex.xyz/department");
+    // const response = await axios.get("https://peoplexdevapi.packagex.xyz/department");
     // setState(response?.data?.data);
   };
   return (

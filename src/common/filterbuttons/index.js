@@ -17,14 +17,14 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
   const [rowItems, setRowItems] = useState([]);
 
   const reviewChangeHandler = async () => {
-    // const response = await Axios.put("https://peoplexdev.packagex.xyz/can/status", {
+    // const response = await Axios.put("https://peoplexdevapi.packagex.xyz/can/status", {
     //   candidate_id: rowData[0].key,
     //   job_id: rowData[0].job_id,
     //   stage: "REVIEW",
     // });
 
     await Axios.put(
-      "https://peoplexdev.packagex.xyz/can/status",
+      "https://peoplexdevapi.packagex.xyz/can/status",
       rowData.map((row, key) => ({
         candidate_id: row.key,
         job_id: row.job_id,
@@ -43,14 +43,14 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
     apiCall(!secondApiCall);
   };
   const phoneChangeHandler = async () => {
-    // const response = await Axios.put("https://peoplexdev.packagex.xyz/can/status", {
+    // const response = await Axios.put("https://peoplexdevapi.packagex.xyz/can/status", {
     //   candidate_id: rowData[0].key,
     //   job_id: rowData[0].job_id,
     //   stage: "PHONE SCREEN",
     // });
 
     await Axios.put(
-      "https://peoplexdev.packagex.xyz/can/status",
+      "https://peoplexdevapi.packagex.xyz/can/status",
       rowData.map((row, key) => ({
         candidate_id: row.key,
         job_id: row.job_id,
@@ -69,14 +69,14 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
     apiCall(!secondApiCall);
   };
   const firstRoundChangeHandler = async () => {
-    // const response = await Axios.put("https://peoplexdev.packagex.xyz/can/status", {
+    // const response = await Axios.put("https://peoplexdevapi.packagex.xyz/can/status", {
     //   candidate_id: rowData[0].key,
     //   job_id: rowData[0].job_id,
     //   stage: "REVIEW",
     // });
 
     await Axios.put(
-      "https://peoplexdev.packagex.xyz/can/status",
+      "https://peoplexdevapi.packagex.xyz/can/status",
       rowData.map((row, key) => ({
         candidate_id: row.key,
         job_id: row.job_id,
@@ -95,14 +95,14 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
     apiCall(!secondApiCall);
   };
   const secondRoundChangeHandler = async () => {
-    // const response = await Axios.put("https://peoplexdev.packagex.xyz/can/status", {
+    // const response = await Axios.put("https://peoplexdevapi.packagex.xyz/can/status", {
     //   candidate_id: rowData[0].key,
     //   job_id: rowData[0].job_id,
     //   stage: "REVIEW",
     // });
 
     await Axios.put(
-      "https://peoplexdev.packagex.xyz/can/status",
+      "https://peoplexdevapi.packagex.xyz/can/status",
       rowData.map((row, key) => ({
         candidate_id: row.key,
         job_id: row.job_id,
@@ -121,14 +121,14 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
     apiCall(!secondApiCall);
   };
   const offeredChangeHandler = async () => {
-    // const response = await Axios.put("https://peoplexdev.packagex.xyz/can/status", {
+    // const response = await Axios.put("https://peoplexdevapi.packagex.xyz/can/status", {
     //   candidate_id: rowData[0].key,
     //   job_id: rowData[0].job_id,
     //   stage: "REVIEW",
     // });
 
     await Axios.put(
-      "https://peoplexdev.packagex.xyz/can/status",
+      "https://peoplexdevapi.packagex.xyz/can/status",
       rowData.map((row, key) => ({
         candidate_id: row.key,
         job_id: row.job_id,
@@ -147,14 +147,14 @@ const CustomTableFilters = ({ rowData, apiCall, secondApiCall }) => {
     apiCall(!secondApiCall);
   };
   const hiredChangeHandler = async () => {
-    // const response = await Axios.put("https://peoplexdev.packagex.xyz/can/status", {
+    // const response = await Axios.put("https://peoplexdevapi.packagex.xyz/can/status", {
     //   candidate_id: rowData[0].key,
     //   job_id: rowData[0].job_id,
     //   stage: "REVIEW",
     // });
 
     await Axios.put(
-      "https://peoplexdev.packagex.xyz/can/status",
+      "https://peoplexdevapi.packagex.xyz/can/status",
       rowData.map((row, key) => ({
         candidate_id: row.key,
         job_id: row.job_id,
