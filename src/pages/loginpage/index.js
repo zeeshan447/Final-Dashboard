@@ -130,7 +130,7 @@ const LoginPage = () => {
             <LoginPageLogo src={peoplelogo} alt="Logo" />
             <LoginPageText>Sign In To PeopleX</LoginPageText>
             <LoginPageButton onClick={getData}>
-              <SignInButtonURL href="https://login.microsoftonline.com">
+              <SignInButtonURL href={url}>
                 <MicrosoftLogo
                   src={microsoftlogo}
                   alt="microsoftlogo"
