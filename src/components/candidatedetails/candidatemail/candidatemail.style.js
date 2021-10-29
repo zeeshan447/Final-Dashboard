@@ -128,3 +128,5 @@ export const ScheduleButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+
+export const MailTemplateDropdown = styled.div``;

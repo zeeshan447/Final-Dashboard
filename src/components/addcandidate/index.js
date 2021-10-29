@@ -69,16 +69,34 @@ const AddCandidate = () => {
       applied_post: jobTitle,
       address: address,
     }).then((response) => {
-      console.log("asdsadsadsadsadsad ", response);
-      dispatch({ type: "RELOAD" });
+      if (
+        getName &&
+        getCompanyName &&
+        getPhone &&
+        getNote &&
+        jobTitle &&
+        getResume &&
+        address === ""
+      ) {
+        notification.open({
+          message: "Error missing Fields",
+          description: "Please fill all fields",
+          onClick: () => {
+            console.log("Notification Clicked!");
+          },
+        });
+      } else {
+        console.log("asdsadsadsadsadsad ", response);
+        dispatch({ type: "RELOAD" });
 
-      notification.open({
-        message: "Added Successfully",
-        description: "Candidate has been added successfully",
-        onClick: () => {
-          console.log("Notification Clicked!");
-        },
-      });
+        notification.open({
+          message: "Added Successfully",
+          description: "Candidate has been added successfully",
+          onClick: () => {
+            console.log("Notification Clicked!");
+          },
+        });
+      }
     });
   };
   const noteChangeHandler = (e) => {

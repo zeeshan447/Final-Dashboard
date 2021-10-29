@@ -2,14 +2,17 @@ var nodemailer = require("nodemailer");
 
 const sendemail = async (req, res) => {
   try {
+    const candidate_name = req.body.candidate_name;
     const to = req.body.to;
+    const cc = req.body.cc;
     const subject = req.body.subject;
     const text = req.body.text;
     const mailOptions = {
       from: process.env.UserEmail,
       to: to,
       subject: subject,
-      html: `<p>Dear Candidate,</p><br><b>${text}</b><br><br><p>Thanks</p>`,
+      cc: cc,
+      html: `<p>Dear ${candidate_name},</p><br><b>${text}</b><br><br><p>Thanks</p>`,
     };
 
     console.log("mailOptions :>> ", mailOptions);
