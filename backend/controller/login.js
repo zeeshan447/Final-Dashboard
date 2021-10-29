@@ -34,6 +34,7 @@ const pca = new msal.ConfidentialClientApplication(config);
 const outlookLogin = (req, res) => {
   const authCodeUrlParameters = {
     scopes: ["user.read"],
+    redirectUri: process.env.DASHBOARD_URL,
   };
 
   // get url to sign user in and consent to scopes needed for application
