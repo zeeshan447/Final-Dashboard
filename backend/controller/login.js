@@ -73,6 +73,7 @@ const outlookLoginCallback = async (req, res) => {
           .status(403)
           .send({ statusCode: 403, message: "User not exist", body: false });
       } else {
+        console.log("user  exists");
         const role_name = await pool.query(
           `Select * from roles where role_id = ${chk_email.rows[0].role_id}`
         );
