@@ -1,1 +1,1 @@
-export const MY_INTERVIEWS = "http://localhost:2500/interview";
+export const MY_INTERVIEWS = "https://peoplexdev.packagex.xyz/interview";

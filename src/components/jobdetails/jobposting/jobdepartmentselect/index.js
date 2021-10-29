@@ -29,17 +29,19 @@ const JobDepartmentSelect = ({ departmentSelect, departmentDetail }) => {
   }
 
   const getData = async () => {
-    await Axios.get("http://localhost:2500/department").then((response) => {
-      responseData = response.data.data.map((row, key) => ({
-        key: row.department_id,
-        department_name: row.department_name,
-      }));
-    });
+    await Axios.get("https://peoplexdev.packagex.xyz/department").then(
+      (response) => {
+        responseData = response.data.data.map((row, key) => ({
+          key: row.department_id,
+          department_name: row.department_name,
+        }));
+      }
+    );
 
     setDepartment(responseData);
 
     // console.log("response", state);
-    // const response = await axios.get("http://localhost:2500/department");
+    // const response = await axios.get("https://peoplexdev.packagex.xyz/department");
     // setState(response?.data?.data);
   };
   return (

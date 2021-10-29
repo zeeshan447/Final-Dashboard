@@ -65,7 +65,7 @@ const ApplicantTable = ({ getCount }) => {
   };
   const getData = async () => {
     await Axios.get(
-      "http://localhost:2500/can/initial?stage=NEW APPLICANTS"
+      "https://peoplexdev.packagex.xyz/can/initial?stage=NEW APPLICANTS"
     ).then((res) => {
       setLoading(false);
       setCandidates(

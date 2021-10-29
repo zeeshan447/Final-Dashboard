@@ -31,17 +31,19 @@ const AntSelect = (props) => {
   }
 
   const getData = async () => {
-    await axios.get("http://localhost:2500/department").then((response) => {
-      responseData = response.data.data.map((row, key) => ({
-        key: row.department_id,
-        department_name: row.department_name,
-      }));
-    });
+    await axios
+      .get("https://peoplexdev.packagex.xyz/department")
+      .then((response) => {
+        responseData = response.data.data.map((row, key) => ({
+          key: row.department_id,
+          department_name: row.department_name,
+        }));
+      });
 
     setState(responseData);
 
     // console.log("response", state);
-    // const response = await axios.get("http://localhost:2500/department");
+    // const response = await axios.get("https://peoplexdev.packagex.xyz/department");
     // setState(response?.data?.data);
   };
 

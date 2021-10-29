@@ -1,1 +1,1 @@
-export const GET_ALLJOBS = "http://localhost:2500/job";
+export const GET_ALLJOBS = "https://peoplexdev.packagex.xyz/job";

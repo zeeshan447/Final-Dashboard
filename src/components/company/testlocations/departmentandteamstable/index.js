@@ -62,7 +62,7 @@ function DepartmentTeamTable({ recallDepartment }) {
   };
 
   const insertTeam = () => {
-    Axios.post("http://localhost:2500/team", {
+    Axios.post("https://peoplexdev.packagex.xyz/team", {
       team_name: inputTeamName,
       department_id: departmentId,
     }).then((res) => {
@@ -70,7 +70,7 @@ function DepartmentTeamTable({ recallDepartment }) {
     });
   };
   const getDepartmentNames = async () => {
-    await Axios.get("http://localhost:2500/country").then((res) => {
+    await Axios.get("https://peoplexdev.packagex.xyz/country").then((res) => {
       setDepartmentNames(
         res.data.locations.map((row, key) => ({
           key: row.country_id,
@@ -83,15 +83,17 @@ function DepartmentTeamTable({ recallDepartment }) {
   console.log(departmentNames.length);
 
   const getTeamNames = async () => {
-    await Axios.get("http://localhost:2500/company-loc").then((res) => {
-      setTeamName(
-        res.data.locations.map((row, key) => ({
-          key: row.loc_id,
-          loc_name: row.loc_name,
-          country_id: row.country_id,
-        }))
-      );
-    });
+    await Axios.get("https://peoplexdev.packagex.xyz/company-loc").then(
+      (res) => {
+        setTeamName(
+          res.data.locations.map((row, key) => ({
+            key: row.loc_id,
+            loc_name: row.loc_name,
+            country_id: row.country_id,
+          }))
+        );
+      }
+    );
   };
   console.log("teams", teamName);
 
@@ -112,17 +114,17 @@ function DepartmentTeamTable({ recallDepartment }) {
     console.log("row ", row);
 
     const getTeamById = async () => {
-      await Axios.get(`http://localhost:2500/company-loc/${row}`).then(
-        (res) => {
-          setRowId(
-            res.data.data.map((row, key) => ({
-              key: row.loc_id,
-              loc_name: row.loc_name,
-              country_id: row.country_id,
-            }))
-          );
-        }
-      );
+      await Axios.get(
+        `https://peoplexdev.packagex.xyz/company-loc/${row}`
+      ).then((res) => {
+        setRowId(
+          res.data.data.map((row, key) => ({
+            key: row.loc_id,
+            loc_name: row.loc_name,
+            country_id: row.country_id,
+          }))
+        );
+      });
     };
     console.log("row ", rowId);
     //let inTable = row.key === rowId.key;

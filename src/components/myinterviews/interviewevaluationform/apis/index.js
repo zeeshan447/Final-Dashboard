@@ -1,1 +1,2 @@
-export const POSTFEEDBACK = "http://localhost:2500/interview/feedback";
+export const POSTFEEDBACK =
+  "https://peoplexdev.packagex.xyz/interview/feedback";

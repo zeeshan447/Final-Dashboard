@@ -29,17 +29,19 @@ const JobLocationSelect = ({ locationSelect }) => {
   }
 
   const getData = async () => {
-    await Axios.get("http://localhost:2500/company-loc").then((response) => {
-      responseData = response.data.locations.map((row, key) => ({
-        key: row.loc_id,
-        loc_name: row.loc_name,
-      }));
-    });
+    await Axios.get("https://peoplexdev.packagex.xyz/company-loc").then(
+      (response) => {
+        responseData = response.data.locations.map((row, key) => ({
+          key: row.loc_id,
+          loc_name: row.loc_name,
+        }));
+      }
+    );
 
     setLocation(responseData);
 
     // console.log("response", state);
-    // const response = await axios.get("http://localhost:2500/department");
+    // const response = await axios.get("https://peoplexdev.packagex.xyz/department");
     // setState(response?.data?.data);
   };
   return (

@@ -43,18 +43,18 @@ const DepartmentTeam = ({ record }) => {
   //console.log("row ", row);
 
   const getTeamById = async () => {
-    await Axios.get(`http://localhost:2500/company-loc/${record.key}`).then(
-      (res) => {
-        setRowId(
-          res.data.locations.map((row, key) => ({
-            key: row.loc_id,
-            loc_name: row.loc_name,
-            country_id: row.country_id,
-          }))
-        );
-        console.log("COMPANY RESPONSE", res);
-      }
-    );
+    await Axios.get(
+      `https://peoplexdev.packagex.xyz/company-loc/${record.key}`
+    ).then((res) => {
+      setRowId(
+        res.data.locations.map((row, key) => ({
+          key: row.loc_id,
+          loc_name: row.loc_name,
+          country_id: row.country_id,
+        }))
+      );
+      console.log("COMPANY RESPONSE", res);
+    });
   };
   console.log("row ", rowId);
   //let inTable = row.key === rowId.key;

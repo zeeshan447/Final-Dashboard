@@ -1,8 +1,10 @@
-export const GET_HIRINGSTAGES = "http://localhost:2500/hiringstages";
+export const GET_HIRINGSTAGES = "https://peoplexdev.packagex.xyz/hiringstages";
 
-export const GET_ALLUSERS = "http://localhost:2500/user";
+export const GET_ALLUSERS = "https://peoplexdev.packagex.xyz/user";
 
-export const SCHEDULE_INTERVIEW = "http://localhost:2500/interview/schedule";
+export const SCHEDULE_INTERVIEW =
+  "https://peoplexdev.packagex.xyz/interview/schedule";
 
-export const JOB_UPDATE = "http://localhost:2500/candidatebyjob/updatedJob";
-export const GET_INTEVIEWSTATUS = "http://localhost:2500/interview/";
+export const JOB_UPDATE =
+  "https://peoplexdev.packagex.xyz/candidatebyjob/updatedJob";
+export const GET_INTEVIEWSTATUS = "https://peoplexdev.packagex.xyz/interview/";

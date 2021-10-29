@@ -32,7 +32,7 @@ app.use(cors());
 //   res.setHeader(
 //     "Access-Control-Allow-Origin",
 //     "http://localhost:3000",
-//     "http://localhost:2500/auth/outlook"
+//     "https://peoplexdev.packagex.xyz/auth/outlook"
 //   );
 
 //   // Request methods you wish to allow

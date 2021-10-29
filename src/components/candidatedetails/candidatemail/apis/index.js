@@ -1,1 +1,1 @@
-export const SEND_MAIL = "http://localhost:2500/send-email";
+export const SEND_MAIL = "https://peoplexdev.packagex.xyz/send-email";

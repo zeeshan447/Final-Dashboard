@@ -63,7 +63,7 @@ function DepartmentTeamTable({ recallDepartment }) {
   };
 
   const insertTeam = () => {
-    Axios.post("http://localhost:2500/team", {
+    Axios.post("https://peoplexdev.packagex.xyz/team", {
       team_name: inputTeamName,
       department_id: departmentId,
     }).then((res) => {
@@ -78,20 +78,22 @@ function DepartmentTeamTable({ recallDepartment }) {
     });
   };
   const getDepartmentNames = async () => {
-    await Axios.get("http://localhost:2500/department").then((res) => {
-      setDepartmentNames(
-        res.data.data.map((row, key) => ({
-          key: row.department_id,
-          department_name: row.department_name,
-        }))
-      );
-    });
+    await Axios.get("https://peoplexdev.packagex.xyz/department").then(
+      (res) => {
+        setDepartmentNames(
+          res.data.data.map((row, key) => ({
+            key: row.department_id,
+            department_name: row.department_name,
+          }))
+        );
+      }
+    );
   };
 
   console.log(departmentNames.length);
 
   const getTeamNames = async () => {
-    await Axios.get("http://localhost:2500/team").then((res) => {
+    await Axios.get("https://peoplexdev.packagex.xyz/team").then((res) => {
       setTeamName(
         res.data.data.map((row, key) => ({
           key: row.team_id,
@@ -120,15 +122,17 @@ function DepartmentTeamTable({ recallDepartment }) {
     console.log("row ", row);
 
     const getTeamById = async () => {
-      await Axios.get(`http://localhost:2500/team/${row}`).then((res) => {
-        setRowId(
-          res.data.data.map((row, key) => ({
-            key: row.team_id,
-            team_name: row.team_name,
-            department_id: row.department_id,
-          }))
-        );
-      });
+      await Axios.get(`https://peoplexdev.packagex.xyz/team/${row}`).then(
+        (res) => {
+          setRowId(
+            res.data.data.map((row, key) => ({
+              key: row.team_id,
+              team_name: row.team_name,
+              department_id: row.department_id,
+            }))
+          );
+        }
+      );
     };
     console.log("row ", rowId);
     //let inTable = row.key === rowId.key;

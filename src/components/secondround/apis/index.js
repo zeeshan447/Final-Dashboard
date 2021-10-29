@@ -1,1 +1,2 @@
-export const SECONDROUND_APPLICANTS = "http://localhost:2500/can/initial?stage";
+export const SECONDROUND_APPLICANTS =
+  "https://peoplexdev.packagex.xyz/can/initial?stage";

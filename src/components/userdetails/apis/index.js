@@ -1,1 +1,1 @@
-export const UPDATE_USER = "http://localhost:2500/user";
+export const UPDATE_USER = "https://peoplexdev.packagex.xyz/user";

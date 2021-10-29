@@ -62,7 +62,7 @@ const TestingLocations = () => {
 
   useEffect(() => {
     dispatch({ type: "company" });
-    const response = Axios.get("http://localhost:2500/country");
+    const response = Axios.get("https://peoplexdev.packagex.xyz/country");
     console.log("Country response", response);
   }, []);
 
@@ -71,7 +71,7 @@ const TestingLocations = () => {
   };
 
   const insertData = async () => {
-    await Axios.post("http://localhost:2500/country", {
+    await Axios.post("https://peoplexdev.packagex.xyz/country", {
       country_name: countryName,
     }).then((response) => {
       console.log(response.userData);
@@ -85,7 +85,7 @@ const TestingLocations = () => {
   console.log("ID = ", departmentID);
 
   // const displayDepartmentName = async (newDepartmentID) => {
-  //   await Axios.get(`http://localhost:2500/department/${newDepartmentID}`).then(
+  //   await Axios.get(`https://peoplexdev.packagex.xyz/department/${newDepartmentID}`).then(
   //     (res) => {
   //       setDepartmentTitle(
   //         // res.data.data.map((row, key) => ({

@@ -1,5 +1,5 @@
-export const GETALLUSERS = "http://localhost:2500/user";
+export const GETALLUSERS = "https://peoplexdev.packagex.xyz/user";
 
-export const GETJOBOWNERS = "http://localhost:2500/job-owner";
+export const GETJOBOWNERS = "https://peoplexdev.packagex.xyz/job-owner";
 
-export const UPDATEJOB = "http://localhost:2500/job";
+export const UPDATEJOB = "https://peoplexdev.packagex.xyz/job";

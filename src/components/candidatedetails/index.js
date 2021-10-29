@@ -97,7 +97,7 @@ const CandidateDetails = ({
 
   const getInterviewStatus = async () => {
     await Axios.get(
-      `http://localhost:2500/interview/candidate/${candidateData.key}`
+      `https://peoplexdev.packagex.xyz/interview/candidate/${candidateData.key}`
     ).then((response) => {
       responseData = response.data.scheduleInterview?.map((row, key) => ({
         interviewer_status_id: row.interviewer_status_id,
@@ -117,7 +117,9 @@ const CandidateDetails = ({
   };
 
   const deleteScheduleInterview = async (id) => {
-    await Axios.delete(`http://localhost:2500/interview/schedule/${id}`);
+    await Axios.delete(
+      `https://peoplexdev.packagex.xyz/interview/schedule/${id}`
+    );
     const newInterviewList = InterviewStatus.filter((InterviewStatus) => {
       return InterviewStatus.interviewer_status_id !== id;
     });

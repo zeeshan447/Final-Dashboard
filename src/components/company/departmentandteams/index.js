@@ -64,7 +64,7 @@ const DepartmentAndTeam = () => {
 
   useEffect(() => {
     dispatch({ type: "company" });
-    const response = Axios.get("http://localhost:2500/department");
+    const response = Axios.get("https://peoplexdev.packagex.xyz/department");
     console.log("department response", response);
   }, []);
 
@@ -73,7 +73,7 @@ const DepartmentAndTeam = () => {
   };
 
   const insertData = async () => {
-    await Axios.post("http://localhost:2500/department", {
+    await Axios.post("https://peoplexdev.packagex.xyz/department", {
       department_name: departmentName,
     }).then((response) => {
       console.log(response.userData);
@@ -94,7 +94,7 @@ const DepartmentAndTeam = () => {
   console.log("ID = ", departmentID);
 
   // const displayDepartmentName = async (newDepartmentID) => {
-  //   await Axios.get(`http://localhost:2500/department/${newDepartmentID}`).then(
+  //   await Axios.get(`https://peoplexdev.packagex.xyz/department/${newDepartmentID}`).then(
   //     (res) => {
   //       setDepartmentTitle(
   //         // res.data.data.map((row, key) => ({

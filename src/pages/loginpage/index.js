@@ -45,7 +45,7 @@ const LoginPage = () => {
   //const accessCode = window.location.href.split("?")[1].split("=")[1];
 
   const getData = async () => {
-    const res = await Axios.get("http://localhost:2500/auth/outlook");
+    const res = await Axios.get("https://peoplexdev.packagex.xyz");
     console.log("response ", res.request.responseURL);
 
     setUrl(res.request.responseURL);
