@@ -74,7 +74,7 @@ app.use("/job", jobrouters);
 app.use("/uploadcv", upload);
 app.use("/candidatebyjob", candidate_job_maping);
 app.use("/team", teamsrouter);
-app.use("/", login);
+app.use("/auth", login);
 app.use("/interview", interview);
 const can = require("./router/candidate");
 app.use("/work-type", worktype);
