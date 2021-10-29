@@ -21,31 +21,28 @@ const AllRoutes = () => {
 
   return (
     <React.Fragment>
-      {userDetailing.role_value > 30 ? (
-        <Switch>
-          <PrivateRoute path="/applicant" component={Applicant} />
-          <PrivateRoute path="/edituser" component={EditUser} />
-          <PrivateRoute path="/interview" component={Interview} />
-          <PrivateRoute path="/adduser" component={AddNewUser} />
-          <PrivateRoute path="/company" component={CompanySettings} />
-          <PrivateRoute path="/locations" component={TestingLocations} />
-          <PrivateRoute
-            path="/departmentsandteams"
-            component={DepartmentAndTeam}
-          />
-          <PrivateRoute path="/jobs" component={Jobs} />
-          <PublicRoute exact={true} path="/" component={LoginPage} />
-          <PrivateRoute path="/review" component={ApplicantReview} />
-        </Switch>
-      ) : null}
-      {userDetailing.role_value >= 30 && (
-        <Switch>
-          <ProtectedRoute path="/myinterviews" component={MyInterviews} />
-          <PublicRoute exact={true} path="/" component={LoginPage} />
+      <Switch>
+        <PrivateRoute path="/applicant" component={Applicant} />
+        <PrivateRoute path="/edituser" component={EditUser} />
+        <PrivateRoute path="/interview" component={Interview} />
+        <PrivateRoute path="/adduser" component={AddNewUser} />
+        <PrivateRoute path="/company" component={CompanySettings} />
+        <PrivateRoute path="/locations" component={TestingLocations} />
+        <PrivateRoute
+          path="/departmentsandteams"
+          component={DepartmentAndTeam}
+        />
+        <PrivateRoute path="/jobs" component={Jobs} />
+        <PublicRoute exact={true} path="/" component={LoginPage} />
+        <PrivateRoute path="/review" component={ApplicantReview} />
+      </Switch>
 
-          {/* <Redirect from="*" to="/myinterviews" /> */}
-        </Switch>
-      )}
+      <Switch>
+        <ProtectedRoute path="/myinterviews" component={MyInterviews} />
+        <PublicRoute exact={true} path="/" component={LoginPage} />
+
+        {/* <Redirect from="*" to="/myinterviews" /> */}
+      </Switch>
     </React.Fragment>
   );
 };
