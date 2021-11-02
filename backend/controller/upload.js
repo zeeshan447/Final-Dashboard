@@ -17,7 +17,7 @@ const uploadfile = (req, res) => {
       }
       console.log(req.file);
       console.log("req.file.location :>> ", req.file.location);
-      res.json({ statusCode: 200, url: req.file.location });
+      res.status(201).json({ statusCode: 201, url: req.file.location });
       // let update = { profilePicture: req.file.location };
     });
   } catch (error) {

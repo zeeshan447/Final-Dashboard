@@ -65,12 +65,18 @@ const candidateinsert = async function (req, res) {
       `INSERT INTO "candidate_job_maping" (candidate_id,job_id) VALUES($1,$2)`,
       [candidate_ids.rows[0].candidate_id, job_id.rows[0].job_id],
       function (err, result) {
-        res.json({ statusCode: 201, candidate: "Add SuccesFull" });
+        if (err) {
+          res.status(500).json({ candidate: err.message });
+        } else {
+          res
+            .status(201)
+            .json({ statusCode: 201, candidate: "Add SuccesFull" });
+        }
       }
     );
   } catch (error) {
     console.log(error.message);
-    res.json({ statusCode: 300, candidate: error.message });
+    res.status(300).json({ statusCode: 300, candidate: error.message });
   }
 };
 const candidategetbyid = async function (req, res) {
@@ -84,10 +90,13 @@ const candidategetbyid = async function (req, res) {
       [candidate_id],
       function (error, result) {
         if (!error) {
-          res.json({
+          res.status(200).json({
             data: result.rows,
           });
         } else {
+          res.status(500).json({
+            msg: error.message,
+          });
           console.log(error.message);
         }
       }
@@ -109,7 +118,7 @@ const candidateupdated = async function (req, res) {
       [candidate_name, email, phone, urls, prev_company, candidate_id],
       function (error, result) {
         if (!error) {
-          res.json({
+          res.status(200).json({
             msg: "data updated",
           });
         } else {
@@ -130,10 +139,13 @@ const candidatedeleted = async function (req, res) {
       [candidate_id],
       function (error, result) {
         if (!error) {
-          res.json({
+          res.status(200).json({
             msg: "Data Deleted",
           });
         } else {
+          res.status(500).json({
+            data: error.message,
+          });
           console.log(error.message);
         }
       }
