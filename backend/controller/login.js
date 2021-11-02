@@ -49,6 +49,7 @@ const outlookLogin = (req, res) => {
 
 const outlookLoginCallback = async (req, res) => {
   try {
+    const redirect = req.query.redirect;
     console.log("here");
     const tokenRequest = {
       code: req.query.code,
