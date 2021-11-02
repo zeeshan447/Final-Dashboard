@@ -7,6 +7,7 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 let OUTLOOK_CLIENT_ID = process.env.OUTLOOK_CLIENT_ID;
 let OUTLOOK_CLIENT_SECRET = process.env.OUTLOOK_CLIENT_SECRET;
 let POST_REDIRECT_URI = process.env.POST_REDIRECT_URI;
+
 const config = {
   auth: {
     clientId: process.env.OUTLOOK_CLIENT_ID,
