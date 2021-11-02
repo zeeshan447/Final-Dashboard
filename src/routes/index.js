@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Redirect } from "react-router-dom";
 import AddNewUser from "../components/addnewuser";
 import Applicant from "../components/applicant";
 import ApplicantReview from "../components/applicantsreview";
@@ -23,7 +23,7 @@ const AllRoutes = () => {
       <Switch>
         <PublicRoute exact={true} path="/" component={LoginPage} />
 
-        {userDetailing?.role_value > 30 ? (
+        {userDetailing?.role_value > 30 && (
           <>
             <PrivateRoute path="/applicant" component={Applicant} />
             <PrivateRoute path="/edituser" component={EditUser} />
@@ -37,16 +37,17 @@ const AllRoutes = () => {
             />
             <PrivateRoute path="/jobs" component={Jobs} />
             <PrivateRoute path="/review" component={ApplicantReview} />
-            <Redirect from="*" to="/applicant" />
           </>
-        ) : (
-          <PublicRoute exact={true} path="/" component={LoginPage} />
         )}
 
         {userDetailing?.role_value >= 30 ? (
           <>
             <PrivateRoute path="/myinterviews" component={MyInterviews} />
-            <Redirect from="*" to="/myinterviews" />
+            {userDetailing?.role_value === 30 ? (
+              <Redirect from="*" to="/myinterviews" />
+            ) : (
+              <Redirect from="*" to="/applicant" />
+            )}
           </>
         ) : (
           <PublicRoute exact={true} path="/" component={LoginPage} />
