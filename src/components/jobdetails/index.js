@@ -49,10 +49,9 @@ const JobDetails = ({ jobDetails, updateJob }) => {
   const [getUserId, setUserId] = useState(jobDetails.job_id);
   const [getJobOwner, setJobOwner] = useState(jobDetails.job_created);
   const [getIsActive, setIsActive] = useState();
-  const [hiringManagerId, setHiringManagerId] = useState();
-  const [getHiringManager, setHiringManager] = useState(
-    jobDetails.hiring_manager
-  );
+  const [hiringManagerId, setHiringManagerId] = useState(jobDetails.user_id);
+  const [getHiringManager, setHiringManager] = useState(jobDetails.user_name);
+  const [workTypeId, setWorkTypeId] = useState(jobDetails.work_id);
 
   const dispatch = useDispatch();
 
@@ -63,7 +62,7 @@ const JobDetails = ({ jobDetails, updateJob }) => {
       "asdsadsadasda",
       getJobName,
       getDepartment,
-      getWorkType,
+      workTypeId,
       getLocation,
       getDescription,
       getUserId,
@@ -97,7 +96,6 @@ const JobDetails = ({ jobDetails, updateJob }) => {
   // };
 
   const updateJobHandler = async () => {
-    debugger;
     await Axios.put(`${UPDATEJOB}/${jobDetails.job_id}`, {
       job_title: getJobName,
       job_loc: getLocation,
@@ -105,22 +103,42 @@ const JobDetails = ({ jobDetails, updateJob }) => {
       department_id: getDepartment,
       user_id: jobDetails.user_id,
       description: getDescription,
-      worktype_id: getWorkType,
+      worktype_id: workTypeId,
       is_active: "true",
       company_id: 2,
-    }).then((response) => {
-      console.log("asdsadsadsadsadsad ", response.data);
-      dispatch({ type: "RELOAD" });
+    })
+      .then((response) => {
+        if (response.request.status === 200) {
+          console.log("JOB POSTING API ", response);
+          dispatch({ type: "RELOAD" });
 
-      updateJob(false);
-      notification.open({
-        message: "Job Update Successfully",
-        description: "Job has successfully updated",
-        onClick: () => {
-          console.log("Notification Clicked!");
-        },
+          updateJob(false);
+          notification.open({
+            message: "Job Update Successfully",
+            description: "Job has successfully updated",
+            onClick: () => {
+              console.log("Notification Clicked!");
+            },
+          });
+        } else {
+          notification.open({
+            message: "Job Update Failed",
+            description: "Please recheck all the values",
+            onClick: () => {
+              console.log("Notification Clicked!");
+            },
+          });
+        }
+      })
+      .catch((err) => {
+        notification.open({
+          message: " Failed",
+          description: "Server side error, try again later",
+          onClick: () => {
+            console.log("Notification Clicked!");
+          },
+        });
       });
-    });
   };
 
   function confirm(e) {
@@ -165,6 +183,7 @@ const JobDetails = ({ jobDetails, updateJob }) => {
             <JobWorkTypeSelect
               workTypeSelect={setWorkType}
               workTypeDetails={jobDetails}
+              workId={setWorkTypeId}
             ></JobWorkTypeSelect>
             <JobLocationSelect
               locationSelect={setLocation}

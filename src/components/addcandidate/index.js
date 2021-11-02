@@ -23,7 +23,7 @@ const AddCandidate = () => {
   const [getInputSize, setInputSize] = useState("");
   const [getOnFocus, setOnFocus] = useState(false);
   const [getNote, setNote] = useState();
-  const [getName, setName] = useState();
+  const [getName, setName] = useState("");
   const [getCompanyName, setCompanyName] = useState();
   const [getResume, setResume] = useState();
   const [getEmail, setEmail] = useState();
@@ -53,51 +53,54 @@ const AddCandidate = () => {
     dispatch({ type: "DEFAULT" });
     console.log("response from redux", pageReload);
   }, []);
-  const config = {
-    headers: { "content-type": "multipart/form-data" },
-  };
 
   const candidateAddHandler = async () => {
-    debugger;
-    await Axios.post(ADD_CANDIDATE, {
-      candidate_name: getName,
-      prev_company: getCompanyName,
-      email: getEmail,
-      phone: getPhone,
-      notes: getNote,
-      cv: getResume,
-      applied_post: jobTitle,
-      address: address,
-    }).then((response) => {
-      if (
-        getName &&
-        getCompanyName &&
-        getPhone &&
-        getNote &&
-        jobTitle &&
-        getResume &&
-        address === ""
-      ) {
-        notification.open({
-          message: "Error missing Fields",
-          description: "Please fill all fields",
-          onClick: () => {
-            console.log("Notification Clicked!");
-          },
+    if (
+      getName &&
+      getCompanyName &&
+      getPhone &&
+      getNote &&
+      jobTitle &&
+      getResume &&
+      address === undefined
+    ) {
+      notification.open({
+        message: "Error missing Fields",
+        description: "Please fill all fields",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
+    } else {
+      await Axios.post(ADD_CANDIDATE, {
+        candidate_name: getName,
+        prev_company: getCompanyName,
+        email: getEmail,
+        phone: getPhone,
+        notes: getNote,
+        cv: getResume,
+        applied_post: jobTitle,
+        address: address,
+      })
+        .then((response) => {
+          console.log("STATUS CODE", response.request.status);
+          if (response.request.status === 200) {
+            notification.open({
+              message: "Adding Candidate Failed",
+              description: "Please check all the  fields",
+              onClick: () => {
+                console.log("Notification Clicked!");
+              },
+            });
+          } else {
+            dispatch({ type: "RELOAD" });
+            console.log("asdsadsadsadsadsad ", response);
+          }
+        })
+        .catch((err) => {
+          alert(err);
         });
-      } else {
-        console.log("asdsadsadsadsadsad ", response);
-        dispatch({ type: "RELOAD" });
-
-        notification.open({
-          message: "Added Successfully",
-          description: "Candidate has been added successfully",
-          onClick: () => {
-            console.log("Notification Clicked!");
-          },
-        });
-      }
-    });
+    }
   };
   const noteChangeHandler = (e) => {
     setNote(e.target.value);

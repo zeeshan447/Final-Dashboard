@@ -21,7 +21,7 @@ const JobLocationSelect = ({ locationSelect, locationDetails }) => {
 
   useEffect(() => {
     getData();
-  });
+  }, []);
 
   function handleChange(value) {
     console.log(`selected ${value}`);

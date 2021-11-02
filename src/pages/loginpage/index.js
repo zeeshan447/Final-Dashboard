@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import LoginImage from "../../images/LoginImage.png";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { notification } from "antd";
 
 import Axios from "axios";
 import {
@@ -94,15 +95,25 @@ const LoginPage = () => {
     } else {
       await Axios.get(
         `https://peoplexdevapi.packagex.xyz/auth/callback?code=${code}`
-      ).then((res) => {
-        console.log("authentication response", res);
-        setAccessToken(res.data.token);
-        console.log("LOGIN RESPONSE", res);
-        //userDetails = res.data;
-        let details = res.data;
-        dispatch({ type: "USER_DETAILS", payload: details });
-        //console.log("USER DETAILS", userDetails);
-      });
+      )
+        .then((res) => {
+          console.log("authentication response", res);
+          setAccessToken(res.data.token);
+          console.log("LOGIN RESPONSE", res);
+          //userDetails = res.data;
+          let details = res.data;
+          dispatch({ type: "USER_DETAILS", payload: details });
+          //console.log("USER DETAILS", userDetails);
+        })
+        .catch((err) => {
+          notification.open({
+            message: "Sign In Faied",
+            description: "Failed to sign in. User has not been registered yet",
+            onClick: () => {
+              console.log("Notification Clicked!");
+            },
+          });
+        });
     }
   };
   console.log("Access Token", accessToken);

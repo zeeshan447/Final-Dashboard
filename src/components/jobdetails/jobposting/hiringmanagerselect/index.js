@@ -29,10 +29,9 @@ const HiringManagerSelect = ({
     setHiringManager(responseData);
   };
 
-  function handleChange(value, key) {
-    debugger;
+  function handleChange(value, name) {
     console.log(`selected ${value}`);
-    hiringManagerName(value);
+    hiringManagerName(name.name);
     hiringId(value);
   }
   function onSearch(val) {
@@ -53,7 +52,7 @@ const HiringManagerSelect = ({
       >
         {getHiringManager?.map((data, key) => {
           return (
-            <Option value={data.value} key={data.key}>
+            <Option value={data.value} name={data.user_name} key={data.key}>
               {data.user_name}
             </Option>
           );

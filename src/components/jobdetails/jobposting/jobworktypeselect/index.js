@@ -15,7 +15,7 @@ function onSearch(val) {
   console.log("search:", val);
 }
 
-const JobWorkTypeSelect = ({ workTypeSelect, workTypeDetails }) => {
+const JobWorkTypeSelect = ({ workTypeSelect, workTypeDetails, workId }) => {
   const [getWorkType, setWorkType] = useState([]);
   let responseData = [];
 
@@ -28,6 +28,7 @@ const JobWorkTypeSelect = ({ workTypeSelect, workTypeDetails }) => {
   function handleChange(value) {
     console.log(`selected ${value}`);
     workTypeSelect(value);
+    workId(value);
   }
 
   const getData = async () => {

@@ -76,21 +76,35 @@ const JobPosting = ({ jobModalVisibility }) => {
       job_loc: getLocation,
       job_createdby: userDetailing.user_name,
       department_id: getDepartment,
-      user_id: getUserId.key,
+      user_id: getUserId?.key,
       description: getDescription,
       worktype_id: getWorkType,
       is_active: "true",
-    }).then((response) => {
-      console.log("asdsadsadsadsadsad ", response.data);
-      jobModalVisibility(false);
-      notification.open({
-        message: "Job Posted",
-        description: "Job Posted Successfully",
-        onClick: () => {
-          console.log("Notification Clicked!");
-        },
+    })
+      .then((response) => {
+        console.log("asdsadsadsadsadsad ", response);
+        if (response.request.status === 200) {
+          notification.open({
+            message: "Job Posted Failed",
+            description: "Please check all the fields",
+            onClick: () => {
+              console.log("Notification Clicked!");
+            },
+          });
+        } else {
+          jobModalVisibility(false);
+          notification.open({
+            message: "Job Posted",
+            description: "Job Posted Successfully",
+            onClick: () => {
+              console.log("Notification Clicked!");
+            },
+          });
+        }
+      })
+      .catch((err) => {
+        alert(err);
       });
-    });
   };
   return (
     <React.Fragment>

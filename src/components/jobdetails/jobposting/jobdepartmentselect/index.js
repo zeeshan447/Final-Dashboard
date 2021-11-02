@@ -21,7 +21,8 @@ const JobDepartmentSelect = ({ departmentSelect, departmentDetail }) => {
 
   useEffect(() => {
     getData();
-  });
+    console.log("DEPARTMENT DETAIL", departmentDetail);
+  }, []);
 
   function handleChange(value) {
     console.log(`selected ${value}`);
