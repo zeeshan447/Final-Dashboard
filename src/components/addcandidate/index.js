@@ -91,14 +91,6 @@ const AddCandidate = ({ candidateModal }) => {
           console.log("STATUS CODE", response.request.status);
           if (response.request.status === 200) {
             notification.open({
-              message: "Adding Candidate Failed",
-              description: "Please check all the  fields",
-              onClick: () => {
-                console.log("Notification Clicked!");
-              },
-            });
-          } else {
-            notification.open({
               message: "Successfully Added",
               description: "Candidate Added Successfully",
               onClick: () => {
@@ -108,6 +100,14 @@ const AddCandidate = ({ candidateModal }) => {
             dispatch({ type: "RELOAD" });
             console.log("asdsadsadsadsadsad ", response);
             candidateModal(false);
+          } else {
+            notification.open({
+              message: "Adding Candidate Failed",
+              description: "Please check all the  fields",
+              onClick: () => {
+                console.log("Notification Clicked!");
+              },
+            });
           }
         })
         .catch((err) => {
