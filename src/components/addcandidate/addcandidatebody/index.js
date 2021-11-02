@@ -57,6 +57,7 @@ const AddCandidateBody = ({
   candidateJob,
   candidateJobId,
   candidateLocation,
+  managerId,
 }) => {
   const [getCandidateName, setCandidateName] = useState();
   const [getCandidateCompany, setCandidateCompany] = useState();
@@ -67,10 +68,11 @@ const AddCandidateBody = ({
   const [getCandidatePhone, setCandidatePhone] = useState();
   const [location, setLocation] = useState();
   const [resumeUrl, setResumeUrl] = useState();
+  const [hiringManagerId, setHiringManagerId] = useState();
   let responseData = [];
   useEffect(() => {
     getData();
-  });
+  }, []);
   useEffect(() => {
     //console.log("pdfamsnakjsdfile ", getPdfFile);
     candidateName(getCandidateName);
@@ -80,12 +82,15 @@ const AddCandidateBody = ({
     candidatePhone(getCandidatePhone);
     candidateJob(getJobTitle);
     candidateLocation(location);
+    managerId(hiringManagerId);
+    console.log("JOB NAME", hiringManagerId);
     //console.log("Applied job", getJobName.job_title);
   });
   function handleChange(value, key) {
     console.log(`selected ${value}`);
     setJobTitle(value);
     candidateJobId(key.key);
+    setHiringManagerId(key.userId.user_id);
   }
 
   const getData = async () => {
@@ -94,6 +99,7 @@ const AddCandidateBody = ({
         responseData = response?.data.candidateJob.map((row, key) => ({
           key: row.job_id,
           job_title: row.job_title,
+          user_id: row.user_id,
         }));
       }
     );
@@ -146,7 +152,7 @@ const AddCandidateBody = ({
               >
                 {getJobName?.map((data, key) => {
                   return (
-                    <Option value={data.job_title} key={data.key}>
+                    <Option value={data.job_title} key={data.key} userId={data}>
                       {data.job_title}
                     </Option>
                   );

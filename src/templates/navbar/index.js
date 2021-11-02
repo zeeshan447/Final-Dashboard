@@ -254,7 +254,7 @@ const NavBar = () => {
         footer={false}
         destroyOnClose
       >
-        <AddCandidate />
+        <AddCandidate candidateModal={setIsModalVisible} />
       </Modal>
       <JobModal
         visible={jobModalVisible}

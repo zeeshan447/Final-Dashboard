@@ -32,7 +32,7 @@ const AddNewUser = ({ modalVisibility }) => {
     // const response = Axios.get("https://peoplexdevapi.packagex.xyz/roles");
     // console.log("options", response);
     getData();
-  });
+  }, []);
 
   const getData = async () => {
     await Axios.get("https://peoplexdevapi.packagex.xyz/role").then(
@@ -58,21 +58,52 @@ const AddNewUser = ({ modalVisibility }) => {
   };
 
   const addUserHandler = async () => {
-    await Axios.post("https://peoplexdevapi.packagex.xyz/user", {
-      user_name: userData.name,
-      email: userData.email,
-      role_id: roleId,
-    }).then((response) => {
-      console.log("USER DATA RESPONSE", response);
-    });
-    notification.open({
-      message: "Added Successfully",
-      description: "User has been added successfully",
-      onClick: () => {
-        console.log("Notification Clicked!");
-      },
-    });
-    modalVisibility(false);
+    debugger;
+    if (userData.email && userData.name === "") {
+      notification.open({
+        message: "Fill All Fields",
+        description: "Please Fill All The Fields",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
+    } else if (userData.email && userData.name !== "") {
+      await Axios.post("https://peoplexdevapi.packagex.xyz/user", {
+        user_name: userData.name,
+        email: userData.email,
+        role_id: roleId,
+      })
+        .then((response) => {
+          if (response.request.status === 200) {
+            notification.open({
+              message: "Added Successfully",
+              description: "User has been added successfully",
+              onClick: () => {
+                console.log("Notification Clicked!");
+              },
+            });
+            modalVisibility(false);
+            console.log("USER DATA RESPONSE", response);
+          } else {
+            notification.open({
+              message: "Failed",
+              description: "User has not been added. Please check all fields",
+              onClick: () => {
+                console.log("Notification Clicked!");
+              },
+            });
+          }
+        })
+        .catch((err) => {
+          notification.open({
+            message: "Server Error",
+            description: "There is an error from the server",
+            onClick: () => {
+              console.log("Notification Clicked!");
+            },
+          });
+        });
+    }
   };
 
   const handleOptionChange = (value) => {

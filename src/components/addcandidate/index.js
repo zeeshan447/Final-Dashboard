@@ -19,7 +19,7 @@ import { ADD_CANDIDATE } from "./apis";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-const AddCandidate = () => {
+const AddCandidate = ({ candidateModal }) => {
   const [getInputSize, setInputSize] = useState("");
   const [getOnFocus, setOnFocus] = useState(false);
   const [getNote, setNote] = useState();
@@ -31,6 +31,7 @@ const AddCandidate = () => {
   const [jobId, setJobId] = useState();
   const [jobTitle, setJobTitle] = useState();
   const [address, setAddress] = useState();
+  const [hiringId, setHiringId] = useState();
   const dispatch = useDispatch();
   const pageReload = useSelector((state) => state.addCandidates.reloadPage);
 
@@ -51,6 +52,7 @@ const AddCandidate = () => {
     console.log("Company Name", getCompanyName);
     console.log("Resume", getResume);
     dispatch({ type: "DEFAULT" });
+    console.log("JOBTITLE", jobTitle);
     console.log("response from redux", pageReload);
   }, []);
 
@@ -72,6 +74,8 @@ const AddCandidate = () => {
         },
       });
     } else {
+      debugger;
+
       await Axios.post(ADD_CANDIDATE, {
         candidate_name: getName,
         prev_company: getCompanyName,
@@ -81,6 +85,7 @@ const AddCandidate = () => {
         cv: getResume,
         applied_post: jobTitle,
         address: address,
+        user_id: hiringId,
       })
         .then((response) => {
           console.log("STATUS CODE", response.request.status);
@@ -93,8 +98,16 @@ const AddCandidate = () => {
               },
             });
           } else {
+            notification.open({
+              message: "Successfully Added",
+              description: "Candidate Added Successfully",
+              onClick: () => {
+                console.log("Notification Clicked!");
+              },
+            });
             dispatch({ type: "RELOAD" });
             console.log("asdsadsadsadsadsad ", response);
+            candidateModal(false);
           }
         })
         .catch((err) => {
@@ -144,6 +157,7 @@ const AddCandidate = () => {
           candidateJob={setJobTitle}
           candidateJobId={setJobId}
           candidateLocation={setAddress}
+          managerId={setHiringId}
         />
       </AddCandidateTabsDiv>
     </React.Fragment>
