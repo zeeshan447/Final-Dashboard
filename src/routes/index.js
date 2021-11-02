@@ -22,36 +22,36 @@ const AllRoutes = () => {
     <React.Fragment>
       <Switch>
         <PublicRoute exact={true} path="/" component={LoginPage} />
+
+        {userDetailing?.role_value > 30 ? (
+          <>
+            <PrivateRoute path="/applicant" component={Applicant} />
+            <PrivateRoute path="/edituser" component={EditUser} />
+            <PrivateRoute path="/interview" component={Interview} />
+            <PrivateRoute path="/adduser" component={AddNewUser} />
+            <PrivateRoute path="/company" component={CompanySettings} />
+            <PrivateRoute path="/locations" component={TestingLocations} />
+            <PrivateRoute
+              path="/departmentsandteams"
+              component={DepartmentAndTeam}
+            />
+            <PrivateRoute path="/jobs" component={Jobs} />
+            <PrivateRoute path="/review" component={ApplicantReview} />
+            <Redirect from="*" to="/applicant" />
+          </>
+        ) : (
+          <PublicRoute exact={true} path="/" component={LoginPage} />
+        )}
+
+        {userDetailing?.role_value >= 30 ? (
+          <>
+            <PrivateRoute path="/myinterviews" component={MyInterviews} />
+            <Redirect from="*" to="/myinterviews" />
+          </>
+        ) : (
+          <PublicRoute exact={true} path="/" component={LoginPage} />
+        )}
       </Switch>
-
-      {userDetailing?.role_value > 30 ? (
-        <Switch>
-          <PrivateRoute path="/applicant" component={Applicant} />
-          <PrivateRoute path="/edituser" component={EditUser} />
-          <PrivateRoute path="/interview" component={Interview} />
-          <PrivateRoute path="/adduser" component={AddNewUser} />
-          <PrivateRoute path="/company" component={CompanySettings} />
-          <PrivateRoute path="/locations" component={TestingLocations} />
-          <PrivateRoute
-            path="/departmentsandteams"
-            component={DepartmentAndTeam}
-          />
-          <PrivateRoute path="/jobs" component={Jobs} />
-          <PrivateRoute path="/review" component={ApplicantReview} />
-          <Redirect from="*" to="/applicant" />
-        </Switch>
-      ) : (
-        <PublicRoute exact={true} path="/" component={LoginPage} />
-      )}
-
-      {userDetailing?.role_value > 30 ? (
-        <Switch>
-          <PrivateRoute path="/myinterviews" component={MyInterviews} />
-          <Redirect from="*" to="/myinterviews" />
-        </Switch>
-      ) : (
-        <PublicRoute exact={true} path="/" component={LoginPage} />
-      )}
     </React.Fragment>
   );
 };
