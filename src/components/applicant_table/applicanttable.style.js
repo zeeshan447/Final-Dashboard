@@ -15,3 +15,9 @@ export const CandidateDetailModal = styled(Modal)`
     border-radius: 8px !important;
   }
 `;
+export const SpinLocation = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+`;

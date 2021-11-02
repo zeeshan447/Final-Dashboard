@@ -9,9 +9,10 @@ import "./table.css";
 import { Modal } from "antd";
 import CandidateDetails from "../candidatedetails";
 import { GET_NEWAPPLICANTS } from "./apis";
-import { CandidateDetailModal } from "./applicanttable.style";
+import { CandidateDetailModal, SpinLocation } from "./applicanttable.style";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const ApplicantTable = ({ getCount }) => {
   const [select, setSelectedRow] = useState([]);
@@ -28,6 +29,7 @@ const ApplicantTable = ({ getCount }) => {
   const [stageChangeApiCallback, setStageChangeApiCallback] = useState(false);
   const pageReload = useSelector((state) => state.addCandidates.reloadPage);
   const dispatch = useDispatch();
+  const antIcon = <LoadingOutlined style={{ fontSize: 60 }} spin />;
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -115,7 +117,9 @@ const ApplicantTable = ({ getCount }) => {
       <h2 className="new-applicant">NEW APPLICANTS</h2>
 
       {loading ? (
-        <Spin size="large" />
+        <SpinLocation>
+          <Spin indicator={antIcon} />
+        </SpinLocation>
       ) : (
         <React.Fragment>
           {rowCounter === 0 ? null : (

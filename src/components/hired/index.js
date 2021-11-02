@@ -9,6 +9,8 @@ import { Modal } from "antd";
 import CandidateDetails from "../candidatedetails";
 import { Spin } from "antd";
 import { HIRED_APPLICANTS } from "./apis";
+import { LoadingOutlined } from "@ant-design/icons";
+import { SpinLocation } from "../applicant_table/applicanttable.style";
 
 const Hired = ({ getCount }) => {
   const [select, setSelectedRow] = useState(null);
@@ -20,6 +22,7 @@ const Hired = ({ getCount }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [jobChangeApiCallback, setJobChangeApiCallback] = useState(false);
   const [stageChangeApiCallback, setStageChangeApiCallback] = useState(false);
+  const antIcon = <LoadingOutlined style={{ fontSize: 60 }} spin />;
 
   const [getCandidateData, setCandidateData] = useState();
 
@@ -97,7 +100,9 @@ const Hired = ({ getCount }) => {
       <h2 className="new-applicant">HIRED APPLICANTS</h2>
 
       {loading ? (
-        <Spin size="large" />
+        <SpinLocation>
+          <Spin indicator={antIcon} />
+        </SpinLocation>
       ) : (
         <React.Fragment>
           {rowCounter === 0 ? null : (

@@ -9,6 +9,8 @@ import { Modal } from "antd";
 import CandidateDetails from "../candidatedetails";
 import { Spin } from "antd";
 import { SECONDROUND_APPLICANTS } from "./apis";
+import { LoadingOutlined } from "@ant-design/icons";
+import { SpinLocation } from "../jobs/jobs.style";
 
 const SecondRound = ({ getCount }) => {
   const [select, setSelectedRow] = useState(null);
@@ -21,6 +23,7 @@ const SecondRound = ({ getCount }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [jobChangeApiCallback, setJobChangeApiCallback] = useState(false);
   const [stageChangeApiCallback, setStageChangeApiCallback] = useState(false);
+  const antIcon = <LoadingOutlined style={{ fontSize: 60 }} spin />;
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -96,7 +99,9 @@ const SecondRound = ({ getCount }) => {
       <h2 className="new-applicant">APPLICANTS IN SECOND ROUND</h2>
 
       {loading ? (
-        <Spin size="large" />
+        <SpinLocation>
+          <Spin indicator={antIcon} />
+        </SpinLocation>
       ) : (
         <React.Fragment>
           {rowCounter === 0 ? null : (

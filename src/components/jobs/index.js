@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { LoadingOutlined } from "@ant-design/icons";
+
 import Axios from "axios";
 import {
   ClearFilterButton,
+  SpinLocation,
+  Spinner,
   FilterText,
   JobsBody,
   JobsHeader,
@@ -39,7 +43,9 @@ const Jobs = () => {
   const [modalState, setModalState] = useState(false);
   const [jobModalVisible, setJobModalVisible] = useState(false);
   const [filterOwner, setFilterOwner] = useState("");
+  const [loading, setLoading] = useState(true);
   const pageReload = useSelector((state) => state.addCandidates.reloadPage);
+  const antIcon = <LoadingOutlined style={{ fontSize: 60 }} spin />;
 
   let jobArray = [];
 
@@ -87,6 +93,7 @@ const Jobs = () => {
     const response = await Axios.get(
       `${GET_ALLJOBS}?department_id=${filterDepartmentName}&job_loc=${filterLocationName}&job_createdby=${filterOwner}`
     );
+    setLoading(false);
     setDepartmentName(
       response.data.job.map((row, key) => ({
         department_name: row.department_name,
@@ -137,24 +144,30 @@ const Jobs = () => {
           Clear Filters
         </ClearFilterButton>
       </JobsHeader>
-      <JobTableDiv>
-        {departmentName?.map((data, key) => {
-          <div>{key.department_id}</div>;
-          return (
-            <React.Fragment>
-              <OpenJobDepartmentName>
-                {data.department_name}
-              </OpenJobDepartmentName>
-              <JobsBody>
-                <JobsTable
-                  allJobs={data.jobs}
-                  modalVisibility={setModalState}
-                ></JobsTable>
-              </JobsBody>
-            </React.Fragment>
-          );
-        })}
-      </JobTableDiv>
+      {loading ? (
+        <SpinLocation>
+          <Spinner indicator={antIcon} />
+        </SpinLocation>
+      ) : (
+        <JobTableDiv>
+          {departmentName?.map((data, key) => {
+            <div>{key.department_id}</div>;
+            return (
+              <React.Fragment>
+                <OpenJobDepartmentName>
+                  {data.department_name}
+                </OpenJobDepartmentName>
+                <JobsBody>
+                  <JobsTable
+                    allJobs={data.jobs}
+                    modalVisibility={setModalState}
+                  ></JobsTable>
+                </JobsBody>
+              </React.Fragment>
+            );
+          })}
+        </JobTableDiv>
+      )}
 
       <JobModal
         visible={jobModalVisible}

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Modal } from "antd";
+import { Spin } from "antd";
 
 export const Header = styled.div`
   display: flex;
@@ -138,4 +139,17 @@ export const JobModal = styled(Modal)`
 
 export const DepartmentSelectDiv = styled.div`
   margin-left: 2%;
+`;
+
+export const SpinLocation = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+`;
+
+export const Spinner = styled(Spin)`
+  .ant-spin-dot {
+    font-size: 40px;
+  }
 `;
