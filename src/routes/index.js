@@ -38,6 +38,7 @@ const AllRoutes = () => {
           />
           <PrivateRoute path="/jobs" component={Jobs} />
           <PrivateRoute path="/review" component={ApplicantReview} />
+          <Redirect from="*" to="/applicant" />
         </Switch>
       ) : (
         <PublicRoute exact={true} path="/" component={LoginPage} />
@@ -46,12 +47,11 @@ const AllRoutes = () => {
       {userDetailing?.role_value > 30 ? (
         <Switch>
           <PrivateRoute path="/myinterviews" component={MyInterviews} />
+          <Redirect from="*" to="/myinterviews" />
         </Switch>
       ) : (
         <PublicRoute exact={true} path="/" component={LoginPage} />
       )}
-
-      {/* <Redirect from="*" to="/myinterviews" /> */}
     </React.Fragment>
   );
 };
