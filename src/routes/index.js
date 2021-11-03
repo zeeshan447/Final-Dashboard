@@ -13,6 +13,7 @@ import MyInterviews from "../components/myinterviews";
 import LoginPage from "../pages/loginpage";
 import PrivateRoute from "./privateroutes/privateroute";
 import PublicRoute from "./publicroutes/publicroute";
+import ProtectedRoute from "./protectedroute";
 import { useSelector } from "react-redux";
 
 const AllRoutes = () => {
@@ -42,7 +43,7 @@ const AllRoutes = () => {
 
         {userDetailing?.role_value >= 30 ? (
           <>
-            <PrivateRoute path="/myinterviews" component={MyInterviews} />
+            <ProtectedRoute path="/myinterviews" component={MyInterviews} />
             {userDetailing?.role_value === 30 ? (
               <Redirect from="*" to="/myinterviews" />
             ) : (
