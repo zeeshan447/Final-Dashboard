@@ -26,5 +26,8 @@ export const userReducer = (state = { isAuthenticated: false }, action) => {
   if (action.type === "SUCCESS") {
     return { isAuthenticated: true };
   }
+  if (action.type === "LOGOUT") {
+    return { isAuthenticated: false };
+  }
   return state;
 };

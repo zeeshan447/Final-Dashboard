@@ -38,20 +38,27 @@ const AllRoutes = () => {
             />
             <PrivateRoute path="/jobs" component={Jobs} />
             <PrivateRoute path="/review" component={ApplicantReview} />
+            {userDetailing?.role_value >= 30 && (
+              <ProtectedRoute path="/myinterviews" component={MyInterviews} />
+            )}
+            <Redirect from="*" to="/applicant" />
           </>
         )}
-
-        {userDetailing?.role_value >= 30 ? (
+        {userDetailing?.role_value === 30 ? (
           <>
+            {console.log("VALUE", userDetailing?.role_value)}
+
             <ProtectedRoute path="/myinterviews" component={MyInterviews} />
-            {userDetailing?.role_value === 30 ? (
+            <Redirect from="/*" to="/myinterviews" />
+
+            {/* {userDetailing?.role_value === 30 ? (
               <Redirect from="*" to="/myinterviews" />
             ) : (
               <Redirect from="*" to="/applicant" />
-            )}
+            )} */}
           </>
         ) : (
-          <PublicRoute exact={true} path="/" component={LoginPage} />
+          <div>NOT ALLOWED</div>
         )}
       </Switch>
     </React.Fragment>

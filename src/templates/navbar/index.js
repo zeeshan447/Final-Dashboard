@@ -75,20 +75,22 @@ const NavBar = () => {
       <Header height="150px">
         <Nav>
           <NavbarContainer>
-            <NavMenu>
-              <NavItem>
-                <NavLinks to="/applicant">Candidates</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to="/jobs">Jobs</NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to="/myinterviews">Interviews</NavLinks>
-              </NavItem>
-              {/* <NavItem>
+            {userDetailing?.role_value > 30 ? (
+              <NavMenu>
+                <NavItem>
+                  <NavLinks to="/applicant">Candidates</NavLinks>
+                </NavItem>
+                <NavItem>
+                  <NavLinks to="/jobs">Jobs</NavLinks>
+                </NavItem>
+                <NavItem>
+                  <NavLinks to="/myinterviews">Interviews</NavLinks>
+                </NavItem>
+                {/* <NavItem>
                 <NavLinks to="/">More</NavLinks>
               </NavItem> */}
-            </NavMenu>
+              </NavMenu>
+            ) : null}
           </NavbarContainer>
           <NavInput>
             {userDetailing.role_value > 30 && <CustomInput></CustomInput>}{" "}

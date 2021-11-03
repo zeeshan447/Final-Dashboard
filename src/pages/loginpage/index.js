@@ -46,10 +46,10 @@ const LoginPage = () => {
   //const accessCode = window.location.href.split("?")[1].split("=")[1];
 
   const getData = async () => {
-    const res = await Axios.get("https://peoplexdevapi.packagex.xyz/auth");
-    console.log("response ", res.data);
+    const res = await Axios.get("https://peoplexdev.packagex.xyz/auth");
+    console.log("response ", res.data.response);
 
-    setUrl(res.data);
+    setUrl(res.data.response);
   };
 
   useEffect(() => {
@@ -94,15 +94,28 @@ const LoginPage = () => {
       console.log("Code not found");
     } else {
       await Axios.get(
-        `https://peoplexdevapi.packagex.xyz/auth/callback?code=${code}`
+        `https://peoplexdev.packagex.xyz/auth/callback?code=${code}`
       )
         .then((res) => {
-          console.log("authentication response", res);
-          setAccessToken(res.data.token);
-          console.log("LOGIN RESPONSE", res);
-          //userDetails = res.data;
-          let details = res.data;
-          dispatch({ type: "USER_DETAILS", payload: details });
+          if (res.data.statusCode === 200) {
+            console.log("authentication response", res);
+
+            setAccessToken(res.data.token);
+            console.log("LOGIN RESPONSE", res);
+            //userDetails = res.data;
+            let details = res.data;
+            dispatch({ type: "USER_DETAILS", payload: details });
+          } else {
+            notification.open({
+              message: "Sign In Faied",
+              description:
+                "Failed to sign in. User has not been registered yet",
+              onClick: () => {
+                console.log("Notification Clicked!");
+              },
+            });
+          }
+
           //console.log("USER DETAILS", userDetails);
         })
         .catch((err) => {

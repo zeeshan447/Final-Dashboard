@@ -18,7 +18,7 @@ import {
 } from "@ant-design/icons";
 import Axios from "axios";
 import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
 function handleMenuClick(e) {
   //   message.info("Click on menu item.");
   //   console.log("click", e);
@@ -27,10 +27,13 @@ function handleMenuClick(e) {
 const ProfilePicture = () => {
   let history = useHistory();
   const userDetailing = useSelector((state) => state.userDetails.userDetails);
+  const dispatch = useDispatch();
 
   const logoutHandler = async () => {
     localStorage.removeItem("access_token");
     history.push("/");
+    dispatch({ type: "LOGOUT" });
+    localStorage.clear();
   };
 
   const menu = (
