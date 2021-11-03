@@ -47,9 +47,9 @@ const LoginPage = () => {
 
   const getData = async () => {
     const res = await Axios.get("https://peoplexdevapi.packagex.xyz/auth");
-    console.log("response ", res.request.responseURL);
+    console.log("response ", res.data);
 
-    setUrl(res.request.responseURL);
+    setUrl(res.data);
   };
 
   useEffect(() => {

@@ -42,7 +42,7 @@ const outlookLogin = (req, res) => {
   pca
     .getAuthCodeUrl(authCodeUrlParameters)
     .then((response) => {
-      res.redirect(response);
+      res.status(200).json({ response });
     })
     .catch((error) => console.log(JSON.stringify(error)));
 };
