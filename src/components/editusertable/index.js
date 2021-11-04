@@ -10,7 +10,7 @@ import { Spin } from "antd";
 import { SpinLocation } from "../applicant_table/applicanttable.style";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const EditUserTable = () => {
+const EditUserTable = ({ usersCall }) => {
   const [loading, setLoading] = useState(true);
   const [getUsers, setGetUsers] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -33,7 +33,7 @@ const EditUserTable = () => {
     getData();
     const response = Axios.get("https://peoplexdevapi.packagex.xyz/user");
     console.log("response", response);
-  }, []);
+  }, [usersCall]);
 
   const getData = async () => {
     await Axios.get("https://peoplexdevapi.packagex.xyz/user").then((res) => {

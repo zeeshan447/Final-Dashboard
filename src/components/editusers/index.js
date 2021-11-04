@@ -21,6 +21,7 @@ import EditableTable from "../testusertable";
 const EditUser = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [recallApi, setRecallApi] = useState(false);
+  const [recallUsers, setRecallUsers] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -54,7 +55,7 @@ const EditUser = () => {
           </EditUserSearchBar>
         </EditUserHeader>
         <EditUserTableDiv>
-          <EditUserTable />
+          <EditUserTable usersCall={recallUsers} />
         </EditUserTableDiv>
         <Modal
           visible={isModalVisible}
@@ -64,7 +65,10 @@ const EditUser = () => {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <AddNewUser modalVisibility={setIsModalVisible} />
+          <AddNewUser
+            userCallback={setRecallUsers}
+            modalVisibility={setIsModalVisible}
+          />
         </Modal>
       </EditUserContainer>
     </React.Fragment>

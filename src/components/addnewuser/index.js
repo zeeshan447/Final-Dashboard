@@ -19,7 +19,7 @@ import Axios from "axios";
 const { Item } = Form;
 const { Option } = Select;
 
-const AddNewUser = ({ modalVisibility }) => {
+const AddNewUser = ({ modalVisibility, userCallback }) => {
   const [form] = Form.useForm();
   const [userRoles, setUserRoles] = useState([]);
   const [roleId, setRoleId] = useState();
@@ -43,6 +43,7 @@ const AddNewUser = ({ modalVisibility }) => {
           role_value: row.row_value,
         }));
         setUserRoles(responseData);
+        userCallback(true);
       }
     );
   };
