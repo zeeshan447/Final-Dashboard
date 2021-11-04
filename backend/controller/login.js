@@ -33,9 +33,10 @@ const config = {
 const pca = new msal.ConfidentialClientApplication(config);
 
 const outlookLogin = (req, res) => {
+  const reqs = req.query.redirect;
   const authCodeUrlParameters = {
     scopes: ["user.read"],
-    redirectUri: process.env.REDIRECT,
+    redirectUri: reqs,
   };
 
   // get url to sign user in and consent to scopes needed for application
@@ -51,10 +52,11 @@ const outlookLoginCallback = async (req, res) => {
   try {
     const redirect = req.query.redirect;
     console.log("here");
+    console.log("rrr", redirect);
     const tokenRequest = {
       code: req.query.code,
       scopes: ["user.read"],
-      redirectUri: process.env.REDIRECT,
+      redirectUri: redirect,
     };
 
     const response = await pca.acquireTokenByCode(tokenRequest);

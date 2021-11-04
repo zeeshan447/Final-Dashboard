@@ -43,7 +43,6 @@ const AddNewUser = ({ modalVisibility, userCallback }) => {
           role_value: row.row_value,
         }));
         setUserRoles(responseData);
-        userCallback(true);
       }
     );
   };
@@ -83,6 +82,8 @@ const AddNewUser = ({ modalVisibility, userCallback }) => {
                 console.log("Notification Clicked!");
               },
             });
+            userCallback(true);
+
             modalVisibility(false);
             console.log("USER DATA RESPONSE", response);
           } else {

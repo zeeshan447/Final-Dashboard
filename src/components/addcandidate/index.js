@@ -89,7 +89,7 @@ const AddCandidate = ({ candidateModal }) => {
       })
         .then((response) => {
           console.log("STATUS CODE", response.request.status);
-          if (response.request.status === 200) {
+          if (response.request.status === 201) {
             notification.open({
               message: "Successfully Added",
               description: "Candidate Added Successfully",

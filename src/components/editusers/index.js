@@ -38,6 +38,7 @@ const EditUser = () => {
 
   useEffect(() => {
     dispatch({ type: "settings" });
+    console.log("USERS STATE", recallUsers);
   }, []);
 
   return (
@@ -64,6 +65,7 @@ const EditUser = () => {
           footer={false}
           onOk={handleOk}
           onCancel={handleCancel}
+          destroyOnClose={true}
         >
           <AddNewUser
             userCallback={setRecallUsers}

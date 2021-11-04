@@ -46,7 +46,9 @@ const LoginPage = () => {
   //const accessCode = window.location.href.split("?")[1].split("=")[1];
 
   const getData = async () => {
-    const res = await Axios.get("https://peoplexdevapi.packagex.xyz/auth");
+    const res = await Axios.get(
+      "https://peoplexdevapi.packagex.xyz/auth?redirect=https://peoplexdev.packagex.xyz"
+    );
     console.log("response ", res.data.response);
 
     setUrl(res.data.response);
@@ -94,7 +96,7 @@ const LoginPage = () => {
       console.log("Code not found");
     } else {
       await Axios.get(
-        `https://peoplexdevapi.packagex.xyz/auth/callback?code=${code}`
+        `https://peoplexdevapi.packagex.xyz/auth/callback?code=${code}&redirect=https://peoplexdev.packagex.xyz`
       )
         .then((res) => {
           if (res.data.statusCode === 200) {
