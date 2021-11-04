@@ -47,7 +47,7 @@ const LoginPage = () => {
 
   const getData = async () => {
     const res = await Axios.get(
-      "http://peoplexdevapi.packagex.xyz/auth?redirect=https://peoplexdev.packagex.xyz"
+      "https://peoplexdevapi.packagex.xyz/auth?redirect=https://peoplexdev.packagex.xyz"
     );
     console.log("response ", res.data.response);
 

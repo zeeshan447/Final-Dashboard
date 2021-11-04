@@ -34,6 +34,7 @@ import Like from "../../../templates/svgicons/like";
 import DoubleLike from "../../../templates/svgicons/doublelike";
 import { POSTFEEDBACK } from "./apis";
 import { notification } from "antd";
+import { QUESTION_1 } from "../questionbutton";
 
 const EvaluationForm = ({ interviewData, recall, modalVisibility }) => {
   const [firstQuestion, setFirstQuestion] = useState();
