@@ -50,22 +50,22 @@ const EvaluationForm = ({ interviewData, recall, modalVisibility }) => {
   const firstQuestionHandler = (id) => {
     console.log("BUTTON ID", id);
     setFirstQuestion(id);
-    setIconColor("#38A6F5");
+    // setIconColor("#38A6F5");
   };
   const secondQuestionHandler = (id) => {
     console.log("BUTTON ID", id);
     setSecondQuestion(id);
-    setIconColor("#38A6F5");
+    // setIconColor("#38A6F5");
   };
   const thirdQuestionHandler = (id) => {
     console.log("BUTTON ID", id);
     setThirdQuestion(id);
-    setIconColor("#38A6F5");
+    // setIconColor("#38A6F5");
   };
   const fourthQuestionHandler = (id) => {
     console.log("BUTTON ID", id);
     setFourthQuestion(id);
-    setIconColor("#38A6F5");
+    // setIconColor("#38A6F5");
   };
 
   const submitFeedbackHandler = async () => {

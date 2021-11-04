@@ -71,6 +71,7 @@ const JobPosting = ({ jobModalVisibility }) => {
     setDescription(e.target.value);
   };
   const jobPostHandler = async () => {
+    debugger;
     await Axios.post(POSTJOB, {
       job_title: getJobName,
       job_loc: getLocation,
@@ -82,20 +83,21 @@ const JobPosting = ({ jobModalVisibility }) => {
       is_active: "true",
     })
       .then((response) => {
-        console.log("asdsadsadsadsadsad ", response);
         if (response.request.status === 200) {
+          console.log("asdsadsadsadsadsad ", response);
+
+          jobModalVisibility(false);
           notification.open({
-            message: "Job Posted Failed",
-            description: "Please check all the fields",
+            message: "Job Posted",
+            description: "Job Posted Successfully",
             onClick: () => {
               console.log("Notification Clicked!");
             },
           });
         } else {
-          jobModalVisibility(false);
           notification.open({
-            message: "Job Posted",
-            description: "Job Posted Successfully",
+            message: "Job Posted Failed",
+            description: "Please check all the fields",
             onClick: () => {
               console.log("Notification Clicked!");
             },

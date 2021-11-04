@@ -67,7 +67,7 @@ const JobsTable = ({ departmentId, allJobs, modalVisibility }) => {
         closable={false}
         destroyOnClose
       >
-        <JobDetails jobDetails={jobData} updateJob={modalVisibility} />
+        <JobDetails jobDetails={jobData} updateJob={setIsModalVisible} />
       </JobModal>
     </React.Fragment>
   );

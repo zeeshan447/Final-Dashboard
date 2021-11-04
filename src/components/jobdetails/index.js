@@ -148,7 +148,30 @@ const JobDetails = ({ jobDetails, updateJob }) => {
   function cancel(e) {}
 
   const jobDeleteHandler = async () => {
-    await Axios.delete(`${UPDATEJOB}/${jobDetails.job_id}`);
+    debugger;
+    await Axios.delete(`${UPDATEJOB}/${jobDetails.job_id}`)
+      .then((res) => {
+        console.log("job Deleted", res);
+        updateJob(false);
+        dispatch({ type: "RELOAD" });
+
+        notification.open({
+          message: "Job Deleted",
+          description: "Job has successfully been deleted",
+          onClick: () => {
+            console.log("Notification Clicked!");
+          },
+        });
+      })
+      .catch((err) => {
+        notification.open({
+          message: "Server not responding",
+          description: "Server not responding please retry again",
+          onClick: () => {
+            console.log("Notification Clicked!");
+          },
+        });
+      });
   };
   return (
     <React.Fragment>
