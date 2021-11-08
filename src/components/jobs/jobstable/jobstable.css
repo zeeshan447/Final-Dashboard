@@ -37,3 +37,8 @@
   color: #000000;
   text-align: right;
 }
+
+.TitlePosting {
+  display: flex;
+  flex-direction: row;
+}

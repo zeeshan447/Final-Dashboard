@@ -5,7 +5,6 @@ import JobLocationSelect from "./joblocationselect";
 import JobWorkTypeSelect from "./jobworktypeselect";
 import { Button, notification } from "antd";
 import { useSelector } from "react-redux";
-
 import {
   JobPostingDiv,
   JobPostingTitleDiv,
@@ -35,6 +34,8 @@ import {
 import HiringManagerSelect from "./hiringmanagerselect";
 import PostingOwner from "./postingownerselect";
 import { POSTJOB } from "./apis";
+import { Editor, EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
 
 const JobPosting = ({ jobModalVisibility }) => {
   const [getJobName, setJobName] = useState();
@@ -47,7 +48,9 @@ const JobPosting = ({ jobModalVisibility }) => {
   const [getIsActive, setIsActive] = useState();
   const [getHiringManager, setHiringManager] = useState();
   const userDetailing = useSelector((state) => state.userDetails.userDetails);
-
+  const [editorState, setEditorState] = React.useState(() =>
+    EditorState.createEmpty()
+  );
   const { TextArea } = JobPostingDescription;
 
   useEffect(() => {
@@ -139,6 +142,13 @@ const JobPosting = ({ jobModalVisibility }) => {
               rows={4}
               onChange={descriptionHandler}
             ></TextArea>
+            {/* <Editor
+              toolbarOnFocus
+              toolbarClassName="toolbarClassName"
+              wrapperClassName="wrapperClassName"
+              editorClassName="editorClassName"
+            /> */}
+            {/* <Editor editorState={editorState} onChange={setEditorState} /> */}
           </JobPostingDescriptionDiv>
           <RequirementTitle>Requirement List</RequirementTitle>
           <AddListButton>Add List</AddListButton>

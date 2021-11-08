@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { Select } from "antd";
 import { Input, Avatar } from "antd";
+import { Editor } from "react-draft-wysiwyg";
 
 export const JobPostingMainDiv = styled.div`
   display: flex;
   flex-direction: row;
+  
 `;
 
 export const JobPostingDiv = styled.div`
@@ -13,6 +15,7 @@ export const JobPostingDiv = styled.div`
   width: 70%;
   margin-top: 3%;
   margin-left: 2%;
+  overflow: auto;
 `;
 
 export const JobPostingSidebar = styled.div`
@@ -251,4 +254,8 @@ export const PostingOwnerName = styled.h2`
   color: #000000;
   margin-left: 4%;
   margin-top: 6%;
+`;
+
+export const EditorInput = styled(Editor)`
+  width: 200px;
 `;

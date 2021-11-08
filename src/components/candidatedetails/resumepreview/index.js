@@ -7,6 +7,7 @@ import {
   ResumeFileDiv,
 } from "./resumepreview.style";
 import { Document, Page, pdfjs } from "react-pdf";
+import { Link } from "react-router-dom";
 
 const ResumePreview = ({ cv }) => {
   const [pdfFile, setPdfFile] = useState(null);
