@@ -6,11 +6,11 @@ router.route("/:department_id").get(jobs.jobget);
 router.route("/").get(jobs.allJob).post(jobs.jobinsert);
 router
   .route("/:job_id")
-  .get(jobs.jobgetbyid)
+  //.get(jobs.jobgetbyid)
   //.put(jobs.jobupdated)
   .delete(jobs.jobdeleted);
 router.get("/job", jobs.allPosted);
-router.get("/postedjobs/:job_id", jobs.jobgetbsyid);
+router.get("/postedjobs/:job_id", jobs.jobgetbyid);
 router.put("/archivejob", jobs.archivedjob);
 router.put("/:job_id", jobs.jobupdated);
 
