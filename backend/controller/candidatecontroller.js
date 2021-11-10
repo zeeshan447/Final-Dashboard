@@ -41,9 +41,13 @@ const candidateinsert = async function (req, res) {
       notice_period_at_current_employer,
       total_experience,
     } = req.body;
-    const data = await client.query(
+    const job_id = await client.query(
+      `select j.job_id  from job j where j.job_title = '${applied_post}'`
+    );
+    console.log("job id is", job_id.rows[0].job_id);
+    const candidate_ids = await client.query(
       `INSERT INTO "candidate" (candidate_name,email, address,phone,urls,prev_company,applied_post, notes, cv, expected_salery, notice_period_at_current_employer, total_experience) 
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING candidate_id `,
       [
         candidate_name,
         email,
@@ -59,7 +63,20 @@ const candidateinsert = async function (req, res) {
         total_experience,
       ]
     );
-    res.status(201).json({ message: "candidate inserted successfully" });
+    console.log("candidate_id ", candidate_ids.rows[0].candidate_id);
+    const ids = await client.query(
+      `INSERT INTO "candidate_job_maping" (candidate_id,job_id) VALUES($1,$2)`,
+      [candidate_ids.rows[0].candidate_id, job_id.rows[0].job_id],
+      function (err, result) {
+        if (err) {
+          res.status(500).json({ candidate: err.message });
+        } else {
+          res
+            .status(201)
+            .json({ statusCode: 201, candidate: "Add SuccesFull" });
+        }
+      }
+    );
   } catch (error) {
     console.log(error.message);
     res.status(300).json({ message: error.message });
