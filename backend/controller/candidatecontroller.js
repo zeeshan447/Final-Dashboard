@@ -27,56 +27,42 @@ const candidateget = async function (req, res) {
 };
 const candidateinsert = async function (req, res) {
   try {
-    // const compname=  client.query(`SELECT company_name FROM "company" `)
     let {
       candidate_name,
       email,
+      address,
       phone,
       urls,
       prev_company,
       applied_post,
-      cv,
       notes,
-      address,
+      cv,
+      expected_salery,
+      notice_period_at_current_employer,
+      total_experience,
     } = req.body;
-    //  res.send("job id is", job_id);
-    const job_id = await client.query(
-      `select j.job_id  from job j where j.job_title = '${applied_post}'`
-    );
-    console.log("job id is", job_id.rows[0].job_id);
-    // console.log(candidate_name);
-    const candidate_ids = await client.query(
-      `INSERT INTO "candidate" (candidate_name,email,phone,urls,prev_company,applied_post,cv, notes, address) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING candidate_id`,
+    const data = await client.query(
+      `INSERT INTO "candidate" (candidate_name,email, address,phone,urls,prev_company,applied_post, notes, cv, expected_salery, notice_period_at_current_employer, total_experience) 
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
       [
         candidate_name,
         email,
+        address,
         phone,
         urls,
         prev_company,
         applied_post,
-        cv,
         notes,
-        address,
+        cv,
+        expected_salery,
+        notice_period_at_current_employer,
+        total_experience,
       ]
     );
-    ////
-    console.log("candidate_id ", candidate_ids.rows[0].candidate_id);
-    const ids = await client.query(
-      `INSERT INTO "candidate_job_maping" (candidate_id,job_id) VALUES($1,$2)`,
-      [candidate_ids.rows[0].candidate_id, job_id.rows[0].job_id],
-      function (err, result) {
-        if (err) {
-          res.status(500).json({ candidate: err.message });
-        } else {
-          res
-            .status(201)
-            .json({ statusCode: 201, candidate: "Add SuccesFull" });
-        }
-      }
-    );
+    res.status(201).json({ message: "candidate inserted successfully" });
   } catch (error) {
     console.log(error.message);
-    res.status(300).json({ statusCode: 300, candidate: error.message });
+    res.status(300).json({ message: error.message });
   }
 };
 const candidategetbyid = async function (req, res) {

@@ -156,7 +156,8 @@ const jobgetbyid = async function (req, res) {
     //   console.log(company_id);
     //let {company_name} = req.body
     client.query(
-      `SELECT * FROM "job" WHERE job_id=$1 `,
+      `select (j.*), wt.worktype,u.user_name , d.department_name from job j join work_type wt on j.worktype_id = wt .worktype_id
+      join users u on u.user_id = j.user_id join department d on j.department_id =d.department_id where j.job_id = $1 `,
       [job_id],
       function (error, result) {
         if (!error) {
