@@ -40,6 +40,7 @@ const candidateinsert = async function (req, res) {
       expected_salery,
       notice_period_at_current_employer,
       total_experience,
+      cover_letter,
     } = req.body;
     const job_id = await client.query(
       `select j.job_id  from job j where j.job_title = '${applied_post}'`
@@ -61,6 +62,7 @@ const candidateinsert = async function (req, res) {
         expected_salery,
         notice_period_at_current_employer,
         total_experience,
+        cover_letter,
       ]
     );
     console.log("candidate_id ", candidate_ids.rows[0].candidate_id);
