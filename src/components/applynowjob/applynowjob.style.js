@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Input } from "antd";
 
 export const JobViewTitleDiv = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ export const ApplyNowJobFormDiv = styled.div`
   align-items: center;
   overflow-y: scroll;
   width: 100%;
-  height: 800px;
+  height: 1000px;
 `;
 
 export const LabelInputDiv = styled.div`
@@ -76,10 +77,46 @@ export const ApplyNowInput = styled.input`
   outline: none;
   padding-left: 3%;
 `;
+export const ApplyNowQuestionInput = styled.input`
+  width: 1003.08px;
+  height: 48px;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  box-sizing: border-box;
+  border-radius: 8px;
+  outline: none;
+  padding-left: 3%;
+`;
 export const ApplyNowLinks = styled.h2`
   font-family: Mulish;
   font-weight: 700;
   font-size: 28px;
   line-height: 24px;
   color: #000000;
+`;
+
+export const ApplyNowCoverLetter = styled(Input)`
+  width: 970.08px;
+`;
+
+export const ApplyNowButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4%;
+`;
+export const ApplyNowButton = styled.button`
+  width: 999px;
+  height: 56px;
+  background-color: #38a6f5;
+  border-radius: 8px;
+  font-family: Mulish;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
 `;

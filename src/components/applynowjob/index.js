@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Axios from "axios";
 import {
+  ApplyNowButton,
+  ApplyNowButtonDiv,
+  ApplyNowCoverLetter,
   ApplyNowInput,
   ApplyNowJobFormDiv,
   ApplyNowLabel,
   ApplyNowLinks,
+  ApplyNowQuestionInput,
   JobTitle,
   JobTitleLocation,
   JobTitleLocationDiv,
@@ -28,6 +32,7 @@ const ApplyNowJob = () => {
   const [data, setData] = useState({});
   const onChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
   const [value, setValue] = React.useState(1);
+  const { TextArea } = ApplyNowCoverLetter;
 
   const radioChangeHandler = (e) => {
     console.log("radio checked", e.target.value);
@@ -144,23 +149,23 @@ const ApplyNowJob = () => {
         </LabelInputDiv>
         <LabelQuestionInputDiv>
           <ApplyNowLabel>Expected Salary</ApplyNowLabel>
-          <ApplyNowInput
+          <ApplyNowQuestionInput
             type="text"
             name="salary"
             onChange={onChange}
-          ></ApplyNowInput>
+          ></ApplyNowQuestionInput>
         </LabelQuestionInputDiv>
         <LabelQuestionInputDiv>
           <ApplyNowLabel>Notice Period At Current Employeer</ApplyNowLabel>
-          <ApplyNowInput
+          <ApplyNowQuestionInput
             type="text"
             name="notice_period"
             onChange={onChange}
-          ></ApplyNowInput>
+          ></ApplyNowQuestionInput>
         </LabelQuestionInputDiv>
         <LabelQuestionInputDiv>
           <ApplyNowLabel>Total Experience</ApplyNowLabel>
-          <Radio.Group onChange={onChange} value={value}>
+          <Radio.Group onChange={radioChangeHandler} value={value}>
             <Space direction="vertical">
               <Radio value="3-4 years">3-4 years</Radio>
               <Radio value="4-5 years">4-5 years</Radio>
@@ -168,6 +173,16 @@ const ApplyNowJob = () => {
             </Space>
           </Radio.Group>
         </LabelQuestionInputDiv>
+        <LabelQuestionInputDiv>
+          <ApplyNowLinks>Additional Information</ApplyNowLinks>
+          <TextArea
+            rows={4}
+            placeholder="Add a cover letter or anything else you want to share."
+          ></TextArea>
+        </LabelQuestionInputDiv>
+        <ApplyNowButtonDiv>
+          <ApplyNowButton>Apply Now</ApplyNowButton>
+        </ApplyNowButtonDiv>
       </ApplyNowJobFormDiv>
     </>
   );

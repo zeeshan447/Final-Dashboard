@@ -40,10 +40,11 @@ const candidateinsert = async function (req, res) {
       expected_salery,
       notice_period_at_current_employer,
       total_experience,
+      cover_letter,
     } = req.body;
     const data = await client.query(
-      `INSERT INTO "candidate" (candidate_name,email, address,phone,urls,prev_company,applied_post, notes, cv, expected_salery, notice_period_at_current_employer, total_experience) 
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
+      `INSERT INTO "candidate" (candidate_name,email, address,phone,urls,prev_company,applied_post, notes, cv, expected_salery, notice_period_at_current_employer, total_experience, cover_letter) 
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`,
       [
         candidate_name,
         email,
@@ -57,6 +58,7 @@ const candidateinsert = async function (req, res) {
         expected_salery,
         notice_period_at_current_employer,
         total_experience,
+        cover_letter,
       ]
     );
     res.status(201).json({ message: "candidate inserted successfully" });

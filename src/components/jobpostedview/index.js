@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import { GETJOBBYID } from "./apis";
+
 import {
   JobInfoDetailsDiv,
   JobTitle,
