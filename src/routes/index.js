@@ -17,6 +17,7 @@ import ProtectedRoute from "./protectedroute";
 import { useSelector } from "react-redux";
 import PostingRoute from "./postingroute";
 import JobPostedView from "../components/jobpostedview";
+import ApplyNowJob from "../components/applynowjob";
 
 const AllRoutes = () => {
   const userDetailing = useSelector((state) => state.userDetails.userDetails);
@@ -34,6 +35,7 @@ const AllRoutes = () => {
               path="/jobposting/:id"
               component={JobPostedView}
             />
+            <PostingRoute exact path="/applynow/:id" component={ApplyNowJob} />
             <PrivateRoute path="/edituser" component={EditUser} />
             <PrivateRoute path="/interview" component={Interview} />
             <PrivateRoute path="/adduser" component={AddNewUser} />
@@ -48,7 +50,6 @@ const AllRoutes = () => {
             {userDetailing?.role_value >= 30 && (
               <ProtectedRoute path="/myinterviews" component={MyInterviews} />
             )}
-            <Redirect from="*" to="/applicant" />
           </>
         )}
         {userDetailing?.role_value === 30 ? (
