@@ -3,9 +3,7 @@ const client = require("../client");
 const pg = require("pg");
 const jobget = async function (req, res) {
   try {
-    // let query = "SELECT * FROM company";
     let { department_id } = req.params;
-    // let department_id = req.query.search;
     client.query(
       `select department_name,d.department_id ,job_id ,job_title,j.worktype_id, wt.worktype, job_loc, job_createdby from job j join department d on d.department_id =j.department_id join work_type wt on j.worktype_id = wt.worktype_id where d.department_id =$1`,
       [department_id],
@@ -103,9 +101,7 @@ const archivedjob = async function (req, res) {
 //........//
 const jobupdated = async function (req, res) {
   try {
-    //let query = "SELECT * FROM company";
     let { job_id } = req.params;
-    //const pool = client.query(`Select * from "company"`);
     let {
       job_title,
       job_loc,
@@ -117,8 +113,7 @@ const jobupdated = async function (req, res) {
       company_id,
       worktype_id,
     } = req.body;
-    //var updateData=req.body;
-    //var sql = `UPDATE users SET ? WHERE id= ?`
+
     await client.query(
       `Update "job" SET job_title = $1 , job_loc = $2 , job_createdby = $3, department_id = $4, description =$5,is_active=$6,user_id = $7,company_id=$8,worktype_id=$9 WHERE job_id =$10`,
       [
@@ -153,8 +148,7 @@ const jobgetbyid = async function (req, res) {
   try {
     //let query = "SELECT * FROM company";
     let { job_id } = req.params;
-    //   console.log(company_id);
-    //let {company_name} = req.body
+
     client.query(
       `select (j.*), wt.worktype,u.user_name , d.department_name from job j join work_type wt on j.worktype_id = wt .worktype_id
       join users u on u.user_id = j.user_id join department d on j.department_id =d.department_id where j.job_id = $1 `,
@@ -236,8 +230,6 @@ const allJob = async function (req, res) {
 
 const jobCreated = async function (req, res) {
   try {
-    // let query = "SELECT * FROM company";
-    // let department_id = req.query.search;
     client.query(
       `select user_id ,user_name from users `,
       function (err, result) {
@@ -301,6 +293,21 @@ const allPosted = async function (req, res) {
     throw error;
   }
 };
+
+const getjobs = async function (req, res) {
+  try {
+    const getjob = await client.query(
+      `select j.job_id , j.job_title, j.job_loc ,d.department_name, wt.worktype from job j join department d on d.department_id = j.department_id
+      join work_type wt on wt.worktype_id = j.worktype_id `
+    );
+
+    console.log("dataerror", getjob.rows);
+    res.json({ statusCode: 200, body: getjob.rows });
+  } catch (error) {
+    console.log(error.message);
+    res.json({ statusCode: 500, message: error.message });
+  }
+};
 ////
 module.exports = {
   jobinsert,
@@ -313,4 +320,5 @@ module.exports = {
   allJob,
   archivedjob,
   jobCreated,
+  getjobs,
 };
